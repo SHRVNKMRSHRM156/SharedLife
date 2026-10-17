@@ -98,7 +98,7 @@ APP_PAGES["account"] = ("My account · SharedLife", "Your SharedLife bookings.",
       <form id="details-form" class="form" novalidate>
         <div class="grid-2 fields">
           <label class="field"><span>Full name</span><input name="name" id="d-name" autocomplete="name" required></label>
-          <label class="field"><span>Email</span><input id="d-email" type="email" readonly disabled><small>To change your email, write to us from the contact page.</small></label>
+          <label class="field"><span>Email</span><input id="d-email" type="email" readonly disabled></label>
           <label class="field"><span>Mobile number</span><input name="phone" id="d-phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
           <label class="field"><span>City <em data-show-for="seeker">(optional)</em></span><input name="city" id="d-city" autocomplete="address-level2"></label>
         </div>
@@ -125,6 +125,7 @@ APP_PAGES["account"] = ("My account · SharedLife", "Your SharedLife bookings.",
         <p class="form-error" role="alert" hidden></p>
         <p class="form-ok" role="status" hidden></p>
         <button class="btn" type="submit">Save my details</button>
+        <p class="note">Greyed-out details were confirmed when you joined. To change them, write to us from the <a class="link" href="contact.html">contact page</a>.</p>
       </form>
     </details>
 

@@ -376,4 +376,4 @@ dialog.dialog::backdrop { background: rgba(10, 20, 15, .55); }
 .details-card[open] > summary::after { content: '−'; }
 .details-card > summary .muted { color: var(--terra); font-weight: 700; }
 .details-card .form { padding-bottom: 24px; }
-.field input[readonly] { color: var(--muted); }
+.field input[readonly], .field select:disabled { color: var(--muted); background: transparent; border-style: dashed; cursor: not-allowed; }

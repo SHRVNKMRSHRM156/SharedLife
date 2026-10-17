@@ -83,7 +83,7 @@
   function values(scope) {
     var out = {};
     scope.querySelectorAll('input, select, textarea').forEach(function (i) {
-      if (!i.name || i.closest('[hidden]')) return;
+      if (!i.name || i.disabled || i.closest('[hidden]')) return;
       if (i.type === 'radio') { if (i.checked) out[i.name] = i.value; }
       else if (i.type === 'checkbox') out[i.name] = i.checked;
       else out[i.name] = i.value;
@@ -160,12 +160,21 @@
   }
 
   // "My details": everyone can update their own name, phone, city and role details
+  // Only details that were optional at sign-up can be changed; the rest are shown greyed out.
+  var EDITABLE = {
+    seeker: ['city', 'partner_name', 'wedding_date'],
+    counsellor: ['registration_no', 'specialisation', 'languages'],
+    advocate: ['practice_areas', 'languages'],
+  };
   var MISSING = { seeker: { city: 'city', partner_name: "partner's name", wedding_date: 'wedding date' } };
 
   function detailsArea(u) {
     var box = document.getElementById('my-details'), form = document.getElementById('details-form');
     form.querySelectorAll('[data-role]').forEach(function (s) { s.hidden = s.getAttribute('data-role') !== u.role; });
     form.querySelectorAll('[data-show-for]').forEach(function (s) { s.hidden = s.getAttribute('data-show-for').split(' ').indexOf(u.role) < 0; });
+    form.querySelectorAll('input[name], select[name]').forEach(function (i) {
+      if (EDITABLE[u.role].indexOf(i.name) < 0) { i.disabled = true; i.readOnly = true; }
+    });
     function fill(user) {
       var data = Object.assign({ name: user.name, phone: user.phone, city: user.city }, user.profile || {});
       document.getElementById('d-email').value = user.email;
