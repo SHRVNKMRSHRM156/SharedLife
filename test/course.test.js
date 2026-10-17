@@ -256,6 +256,23 @@ test('admin can grant the course and cancel access; export and summary include e
   assert.match(r.body, /lessons_done/);
 });
 
+test('health names the Razorpay settings that are missing, without their values', async () => {
+  process.env.RAZORPAY_KEY_ID = ' rzp_live_abc123\n';
+  delete process.env.RAZORPAY_KEY_SECRET;
+  let r = await stranger('GET', '/api/health');
+  assert.equal(r.body.course_payments, 'manual');
+  assert.deepEqual(r.body.razorpay_missing, ['RAZORPAY_KEY_SECRET']);
+  process.env.RAZORPAY_KEY_SECRET = 'shh-secret ';
+  r = await stranger('GET', '/api/health');
+  assert.equal(r.body.course_payments, 'razorpay');
+  assert.equal(r.body.razorpay_mode, 'live');
+  assert.ok(!JSON.stringify(r.body).includes('shh-secret'));
+  process.env.RAZORPAY_KEY_ID = 'abc123';
+  r = await stranger('GET', '/api/health');
+  assert.match(r.body.razorpay_missing[0], /should start with rzp_live_/);
+  useRazorpay(false);
+});
+
 test('price can be set in Vercel', async () => {
   process.env.COURSE_PRICE_INR = '4999';
   const r = await stranger('GET', '/api/course');
