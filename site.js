@@ -59,4 +59,12 @@
       catch (e) { fallback(); }
     });
   }
+
+  // Show "My account" in the nav when logged in
+  var acct = document.querySelector('[data-account-link]');
+  if (acct && window.fetch && location.protocol !== 'file:') {
+    fetch('/api/auth/me', { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+      if (d && d.user) { acct.textContent = 'My account'; acct.setAttribute('href', 'account.html'); }
+    }).catch(function () {});
+  }
 })();

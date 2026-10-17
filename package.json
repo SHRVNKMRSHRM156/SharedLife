@@ -1,0 +1,19 @@
+{
+  "name": "sharedlife",
+  "private": true,
+  "type": "module",
+  "description": "www.sharedlife.in: static site plus accounts, booking and admin API (Vercel functions + Postgres)",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build:pages": "python3 tools/site/build.py",
+    "dev": "node tools/dev-server.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "bcryptjs": "2.4.3",
+    "jose": "5.9.6",
+    "pg": "8.13.1"
+  }
+}

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Create an account · SharedLife</title>
+<meta name="description" content="Create a SharedLife account as a couple, counsellor or advocate.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="img/logo.png">
+</head>
+<body>
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="img/logo.png" alt="">SharedLife</a>
+    <ul class="menu"><li><a href="./">Home</a></li><li><a href="counselling.html">Counselling</a></li><li><a href="prenup.html">Pre-Nuptial Agreement</a></li><li><a href="course.html">Course</a></li><li><a href="workshops.html">Workshops</a></li><li><a href="about.html">About</a></li><li class="m-only"><a href="contact.html">Contact</a></li><li><a href="login.html" data-account-link aria-current="page">Log in</a></li></ul>
+    <a class="btn cta" href="account.html#book">Book a consultation</a>
+    <button class="toggle" type="button" aria-expanded="false">Menu</button>
+  </div>
+</nav>
+<main>
+<section class="auth-wrap">
+  <div class="wrap narrow">
+    <div class="head">
+      <p class="eyebrow">Create an account</p>
+      <h1 class="h2">Join SharedLife</h1>
+      <p class="lede">Already have an account? <a href="login.html" class="link">Log in</a></p>
+    </div>
+    <form id="register-form" class="form" novalidate>
+      <fieldset class="role-pick">
+        <legend>I am joining as</legend>
+        <label class="role-card"><input type="radio" name="role" value="seeker" checked><span><b>A couple or individual</b><small>Seeking counselling, a prenup, the course or a workshop</small></span></label>
+        <label class="role-card"><input type="radio" name="role" value="counsellor"><span><b>A marriage counsellor</b><small>Join our counselling panel</small></span></label>
+        <label class="role-card"><input type="radio" name="role" value="advocate"><span><b>An advocate</b><small>Join our panel of family-law advocates</small></span></label>
+      </fieldset>
+
+      <div class="grid-2 fields">
+        <label class="field"><span>Full name</span><input name="name" id="r-name" autocomplete="name" required></label>
+        <label class="field"><span>Email</span><input name="email" id="r-email" type="email" autocomplete="email" required></label>
+        <label class="field"><span>Mobile number</span><input name="phone" id="r-phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="98765 43210" required></label>
+        <label class="field"><span>City <em data-show-for="seeker">(optional)</em></span><input name="city" id="r-city" autocomplete="address-level2"></label>
+        <label class="field"><span>Password</span><input name="password" id="r-password" type="password" autocomplete="new-password" minlength="8" required><small>At least 8 characters</small></label>
+      </div>
+
+      <div class="grid-2 fields" data-role="seeker">
+        <label class="field"><span>Where are you in your journey?</span>
+          <select name="relationship" id="r-relationship"><option value="about_to_marry">About to marry</option><option value="married">Married</option><option value="other">Something else</option></select></label>
+        <label class="field"><span>Partner's name <em>(optional)</em></span><input name="partner_name" id="r-partner"></label>
+        <label class="field"><span>Wedding date <em>(optional)</em></span><input name="wedding_date" id="r-wedding" type="date"></label>
+      </div>
+
+      <div class="grid-2 fields" data-role="counsellor" hidden>
+        <label class="field"><span>Highest qualification</span><input name="qualification" id="r-qualification" placeholder="e.g. MA Clinical Psychology"></label>
+        <label class="field"><span>Years of experience</span><input name="experience_years" id="r-exp-c" type="number" min="0" max="80"></label>
+        <label class="field"><span>RCI or other registration no. <em>(optional)</em></span><input name="registration_no" id="r-reg"></label>
+        <label class="field"><span>Languages <em>(optional)</em></span><input name="languages" id="r-lang-c" placeholder="Hindi, English"></label>
+        <label class="field wide"><span>Areas of focus <em>(optional)</em></span><input name="specialisation" id="r-spec" placeholder="Pre-marital, couples therapy, family systems"></label>
+      </div>
+
+      <div class="grid-2 fields" data-role="advocate" hidden>
+        <label class="field"><span>Bar Council enrolment number</span><input name="enrolment_no" id="r-enrol"></label>
+        <label class="field"><span>State Bar Council</span><input name="bar_council" id="r-bar" placeholder="e.g. Bar Council of Delhi"></label>
+        <label class="field"><span>Years of practice</span><input name="experience_years" id="r-exp-a" type="number" min="0" max="80"></label>
+        <label class="field"><span>Languages <em>(optional)</em></span><input name="languages" id="r-lang-a" placeholder="Hindi, English"></label>
+        <label class="field wide"><span>Practice areas <em>(optional)</em></span><input name="practice_areas" id="r-areas" placeholder="Family law, matrimonial disputes"></label>
+      </div>
+
+      <p class="note" data-show-for="counsellor advocate" hidden>We review every professional application before you join the panel. You can log in straight away and see your status.</p>
+
+      <label class="check"><input type="checkbox" name="consent" id="r-consent"><span>I agree that SharedLife may store these details to provide its services and contact me. My information is kept confidential and never sold.</span></label>
+
+      <p class="form-error" role="alert" hidden></p>
+      <button class="btn" type="submit">Create account</button>
+    </form>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <a class="brand" href="./"><img src="img/logo.png" alt="">SharedLife</a>
+        <p>Designing a Shared Life. Counselling, courses and Pre-Nuptial Agreements for couples.</p>
+      </div>
+      <div><h4>Services</h4><ul><li><a href="counselling.html">Couples counselling</a></li><li><a href="prenup.html">Pre-Nuptial Agreement</a></li><li><a href="course.html">The SharedLife Course</a></li><li><a href="workshops.html">Workshops and talks</a></li></ul></div>
+      <div><h4>SharedLife</h4><ul><li><a href="about.html">About us</a></li><li><a href="contact.html">Contact</a></li><li><a href="contact.html">FAQ</a></li><li><a href="register.html">Join as a counsellor or advocate</a></li></ul></div>
+    </div>
+    <p class="legal">Agreements are drafted by independent advocates. Information on this website is general and is not legal advice.</p>
+  </div>
+</footer>
+<script src="site.js"></script>
+<script src="app.js"></script>
+<script>SL.page('register');</script>
+</body>
+</html>
