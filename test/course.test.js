@@ -24,7 +24,7 @@ let orderSeq = 0;
 
 before(async () => {
   if (!DB) throw new Error('Set TEST_DATABASE_URL');
-  await db.query('DROP TABLE IF EXISTS lesson_progress, course_enrolments, bookings, login_failures, users CASCADE').catch(() => {});
+  await db.query('DROP TABLE IF EXISTS lesson_progress, course_coupons, course_enrolments, bookings, login_failures, users CASCADE').catch(() => {});
   await db._reset();
   server = http.createServer(handle);
   await new Promise((r) => server.listen(0, r));
@@ -112,14 +112,16 @@ test('anyone sees the outline and the free preview, but not paid lessons', async
   assert.equal(r.status, 200);
   assert.equal(r.body.course.modules.length, 8);
   assert.equal(r.body.course.lesson_count, 32);
-  assert.equal(r.body.course.price_inr, 3999);
+  assert.equal(r.body.course.price_inr, 4999);
   assert.equal(r.body.payments, 'manual');
   assert.equal(r.body.access, false);
   assert.equal(r.body.course.modules[0].lessons[0].summary, undefined, 'outline must not leak lesson text');
 
   r = await stranger('GET', '/api/course/lessons/1');
   assert.equal(r.status, 200);
-  assert.ok(r.body.lesson.points.length > 0);
+  assert.ok(r.body.lesson.blocks.length > 5);
+  assert.ok(r.body.lesson.title.en && r.body.lesson.title.hi, 'lesson 1 is in English and Hindi');
+  assert.ok(r.body.lesson.blocks.some((b) => b.type === 'story' && b.en && b.hi));
   assert.equal(r.body.lesson.next, 2);
 
   r = await stranger('GET', '/api/course/lessons/2');
@@ -142,7 +144,7 @@ test('without Razorpay keys, enrolment waits for payment and an admin marks it p
   assert.equal(r.status, 201, JSON.stringify(r.body));
   assert.equal(r.body.payment, 'manual');
   assert.equal(r.body.enrolment.status, 'pending_payment');
-  assert.equal(r.body.enrolment.amount_inr, 3999);
+  assert.equal(r.body.enrolment.amount_inr, 4999);
   r = await asha('POST', '/api/course/enrol', {});
   assert.equal(r.body.enrolment.status, 'pending_payment');
 
@@ -193,9 +195,9 @@ test('with Razorpay keys, a verified payment opens the course', async () => {
   assert.equal(r.status, 201, JSON.stringify(r.body));
   assert.equal(r.body.payment, 'razorpay');
   const { order_id: orderId, amount, key } = r.body.checkout;
-  assert.equal(amount, 399900);
+  assert.equal(amount, 499900);
   assert.equal(key, 'rzp_test_key');
-  assert.equal(orders.get(orderId).amount, 399900);
+  assert.equal(orders.get(orderId).amount, 499900);
 
   r = await ravi('POST', '/api/course/verify', { razorpay_order_id: orderId, razorpay_payment_id: 'pay_1', razorpay_signature: sign(orderId, 'pay_2') });
   assert.equal(r.status, 400);
@@ -278,4 +280,48 @@ test('price can be set in Vercel', async () => {
   const r = await stranger('GET', '/api/course');
   assert.equal(r.body.course.price_inr, 4999);
   delete process.env.COURSE_PRICE_INR;
+});
+
+test('EARLYBIRD99 takes 99% off, and admins manage coupons', async () => {
+  useRazorpay(true);
+  const c = client();
+  await c('POST', '/api/auth/register', { role: 'seeker', name: 'Pooja', email: 'pooja@example.com', ...base_, relationship: 'about_to_marry' });
+  let r = await c('GET', '/api/course/coupon?code=earlybird99');
+  assert.equal(r.status, 200, JSON.stringify(r.body));
+  assert.deepEqual(r.body.coupon, { code: 'EARLYBIRD99', percent_off: 99, price_inr: 4999, amount_inr: 49.99 });
+  r = await c('GET', '/api/course/coupon?code=NOPE');
+  assert.equal(r.status, 400);
+  assert.equal(r.body.field, 'coupon');
+  r = await c('POST', '/api/course/enrol', { coupon: 'NOPE' });
+  assert.equal(r.status, 400);
+
+  r = await c('POST', '/api/course/enrol', { coupon: ' earlybird99 ' });
+  assert.equal(r.status, 201, JSON.stringify(r.body));
+  assert.equal(r.body.checkout.amount, 4999);
+  assert.equal(orders.get(r.body.checkout.order_id).amount, 4999);
+  assert.equal(r.body.enrolment.coupon, 'EARLYBIRD99');
+  // Changing your mind about the coupon reprices the pending enrolment.
+  r = await c('POST', '/api/course/enrol', {});
+  assert.equal(r.body.checkout.amount, 499900);
+  assert.equal(r.body.enrolment.coupon, null);
+
+  r = await c('GET', '/api/admin/coupons');
+  assert.equal(r.status, 403);
+  r = await admin('POST', '/api/admin/coupons', { code: 'bad code', percent_off: 10 });
+  assert.equal(r.body.field, 'code');
+  r = await admin('POST', '/api/admin/coupons', { code: 'GIFT', percent_off: 100 });
+  assert.equal(r.status, 200, JSON.stringify(r.body));
+  r = await admin('POST', '/api/admin/coupons', { code: 'EARLYBIRD99', percent_off: 99, active: false });
+  assert.equal(r.body.coupon.active, false);
+  r = await c('POST', '/api/course/enrol', { coupon: 'EARLYBIRD99' });
+  assert.equal(r.status, 400, 'a switched-off coupon is refused');
+
+  r = await c('POST', '/api/course/enrol', { coupon: 'GIFT' });
+  assert.equal(r.status, 200, JSON.stringify(r.body));
+  assert.equal(r.body.enrolment.status, 'active');
+  assert.equal(r.body.enrolment.method, 'complimentary');
+  r = await admin('GET', '/api/admin/coupons');
+  assert.equal(r.body.coupons.find((x) => x.code === 'GIFT').used, 1);
+  await admin('POST', '/api/admin/coupons', { code: 'EARLYBIRD99', percent_off: 99, active: true });
+  useRazorpay(false);
 });

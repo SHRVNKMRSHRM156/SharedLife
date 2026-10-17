@@ -287,15 +287,15 @@ def _curriculum():
     rows = []
     for m in COURSE["modules"]:
         lessons = "".join(
-            f'<li><span>{l["title"]}</span><small>{l["minutes"]} min{" · free preview" if l["preview"] else ""}</small></li>'
+            f'<li><span>{l["title"]["en"]}</span><small lang="hi">{l["title"]["hi"]}</small><small>{l["minutes"]} min{" · free preview" if l["preview"] else ""}</small></li>'
             for l in m["lessons"])
-        rows.append(f'<details{" open" if m["n"] == 1 else ""}><summary><b>Module {m["n"]}</b> {m["title"]}</summary>'
-                    f'<p>{m["blurb"]}</p><ol class="lessons" start="{m["lessons"][0]["id"]}">{lessons}</ol></details>')
+        rows.append(f'<details{" open" if m["n"] == 1 else ""}><summary><b>Module {m["n"]}</b> {m["title"]["en"]}</summary>'
+                    f'<p>{m["blurb"]["en"]}</p><ol class="lessons" start="{m["lessons"][0]["id"]}">{lessons}</ol></details>')
     return "\n        ".join(rows)
 
-PAGES["course"] = ("The SharedLife Course", f"A self-paced online course for couples before and after marriage: {len(COURSE['modules'])} modules, {COURSE['lesson_count']} lessons, ending with your own Shared Life Plan.", hero(
+PAGES["course"] = ("The SharedLife Course", f"A self-paced online course in English and Hindi for couples about to marry or newly married: {len(COURSE['modules'])} modules, {COURSE['lesson_count']} lessons, ending with your own Shared Life Plan.", hero(
     "The SharedLife Course", "Learn the skills of a lasting marriage",
-    f"A self-paced online course for couples before and after marriage. {COURSE['lesson_count']} short lessons with exercises you do together, ending with your own Shared Life Plan.", "gold") + f"""
+    f"A self-paced online course for couples about to marry or newly married, in English and Hindi. {COURSE['lesson_count']} lessons full of real-life stories and exercises you do together, ending with your own Shared Life Plan.", "gold") + f"""
 <section>
   <div class="wrap split">
     <div style="display:flex;flex-direction:column;gap:28px">
@@ -304,13 +304,14 @@ PAGES["course"] = ("The SharedLife Course", f"A self-paced online course for cou
         <div><b data-count="{COURSE['lesson_count']}">{COURSE['lesson_count']}</b><span>lessons</span></div>
         <div><b data-count="{COURSE_HOURS}" data-prefix="~">~{COURSE_HOURS}</b><span>hours, at your pace</span></div>
       </div>
-      <p class="lede">Created by SharedLife's co-founders, a family-law scholar and an economist, so the course covers feelings, money and the law in one place. Learn together on a phone or laptop, whenever suits you.</p>
+      <p class="lede">Created by SharedLife's co-founders, a family-law scholar and an economist, so the course covers feelings, money and the law in one place. Every lesson is told through stories and examples from Indian homes, with illustrations, and you can switch between English and Hindi at any time.</p>
       <div class="tier pop price-card">
         <span class="badge">For both partners</span>
         <span class="name">The SharedLife Course</span>
         <span class="price">{COURSE_PRICE}</span>
         <ul>
           <li>All {COURSE['lesson_count']} lessons, open as soon as you enrol</li>
+          <li>In English and हिंदी, switch any time</li>
           <li>Questions and exercises to do together after every lesson</li>
           <li>Your own Shared Life Plan by the end</li>
           <li>Progress saved in your SharedLife account</li>
@@ -338,11 +339,11 @@ PAGES["course"] = ("The SharedLife Course", f"A self-paced online course for cou
 
 <section class="band">
   <div class="wrap">
-    <div class="head"><p class="eyebrow">Who it's for</p><h2 class="h2">Anyone serious about a good marriage</h2></div>
+    <div class="head"><p class="eyebrow">Who it's for</p><h2 class="h2">Couples at the start of a shared life</h2></div>
     <div class="grid-3">
-      <article class="card lift"><span class="icon i-blush">A</span><h3>Thinking about marriage</h3><p>Understand yourself and what you want from a partner before you choose.</p></article>
-      <article class="card lift"><span class="icon i-sage">B</span><h3>Engaged couples</h3><p>Take the course together and arrive at your wedding with a shared plan.</p></article>
-      <article class="card lift"><span class="icon i-gold">C</span><h3>Married couples</h3><p>Refresh how you talk, decide and work through differences.</p></article>
+      <article class="card lift"><span class="icon i-blush">A</span><h3>About to marry</h3><p>Talk through expectations, money and family before the wedding, and arrive with a shared plan.</p></article>
+      <article class="card lift"><span class="icon i-sage">B</span><h3>Newly married</h3><p>Settle into the first year together: new routines, new family and your first differences.</p></article>
+      <article class="card lift"><span class="icon i-gold">C</span><h3>Learning on your own</h3><p>Partner busy or far away? The exercises work as personal reflection too.</p></article>
     </div>
   </div>
 </section>
@@ -351,6 +352,7 @@ PAGES["course"] = ("The SharedLife Course", f"A self-paced online course for cou
   <div class="wrap">
     <div class="head"><p class="eyebrow">Questions</p><h2 class="h2">About the course</h2></div>
     <div class="faq">
+      <details><summary>Which languages is it in?</summary><p>English and Hindi. Switch between them with one tap on any lesson, so each partner can read in the language they prefer.</p></details>
       <details><summary>Do we both need to enrol?</summary><p>No. One enrolment covers a couple. Sit together and learn from one account, or share the account between you.</p></details>
       <details><summary>How do we pay?</summary><p>By UPI, card, net banking or bank transfer when you enrol. All lessons open as soon as your payment is confirmed.</p></details>
       <details><summary>Can we get a refund?</summary><p>Yes, within 7 days of enrolling if you have completed no more than 2 lessons. See our <a class="link" href="refunds.html">refund policy</a>.</p></details>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="Two cups pouring into one shared bowl">
+  <defs>
+    <style>
+      .drip { animation: fall 2.4s ease-in infinite; }
+      .d2 { animation-delay: 1.2s; }
+      .glow { animation: pulse 4s ease-in-out infinite; transform-origin: 400px 300px; }
+      @keyframes fall { 0% { transform: translateY(-20px); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(70px); opacity: 0; } }
+      @keyframes pulse { 0%, 100% { transform: scale(1); opacity: .5; } 50% { transform: scale(1.08); opacity: .85; } }
+      @media (prefers-reduced-motion: reduce) { .drip, .glow { animation: none; } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <circle cx="130" cy="90" r="40" fill="#F6D5C6"/>
+  <circle cx="690" cy="80" r="28" fill="#D6E6D9"/>
+  <ellipse class="glow" cx="400" cy="300" rx="200" ry="70" fill="#EBA937" opacity=".5"/>
+  <!-- left cup tilted -->
+  <g transform="rotate(32 230 170)">
+    <path d="M170 120 h120 l-14 110 a20 20 0 0 1 -20 18 h-52 a20 20 0 0 1 -20 -18 z" fill="#C2512F"/>
+    <path d="M290 150 q36 0 30 34 q-6 30 -38 26" fill="none" stroke="#C2512F" stroke-width="12"/>
+    <ellipse cx="230" cy="120" rx="60" ry="12" fill="#E07A55"/>
+  </g>
+  <!-- right cup tilted -->
+  <g transform="rotate(-32 570 170)">
+    <path d="M510 120 h120 l-14 110 a20 20 0 0 1 -20 18 h-52 a20 20 0 0 1 -20 -18 z" fill="#1F4D3A"/>
+    <path d="M510 150 q-36 0 -30 34 q6 30 38 26" fill="none" stroke="#1F4D3A" stroke-width="12"/>
+    <ellipse cx="570" cy="120" rx="60" ry="12" fill="#2F6E54"/>
+  </g>
+  <!-- streams -->
+  <path d="M300 150 C 340 170, 360 220, 380 262" fill="none" stroke="#EBA937" stroke-width="10" stroke-linecap="round"/>
+  <path d="M500 150 C 460 170, 440 220, 420 262" fill="none" stroke="#EBA937" stroke-width="10" stroke-linecap="round"/>
+  <circle class="drip" cx="372" cy="215" r="6" fill="#EBA937"/>
+  <circle class="drip d2" cx="428" cy="215" r="6" fill="#EBA937"/>
+  <!-- bowl -->
+  <path d="M260 270 h280 a140 80 0 0 1 -280 0 z" fill="#183A2B"/>
+  <ellipse cx="400" cy="270" rx="140" ry="18" fill="#EBA937"/>
+  <path d="M370 300 c0 -14 22 -14 30 0 c8 -14 30 -14 30 0 c0 18 -30 30 -30 30 s-30 -12 -30 -30z" fill="#F6D5C6"/>
+</svg>

@@ -15,7 +15,7 @@ NAV = [("index", "./", "Home"), ("counselling", "counselling.html", "Counselling
        ("course", "course.html", "Course"), ("workshops", "workshops.html", "Workshops"), ("about", "about.html", "About")]
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
-         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@400;600;700;800&display=swap">\n'
+         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@400;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Serif+Devanagari:wght@400&display=swap">\n'
          '<link rel="stylesheet" href="styles.css">\n<link rel="icon" href="img/logo.png">')
 
 
