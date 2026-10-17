@@ -87,9 +87,33 @@ test('three account types register; professionals start pending', async () => {
   r = await admin('POST', '/api/auth/register', { role: 'seeker', name: 'Shravan', email: 'boss@sharedlife.in', ...base_, relationship: 'other' });
   assert.equal(r.body.user.is_admin, true);
 
-  r = await stranger('POST', '/api/auth/register', { role: 'seeker', name: 'Dup', email: 'asha@example.com', ...base_, relationship: 'married' });
+  r = await stranger('POST', '/api/auth/register', { role: 'seeker', name: 'Dup', email: 'asha@example.com', ...base_, password: 'different-pass', relationship: 'married' });
   assert.equal(r.status, 400);
   assert.match(r.body.error, /already exists/);
+});
+
+test('signing up again with the same email and password logs you in', async () => {
+  const c = client();
+  let r = await c('POST', '/api/auth/register', { role: 'seeker', name: 'Asha Rao', email: 'asha@example.com', ...base_, relationship: 'about_to_marry' });
+  assert.equal(r.status, 200, JSON.stringify(r.body));
+  assert.equal(r.body.user.email, 'asha@example.com');
+  r = await c('GET', '/api/auth/me');
+  assert.equal(r.body.user.name, 'Asha Rao');
+});
+
+test('sign-up saves nothing when the session secret is missing', async () => {
+  const saved = process.env.SESSION_SECRET;
+  process.env.SESSION_SECRET = 'short';
+  try {
+    let r = await stranger('POST', '/api/auth/register', { role: 'seeker', name: 'Ghost', email: 'ghost@example.com', ...base_, relationship: 'married' });
+    assert.equal(r.status, 503);
+    r = await stranger('GET', '/api/health');
+    assert.deepEqual(r.body.missing_settings, ['SESSION_SECRET']);
+    const { rows } = await db.query("SELECT 1 FROM users WHERE email = 'ghost@example.com'");
+    assert.equal(rows.length, 0);
+  } finally {
+    process.env.SESSION_SECRET = saved;
+  }
 });
 
 test('login, me, logout and lockout', async () => {
