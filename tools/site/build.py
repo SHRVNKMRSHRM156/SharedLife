@@ -20,6 +20,8 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel
 
 
 def header(key):
+    if key == "learn":  # the lesson player sits under Course in the menu
+        key = "course"
     items = "".join(f'<li><a href="{href}"{" aria-current=\"page\"" if k == key else ""}>{label}</a></li>' for k, href, label in NAV)
     acct = ' aria-current="page"' if key in ("login", "register", "account", "admin") else ""
     return f"""<nav class="nav" aria-label="Main">

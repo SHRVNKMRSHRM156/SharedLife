@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The SharedLife Course · SharedLife</title>
+<meta name="description" content="Your lessons in The SharedLife Course.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="img/logo.png">
+</head>
+<body>
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="img/logo.png" alt="">SharedLife</a>
+    <ul class="menu"><li><a href="./">Home</a></li><li><a href="counselling.html">Counselling</a></li><li><a href="prenup.html">Pre-Nuptial Agreement</a></li><li><a href="course.html" aria-current="page">Course</a></li><li><a href="workshops.html">Workshops</a></li><li><a href="about.html">About</a></li><li class="m-only"><a href="contact.html">Contact</a></li><li><a href="login.html" data-account-link>Log in</a></li></ul>
+    <a class="btn cta" href="account.html#book">Book a consultation</a>
+    <button class="toggle" type="button" aria-expanded="false">Menu</button>
+  </div>
+</nav>
+<main>
+<section class="dash learn">
+  <div class="wrap">
+    <div class="dash-head">
+      <div>
+        <p class="eyebrow">The SharedLife Course</p>
+        <h1 class="h2" id="learn-hello">Your lessons</h1>
+        <p class="muted" id="learn-progress"></p>
+      </div>
+      <div class="row"><a class="btn ghost" href="course.html">About the course</a></div>
+    </div>
+
+    <div id="enrol" class="banner enrol-box" hidden>
+      <div>
+        <h2 class="h3" id="enrol-title">Open all lessons</h2>
+        <p id="enrol-text"></p>
+      </div>
+      <div class="row" id="enrol-actions"></div>
+      <p class="form-error" role="alert" hidden></p>
+    </div>
+
+    <div class="learn-grid">
+      <nav class="toc" id="toc" aria-label="Lessons"></nav>
+      <article class="lesson" id="lesson" aria-live="polite"><p class="empty">Loading…</p></article>
+    </div>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <a class="brand" href="./"><img src="img/logo.png" alt="">SharedLife</a>
+        <p>Designing a Shared Life. Counselling, courses and Pre-Nuptial Agreements for couples.</p>
+      </div>
+      <div><h4>Services</h4><ul><li><a href="counselling.html">Couples counselling</a></li><li><a href="prenup.html">Pre-Nuptial Agreement</a></li><li><a href="course.html">The SharedLife Course</a></li><li><a href="workshops.html">Workshops and talks</a></li></ul></div>
+      <div><h4>SharedLife</h4><ul><li><a href="about.html">About us</a></li><li><a href="contact.html">Contact</a></li><li><a href="contact.html">FAQ</a></li><li><a href="register.html">Join as a counsellor or advocate</a></li></ul></div>
+    </div>
+    <p class="legal">Agreements are drafted by independent advocates. Information on this website is general and is not legal advice.</p>
+  </div>
+</footer>
+<script src="site.js"></script>
+<script src="app.js"></script>
+<script>SL.page('learn');</script>
+</body>
+</html>

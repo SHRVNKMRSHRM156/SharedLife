@@ -130,6 +130,7 @@ APP_PAGES["account"] = ("My account · SharedLife", "Your SharedLife bookings.",
     </details>
 
     <div id="seeker-area" hidden>
+      <div id="course-card" class="banner course-banner" hidden></div>
       <div class="split">
         <form id="book-form" class="form card" novalidate>
           <h2 class="h3" id="book">Book an appointment</h2>
@@ -172,6 +173,34 @@ APP_PAGES["account"] = ("My account · SharedLife", "Your SharedLife bookings.",
   </div>
 </section>""")
 
+APP_PAGES["learn"] = ("The SharedLife Course · SharedLife", "Your lessons in The SharedLife Course.", """
+<section class="dash learn">
+  <div class="wrap">
+    <div class="dash-head">
+      <div>
+        <p class="eyebrow">The SharedLife Course</p>
+        <h1 class="h2" id="learn-hello">Your lessons</h1>
+        <p class="muted" id="learn-progress"></p>
+      </div>
+      <div class="row"><a class="btn ghost" href="course.html">About the course</a></div>
+    </div>
+
+    <div id="enrol" class="banner enrol-box" hidden>
+      <div>
+        <h2 class="h3" id="enrol-title">Open all lessons</h2>
+        <p id="enrol-text"></p>
+      </div>
+      <div class="row" id="enrol-actions"></div>
+      <p class="form-error" role="alert" hidden></p>
+    </div>
+
+    <div class="learn-grid">
+      <nav class="toc" id="toc" aria-label="Lessons"></nav>
+      <article class="lesson" id="lesson" aria-live="polite"><p class="empty">Loading…</p></article>
+    </div>
+  </div>
+</section>""")
+
 APP_PAGES["admin"] = ("Admin · SharedLife", "SharedLife admin dashboard.", """
 <section class="dash">
   <div class="wrap">
@@ -183,6 +212,7 @@ APP_PAGES["admin"] = ("Admin · SharedLife", "SharedLife admin dashboard.", """
       <div class="row">
         <a class="btn ghost" href="/api/admin/export?type=users">Download registrations (CSV)</a>
         <a class="btn ghost" href="/api/admin/export?type=bookings">Download bookings (CSV)</a>
+        <a class="btn ghost" href="/api/admin/export?type=enrolments">Download course enrolments (CSV)</a>
       </div>
     </div>
     <p class="form-error" id="admin-error" role="alert" hidden></p>
@@ -195,11 +225,14 @@ APP_PAGES["admin"] = ("Admin · SharedLife", "SharedLife admin dashboard.", """
       <div class="tile"><b id="t-requested">–</b><span>Bookings to confirm</span></div>
       <div class="tile"><b id="t-week">–</b><span>New sign-ups this week</span></div>
       <div class="tile"><b id="t-week-b">–</b><span>New bookings this week</span></div>
+      <div class="tile"><b id="t-learners">–</b><span>Course learners</span></div>
+      <div class="tile warn"><b id="t-course-due">–</b><span>Awaiting course payment</span></div>
     </div>
 
     <div class="tabs" role="tablist">
       <button role="tab" aria-selected="true" data-tab="bookings">Bookings</button>
       <button role="tab" aria-selected="false" data-tab="users">Registrations</button>
+      <button role="tab" aria-selected="false" data-tab="course">Course</button>
     </div>
 
     <div data-panel="bookings">
@@ -221,6 +254,24 @@ APP_PAGES["admin"] = ("Admin · SharedLife", "SharedLife admin dashboard.", """
       </div>
       <div class="table-wrap"><table class="data" id="users-table">
         <thead><tr><th>Name</th><th>Type</th><th>Contact</th><th>Details</th><th>Joined</th><th>Status</th><th></th></tr></thead>
+        <tbody><tr><td colspan="7" class="empty">Loading…</td></tr></tbody>
+      </table></div>
+    </div>
+
+    <div data-panel="course" hidden>
+      <p class="note" id="course-mode"></p>
+      <form id="grant-form" class="filters" novalidate>
+        <label class="field inline"><span>Give access to</span><input name="email" type="email" placeholder="Account email"></label>
+        <label class="field inline"><span>As</span><select name="method"><option value="manual">Paid by UPI or bank transfer</option><option value="complimentary">Complimentary</option></select></label>
+        <button class="btn small" type="submit">Give access</button>
+        <p class="form-error" role="alert" hidden></p>
+      </form>
+      <div class="filters">
+        <label class="field inline"><span>Status</span><select id="f-estatus"><option value="">All</option><option value="pending_payment">Awaiting payment</option><option value="active">Active</option><option value="cancelled">Cancelled</option></select></label>
+        <label class="field inline"><span>Search</span><input id="f-esearch" placeholder="Name, email or phone"></label>
+      </div>
+      <div class="table-wrap"><table class="data" id="enrolments-table">
+        <thead><tr><th>Learner</th><th>Enrolled</th><th>Amount</th><th>Paid by</th><th>Progress</th><th>Status</th><th></th></tr></thead>
         <tbody><tr><td colspan="7" class="empty">Loading…</td></tr></tbody>
       </table></div>
     </div>
