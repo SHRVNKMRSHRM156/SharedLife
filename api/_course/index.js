@@ -11,6 +11,7 @@
 //   figure                     { type, src, animated?, alt:{en,hi}, caption:{en,hi} }
 import m1 from './m1.js';
 import m2 from './m2.js';
+import m3 from './m3.js';
 import { LESSONS as OLD } from './legacy.js';
 
 export const MODULES = [
@@ -32,13 +33,9 @@ export const MODULES = [
     blurb: { en: 'Bringing it together in your own plan, and keeping it alive year after year.', hi: 'सब कुछ अपने प्लान में समेटना, और उसे हर साल जीवित रखना।' } },
 ];
 
-// Modules 3 to 8 are still the earlier English drafts, waiting to be rewritten in the Module 1 style.
+// Modules 4 to 8 are still the earlier English drafts, waiting to be rewritten in the Module 1 style.
 // [new module, Hindi title, old lesson id or null, English title if it changes]
 const DRAFTS = [
-  [3, 'ऐसा सुनना जो दिल तक पहुँचे', 13],
-  [3, 'बिना दोष दिए अपनी ज़रूरतें कहना', 14],
-  [3, 'मतभेद सुलझाना और रिश्ता जोड़ना', 15],
-  [3, 'रिश्ते को थकाने वाली आदतें, और उनके उपाय', 16],
   [4, 'शादी के केंद्र में दोस्ती', 9, 'Friendship at the heart of marriage'],
   [4, 'स्नेह, नज़दीकी और अंतरंगता', null, 'Affection, closeness and intimacy'],
   [4, 'वे रस्में जो आपको क़रीब रखती हैं', null, 'Rituals that keep you close'],
@@ -61,7 +58,7 @@ const DRAFTS = [
   [8, 'अपने प्लान को जीवित रखना', 32],
 ];
 
-const WRITTEN = [...m1, ...m2];
+const WRITTEN = [...m1, ...m2, ...m3];
 
 const draft = ([module, hi, oldId, en], i) => {
   const o = OLD.find((l) => l.id === oldId);

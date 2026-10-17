@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="Two people sitting close, soft waves travelling from one to the other, a phone face down between them">
+  <defs>
+    <style>
+      .wave { opacity: 0; animation: travel 4.5s ease-out infinite; }
+      .w2 { animation-delay: 1.5s; }
+      .w3 { animation-delay: 3s; }
+      .listener { transform-origin: 560px 330px; animation: nod 4.5s ease-in-out infinite; }
+      .heart { transform-origin: 400px 120px; animation: beat 3s ease-in-out infinite; }
+      @keyframes travel { 0% { opacity: 0; transform: translateX(0); } 20% { opacity: .9; } 85% { opacity: .5; } 100% { opacity: 0; transform: translateX(90px); } }
+      @keyframes nod { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-2.5deg); } }
+      @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+      @media (prefers-reduced-motion: reduce) { .wave, .listener, .heart { animation: none; } .wave { opacity: .7; } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <ellipse cx="400" cy="350" rx="340" ry="30" fill="#D6E6D9"/>
+  <circle cx="110" cy="90" r="20" fill="#EBA937" opacity=".6"/>
+  <circle cx="700" cy="80" r="26" fill="#D6E6D9"/>
+  <circle cx="680" cy="250" r="10" fill="#F6D5C6"/>
+  <rect x="340" y="290" width="120" height="14" rx="7" fill="#1F4D3A"/>
+  <rect x="360" y="304" width="10" height="44" fill="#1F4D3A"/>
+  <rect x="430" y="304" width="10" height="44" fill="#1F4D3A"/>
+  <rect x="376" y="278" width="48" height="12" rx="4" fill="#183A2B"/>
+  <rect x="432" y="250" width="22" height="28" rx="4" fill="#C2512F"/>
+  <path d="M454 256 C466 256 466 272 454 272" fill="none" stroke="#C2512F" stroke-width="4"/>
+  <g>
+    <ellipse cx="230" cy="340" rx="64" ry="10" fill="#183A2B" opacity=".15"/>
+    <path d="M175 340 C175 262 196 222 230 222 C264 222 285 262 285 340 Z" fill="#C2512F"/>
+    <circle cx="232" cy="178" r="40" fill="#F6D5C6"/>
+    <path d="M192 178 C188 128 276 128 272 178 C266 150 200 150 192 178 Z" fill="#183A2B"/>
+    <path d="M196 182 C186 222 190 250 200 262 C200 230 204 206 210 190 Z" fill="#183A2B"/>
+    <circle cx="276" cy="250" r="11" fill="#F6D5C6"/>
+  </g>
+  <g fill="none" stroke="#EBA937" stroke-width="6" stroke-linecap="round">
+    <path class="wave" d="M300 170 Q312 190 300 210"/>
+    <path class="wave w2" d="M300 170 Q312 190 300 210"/>
+    <path class="wave w3" d="M300 170 Q312 190 300 210"/>
+  </g>
+  <g class="listener">
+    <ellipse cx="560" cy="340" rx="64" ry="10" fill="#183A2B" opacity=".15"/>
+    <path d="M505 340 C505 262 526 222 560 222 C594 222 615 262 615 340 Z" fill="#1F4D3A"/>
+    <circle cx="558" cy="178" r="40" fill="#F6D5C6"/>
+    <path d="M520 172 C526 136 592 136 598 172 C580 158 538 158 520 172 Z" fill="#183A2B"/>
+    <circle cx="520" cy="182" r="7" fill="#F6D5C6"/>
+    <circle cx="516" cy="250" r="11" fill="#F6D5C6"/>
+  </g>
+  <path class="heart" d="M400 140 C374 120 374 94 393 94 C400 94 400 101 400 103 C400 101 400 94 407 94 C426 94 426 120 400 140 Z" fill="#C2512F"/>
+</svg>

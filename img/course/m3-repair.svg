@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="Two people on either side of a stream build a small bridge that meets in the middle">
+  <defs>
+    <style>
+      .plankL { transform-origin: 250px 270px; animation: growL 7s ease-in-out infinite; }
+      .plankR { transform-origin: 550px 270px; animation: growR 7s ease-in-out infinite; }
+      .glow { transform-origin: 400px 150px; opacity: 0; animation: glow 7s ease-in-out infinite; }
+      .ripple { animation: flow 4s linear infinite; }
+      @keyframes growL { 0%, 8% { transform: scaleX(0); } 40%, 88% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
+      @keyframes growR { 0%, 8% { transform: scaleX(0); } 40%, 88% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
+      @keyframes glow { 0%, 40% { opacity: 0; transform: scale(.6); } 52%, 84% { opacity: 1; transform: scale(1); } 96%, 100% { opacity: 0; transform: scale(.6); } }
+      @keyframes flow { from { transform: translateX(0); } to { transform: translateX(-60px); } }
+      @media (prefers-reduced-motion: reduce) { .plankL, .plankR, .glow, .ripple { animation: none; } .glow { opacity: 1; } }
+    </style>
+    <clipPath id="river"><rect x="250" y="270" width="300" height="130"/></clipPath>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <circle cx="110" cy="80" r="26" fill="#D6E6D9"/>
+  <circle cx="700" cy="90" r="20" fill="#EBA937" opacity=".7"/>
+  <!-- banks -->
+  <path d="M0 270 H250 L270 400 H0 Z" fill="#D6E6D9"/>
+  <path d="M800 270 H550 L530 400 H800 Z" fill="#D6E6D9"/>
+  <!-- water -->
+  <rect x="250" y="285" width="300" height="115" fill="#1F4D3A" opacity=".85"/>
+  <g clip-path="url(#river)"><g class="ripple" stroke="#FBF6EE" stroke-width="3" fill="none" opacity=".6">
+    <path d="M240 320 q15 -8 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0"/>
+    <path d="M240 360 q15 -8 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0"/>
+  </g></g>
+  <!-- planks -->
+  <rect class="plankL" x="250" y="262" width="152" height="16" rx="4" fill="#C2512F"/>
+  <rect class="plankR" x="398" y="262" width="152" height="16" rx="4" fill="#183A2B"/>
+  <!-- left person -->
+  <circle cx="170" cy="168" r="26" fill="#F6D5C6"/>
+  <path d="M146 162 q24 -32 48 0 q-6 -20 -24 -20 q-18 0 -24 20z" fill="#183A2B"/>
+  <path d="M136 270 q0 -76 34 -76 q34 0 34 76z" fill="#C2512F"/>
+  <!-- right person -->
+  <circle cx="630" cy="168" r="26" fill="#F6D5C6"/>
+  <path d="M606 160 q24 -30 48 0 q0 -24 -24 -24 q-24 0 -24 24z" fill="#183A2B"/>
+  <path d="M596 270 q0 -76 34 -76 q34 0 34 76z" fill="#1F4D3A"/>
+  <!-- heart glow where the bridge meets -->
+  <g class="glow">
+    <circle cx="400" cy="150" r="46" fill="#EBA937" opacity=".35"/>
+    <path d="M382 142 c0 -14 18 -16 18 -3 c0 -13 18 -11 18 3 c0 16 -18 26 -18 26 s-18 -10 -18 -26z" fill="#C2512F"/>
+  </g>
+</svg>

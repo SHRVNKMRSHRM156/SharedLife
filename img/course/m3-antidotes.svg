@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="A balance with many small warm circles outweighing a single dark one, and four small plants growing below">
+  <defs>
+    <style>
+      .beam { transform-origin: 400px 90px; animation: tilt 8s ease-in-out infinite; }
+      .panL { animation: dropL 8s ease-in-out infinite; }
+      .panR { animation: dropR 8s ease-in-out infinite; }
+      .sprout { transform-box: fill-box; transform-origin: 50% 100%; animation: sway 5s ease-in-out infinite; }
+      .s2 { animation-delay: .8s; }
+      .s3 { animation-delay: 1.6s; }
+      .s4 { animation-delay: 2.4s; }
+      @keyframes tilt { 0%, 100% { transform: rotate(-6deg); } 50% { transform: rotate(-9deg); } }
+      @keyframes dropL { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+      @keyframes dropR { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+      @keyframes sway { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+      @media (prefers-reduced-motion: reduce) { .beam, .panL, .panR, .sprout { animation: none; } .beam { transform: rotate(-7deg); } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <ellipse cx="400" cy="360" rx="340" ry="26" fill="#D6E6D9"/>
+  <circle cx="90" cy="80" r="18" fill="#D6E6D9"/>
+  <circle cx="720" cy="70" r="14" fill="#F6D5C6"/>
+  <rect x="392" y="90" width="16" height="200" rx="6" fill="#1F4D3A"/>
+  <path d="M350 300 Q400 280 450 300 Z" fill="#183A2B"/>
+  <rect x="340" y="296" width="120" height="12" rx="6" fill="#183A2B"/>
+  <g class="beam">
+    <rect x="230" y="84" width="340" height="12" rx="6" fill="#183A2B"/>
+    <circle cx="400" cy="90" r="12" fill="#EBA937"/>
+  </g>
+  <g class="panL">
+    <path d="M250 112 L210 196 M250 112 L290 196" stroke="#1F4D3A" stroke-width="3"/>
+    <path d="M200 196 H300 Q300 222 250 222 Q200 222 200 196 Z" fill="#1F4D3A"/>
+    <g fill="#EBA937">
+      <circle cx="222" cy="186" r="10"/><circle cx="244" cy="186" r="10"/><circle cx="266" cy="186" r="10"/><circle cx="286" cy="188" r="8"/>
+      <circle cx="233" cy="168" r="10"/><circle cx="255" cy="168" r="10"/><circle cx="276" cy="170" r="8"/>
+      <circle cx="244" cy="151" r="9"/><circle cx="264" cy="153" r="8"/>
+    </g>
+    <g fill="#C2512F">
+      <circle cx="212" cy="190" r="6"/><circle cx="255" cy="138" r="7"/>
+    </g>
+  </g>
+  <g class="panR">
+    <path d="M550 76 L510 160 M550 76 L590 160" stroke="#1F4D3A" stroke-width="3"/>
+    <path d="M500 160 H600 Q600 186 550 186 Q500 186 500 160 Z" fill="#1F4D3A"/>
+    <circle cx="550" cy="148" r="12" fill="#183A2B"/>
+  </g>
+  <g class="sprout">
+    <rect x="128" y="300" width="4" height="50" fill="#1F4D3A"/>
+    <ellipse cx="118" cy="310" rx="14" ry="7" fill="#1F4D3A"/>
+    <ellipse cx="143" cy="300" rx="14" ry="7" fill="#1F4D3A"/>
+    <circle cx="130" cy="292" r="9" fill="#C2512F"/>
+  </g>
+  <g class="sprout s2">
+    <rect x="248" y="310" width="4" height="40" fill="#1F4D3A"/>
+    <ellipse cx="238" cy="318" rx="13" ry="6" fill="#1F4D3A"/>
+    <ellipse cx="262" cy="312" rx="13" ry="6" fill="#1F4D3A"/>
+    <circle cx="250" cy="304" r="8" fill="#EBA937"/>
+  </g>
+  <g class="sprout s3">
+    <rect x="548" y="306" width="4" height="44" fill="#1F4D3A"/>
+    <ellipse cx="538" cy="316" rx="13" ry="6" fill="#1F4D3A"/>
+    <ellipse cx="562" cy="308" rx="13" ry="6" fill="#1F4D3A"/>
+    <circle cx="550" cy="298" r="8" fill="#F6D5C6"/>
+  </g>
+  <g class="sprout s4">
+    <rect x="668" y="296" width="4" height="54" fill="#1F4D3A"/>
+    <ellipse cx="658" cy="308" rx="14" ry="7" fill="#1F4D3A"/>
+    <ellipse cx="683" cy="298" rx="14" ry="7" fill="#1F4D3A"/>
+    <circle cx="670" cy="288" r="9" fill="#C2512F"/>
+  </g>
+</svg>
