@@ -17,7 +17,7 @@ let base;
 
 before(async () => {
   if (!DB) throw new Error('Set TEST_DATABASE_URL');
-  await db.query('DROP TABLE IF EXISTS bookings, login_failures, users CASCADE').catch(() => {});
+  await db.query('DROP TABLE IF EXISTS lesson_progress, course_enrolments, bookings, login_failures, users CASCADE').catch(() => {});
   await db._reset();
   server = http.createServer(handle);
   await new Promise((r) => server.listen(0, r));

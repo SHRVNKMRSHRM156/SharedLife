@@ -348,8 +348,8 @@ td.empty { text-align: center; padding: 28px 12px; }
   :root:not([data-theme="light"]) .pill.s-confirmed, :root:not([data-theme="light"]) .pill.s-approved, :root:not([data-theme="light"]) .pill.s-active { color: var(--on-dark-soft); }
   :root:not([data-theme="light"]) .pill.s-cancelled, :root:not([data-theme="light"]) .pill.s-rejected, :root:not([data-theme="light"]) .pill.s-suspended { color: #F6C7B3; }
 }
-.tiles { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; margin-bottom: 28px; }
-@media (max-width: 1000px) { .tiles { grid-template-columns: repeat(4, 1fr); } }
+.tiles { display: grid; grid-template-columns: repeat(9, 1fr); gap: 12px; margin-bottom: 28px; }
+@media (max-width: 1000px) { .tiles { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 520px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
 .tile { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 2px; }
 .tile b { font-family: var(--display); font-weight: 400; font-size: 32px; line-height: 1.1; }
@@ -377,3 +377,55 @@ dialog.dialog::backdrop { background: rgba(10, 20, 15, .55); }
 .details-card > summary .muted { color: var(--terra); font-weight: 700; }
 .details-card .form { padding-bottom: 24px; }
 .field input[readonly], .field select:disabled { color: var(--muted); background: transparent; border-style: dashed; cursor: not-allowed; }
+
+
+/* ---------- course ---------- */
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.price-card { max-width: none; }
+.price-card .row { margin-top: 10px; }
+.curriculum .h3 { margin-bottom: 18px; }
+.faq.modules details p { padding-bottom: 12px; }
+.faq.modules summary b { display: block; font-family: var(--body); font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--terra); }
+.lessons { margin: 0 0 20px; padding-left: 28px; display: flex; flex-direction: column; gap: 8px; color: var(--ink-soft); }
+.lessons li { padding-left: 4px; }
+.lessons li::marker { color: var(--muted); font-weight: 700; font-variant-numeric: tabular-nums; }
+.lessons small { display: block; color: var(--muted); font-size: 13px; }
+.course-banner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; }
+.course-banner p { margin-top: 2px; }
+.enrol-box { display: flex; flex-direction: column; gap: 12px; border-left-color: var(--terra); }
+.enrol-box .h3 { margin-bottom: 4px; }
+.enrol-box.s-pending { border-left-color: var(--marigold); }
+.learn-grid { display: grid; grid-template-columns: 320px 1fr; gap: 32px; align-items: start; }
+.learn-grid > * { min-width: 0; }
+.toc { position: sticky; top: 84px; max-height: calc(100vh - 100px); overflow-y: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 18px 12px; display: flex; flex-direction: column; gap: 14px; }
+.toc-head { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--terra); padding: 0 10px 4px; }
+.toc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.toc-item { display: flex; gap: 10px; align-items: flex-start; padding: 7px 10px; border-radius: 12px; text-decoration: none; font-size: 15px; line-height: 1.35; color: var(--ink-soft); }
+.toc-item:hover { background: var(--sage); color: var(--ink); }
+.toc-item.current { background: var(--ink); color: var(--bg); }
+.toc-item.locked { color: var(--muted); }
+.toc-item .mark { flex: 0 0 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 800; background: var(--line); color: var(--ink); font-variant-numeric: tabular-nums; }
+.toc-item.locked .mark { background: transparent; font-size: 13px; }
+.toc-item.done .mark { background: var(--green); color: var(--on-dark); }
+.toc-item.current .mark { background: var(--marigold); color: #2A1C05; }
+.lesson { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: clamp(22px, 4vw, 44px); display: flex; flex-direction: column; gap: 18px; }
+.lesson .h2 { font-size: clamp(26px, 3.4vw, 38px); }
+.lesson section { padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.lesson section h3 { font-family: var(--display); font-weight: 400; font-size: 21px; }
+.lesson section ul { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; color: var(--ink-soft); }
+.lesson .talk { background: var(--sage); border-radius: 16px; padding: 20px 22px; }
+.lesson .talk ul { color: var(--ink); }
+.lesson .try { background: color-mix(in srgb, var(--marigold) 20%, var(--surface)); border-left: 5px solid var(--marigold); border-radius: 16px; padding: 20px 22px; }
+.lesson .video { position: relative; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: var(--green-deep); }
+.lesson .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.lesson-nav { margin-top: 6px; }
+@media (max-width: 900px) {
+  .learn-grid { grid-template-columns: 1fr; }
+  .toc { position: static; max-height: 340px; order: 2; }
+}
+.data .btn.small { white-space: nowrap; }
+.toc-item.current.locked { color: var(--bg); }
+.prose { display: flex; flex-direction: column; gap: 14px; }
+.prose .h3 { margin: 18px 0 0; }
+.prose p, .prose li { color: var(--ink-soft); }
+.prose ul { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; }

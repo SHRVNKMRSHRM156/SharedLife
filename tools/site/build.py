@@ -20,6 +20,8 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel
 
 
 def header(key):
+    if key == "learn":  # the lesson player sits under Course in the menu
+        key = "course"
     items = "".join(f'<li><a href="{href}"{" aria-current=\"page\"" if k == key else ""}>{label}</a></li>' for k, href, label in NAV)
     acct = ' aria-current="page"' if key in ("login", "register", "account", "admin") else ""
     return f"""<nav class="nav" aria-label="Main">
@@ -40,7 +42,7 @@ FOOTER = """<footer>
         <p>Designing a Shared Life. Counselling, courses and Pre-Nuptial Agreements for couples.</p>
       </div>
       <div><h4>Services</h4><ul><li><a href="counselling.html">Couples counselling</a></li><li><a href="prenup.html">Pre-Nuptial Agreement</a></li><li><a href="course.html">The SharedLife Course</a></li><li><a href="workshops.html">Workshops and talks</a></li></ul></div>
-      <div><h4>SharedLife</h4><ul><li><a href="about.html">About us</a></li><li><a href="contact.html">Contact</a></li><li><a href="contact.html">FAQ</a></li><li><a href="register.html">Join as a counsellor or advocate</a></li></ul></div>
+      <div><h4>SharedLife</h4><ul><li><a href="about.html">About us</a></li><li><a href="contact.html">Contact</a></li><li><a href="contact.html">FAQ</a></li><li><a href="register.html">Join as a counsellor or advocate</a></li><li><a href="terms.html">Terms of use</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="refunds.html">Refunds and cancellations</a></li></ul></div>
     </div>
     <p class="legal">Agreements are drafted by independent advocates. Information on this website is general and is not legal advice.</p>
   </div>

@@ -11,7 +11,10 @@
     bstatus: { requested: 'Requested', confirmed: 'Confirmed', completed: 'Completed', cancelled: 'Cancelled' },
     ustatus: { active: 'Active', pending: 'Awaiting approval', approved: 'Approved', rejected: 'Not approved', suspended: 'Suspended' },
     relationship: { about_to_marry: 'About to marry', married: 'Married', other: 'Other' },
+    estatus: { pending_payment: 'Awaiting payment', active: 'Active', cancelled: 'Cancelled' },
+    method: { razorpay: 'Online', manual: 'UPI or bank transfer', complimentary: 'Complimentary', '': '–' },
   };
+  function rupees(n) { return '₹' + Number(n).toLocaleString('en-IN'); }
 
   function api(method, path, body) {
     return fetch('/api/' + path, {
@@ -93,7 +96,7 @@
 
   function nextUrl() {
     var m = /[?&]next=([a-z]+)/.exec(location.search);
-    return m && m[1] === 'book' ? 'account.html#book' : 'account.html';
+    return { book: 'account.html#book', learn: 'learn.html#enrol' }[m && m[1]] || 'account.html';
   }
 
   // ---------- register ----------
@@ -209,6 +212,7 @@
 
   function seekerArea(u) {
     document.getElementById('seeker-area').hidden = false;
+    courseCard();
     var form = document.getElementById('book-form');
     if (u.profile && u.profile.partner_name) document.getElementById('b-partner').value = u.profile.partner_name;
     var date = document.getElementById('b-date');
@@ -273,10 +277,199 @@
     load();
   }
 
+  // ---------- course ----------
+  function courseCard() {
+    var box = document.getElementById('course-card');
+    api('GET', 'course').then(function (d) {
+      var e = d.enrolment, total = d.course.lesson_count, text, link;
+      if (d.access) {
+        var done = d.progress.length;
+        text = done >= total ? 'You have completed all ' + total + ' lessons. Revisit them any time.' : done + ' of ' + total + ' lessons done.';
+        link = h('a', { class: 'btn small', href: 'learn.html', text: done ? 'Continue the course' : 'Start the course' });
+        box.className = 'banner course-banner s-approved';
+      } else if (e && e.status === 'pending_payment') {
+        text = d.payments === 'razorpay' ? 'Your place is reserved. Complete your payment to open all lessons.' : 'Your place is reserved. We will contact you with payment details, and your lessons open as soon as payment is confirmed.';
+        link = h('a', { class: 'btn small', href: 'learn.html#enrol', text: d.payments === 'razorpay' ? 'Complete payment' : 'View the course' });
+        box.className = 'banner course-banner s-pending';
+      } else {
+        text = total + ' lessons for couples, at your own pace. ' + rupees(d.course.price_inr) + ' for both partners.';
+        link = h('a', { class: 'btn small ghost', href: 'course.html', text: 'See the course' });
+      }
+      box.textContent = '';
+      box.appendChild(h('div', {}, [h('b', { text: 'The SharedLife Course' }), h('p', { class: 'muted', text: text })]));
+      box.appendChild(link);
+      box.hidden = false;
+    }, function () {});
+  }
+
+  function loadScript(src) {
+    return new Promise(function (resolve, reject) {
+      if (document.querySelector('script[src="' + src + '"]')) return resolve();
+      var s = document.createElement('script');
+      s.src = src; s.onload = resolve; s.onerror = function () { reject(new Error('Could not load the payment window. Check your connection and try again.')); };
+      document.head.appendChild(s);
+    });
+  }
+
+  function learnPage() {
+    var state = { info: null, user: null, current: null };
+    var box = document.getElementById('enrol'), toc = document.getElementById('toc'), view = document.getElementById('lesson');
+    var lessons = [];
+
+    function wanted() {
+      var m = /[?&]lesson=(\d+)/.exec(location.search);
+      return m ? Number(m[1]) : null;
+    }
+    function unlocked(l) { return state.info.access || l.preview; }
+
+    function renderEnrol() {
+      var d = state.info, e = d.enrolment, title = document.getElementById('enrol-title'), text = document.getElementById('enrol-text'), actions = document.getElementById('enrol-actions');
+      var price = rupees(d.course.price_inr);
+      actions.textContent = '';
+      showError(box, null);
+      box.hidden = d.access;
+      if (d.access) return;
+      box.className = 'banner enrol-box';
+      if (!state.user) {
+        title.textContent = 'Enrol to open all ' + d.course.lesson_count + ' lessons';
+        text.textContent = price + ' for both partners. Create a free SharedLife account first, or log in if you have one.';
+        actions.appendChild(h('a', { class: 'btn', href: 'register.html?next=learn', text: 'Create an account and enrol' }));
+        actions.appendChild(h('a', { class: 'btn ghost', href: 'login.html?next=learn', text: 'Log in' }));
+      } else if (!d.can_enrol) {
+        title.textContent = 'The course is for couples and individuals';
+        text.textContent = 'Please enrol from a couple or individual account. Counsellor and advocate accounts cannot enrol.';
+      } else if (e && e.status === 'pending_payment' && d.payments === 'manual') {
+        box.className = 'banner enrol-box s-pending';
+        title.textContent = 'Your place is reserved';
+        text.textContent = 'We will call or email you with UPI or bank transfer details for ' + rupees(e.amount_inr) + '. All lessons open as soon as your payment is confirmed.';
+      } else {
+        title.textContent = e && e.status === 'pending_payment' ? 'Complete your enrolment' : 'Enrol to open all ' + d.course.lesson_count + ' lessons';
+        text.textContent = price + ' for both partners. ' + (d.payments === 'razorpay' ? 'Pay securely by UPI, card or net banking.' : 'We will send you UPI or bank transfer details.');
+        actions.appendChild(h('button', { class: 'btn', type: 'button', text: d.payments === 'razorpay' ? 'Enrol and pay ' + price : 'Enrol for ' + price, onclick: enrol }));
+      }
+    }
+
+    function enrol(ev) {
+      var btn = ev.currentTarget;
+      showError(box, null);
+      btn.disabled = true;
+      api('POST', 'course/enrol', {}).then(function (r) {
+        if (r.payment !== 'razorpay') { btn.disabled = false; return refresh(); }
+        return loadScript('https://checkout.razorpay.com/v1/checkout.js').then(function () {
+          var c = r.checkout;
+          var rzp = new window.Razorpay({
+            key: c.key, order_id: c.order_id, amount: c.amount, currency: c.currency, name: c.name, description: c.description,
+            image: location.origin + '/img/logo.png', prefill: c.prefill, theme: { color: '#C2512F' },
+            handler: function (resp) {
+              api('POST', 'course/verify', resp).then(refresh, function (err) { showError(box, err); refresh(); });
+            },
+            modal: { ondismiss: function () { btn.disabled = false; } },
+          });
+          rzp.on('payment.failed', function (resp) {
+            showError(box, new Error((resp.error && resp.error.description) || 'The payment did not go through. Please try again.'));
+          });
+          rzp.open();
+        });
+      }).catch(function (err) { btn.disabled = false; showError(box, err); });
+    }
+
+    function renderToc() {
+      var d = state.info;
+      toc.textContent = '';
+      d.course.modules.forEach(function (m) {
+        var list = h('ol', { class: 'toc-list' });
+        m.lessons.forEach(function (l) {
+          var done = d.progress.indexOf(l.id) >= 0, open = unlocked(l);
+          var cls = 'toc-item' + (done ? ' done' : '') + (open ? '' : ' locked') + (state.current === l.id ? ' current' : '');
+          list.appendChild(h('li', {}, [h('a', {
+            class: cls, href: 'learn.html?lesson=' + l.id, 'aria-current': state.current === l.id ? 'page' : null,
+            onclick: function (ev) { ev.preventDefault(); show(l.id, true); },
+          }, [h('span', { class: 'mark', 'aria-hidden': 'true', text: done ? '✓' : open ? String(l.id) : '🔒' }), h('span', { text: l.title }), done ? h('span', { class: 'sr', text: ' (done)' }) : null, open ? null : h('span', { class: 'sr', text: ' (locked)' })])]));
+        });
+        toc.appendChild(h('div', { class: 'toc-module' }, [h('p', { class: 'toc-head', text: 'Module ' + m.n + ' · ' + m.title }), list]));
+      });
+      var done = d.progress.length, total = d.course.lesson_count;
+      document.getElementById('learn-progress').textContent = d.access ? done + ' of ' + total + ' lessons done' : '';
+    }
+
+    function section(title, items, cls) {
+      return h('section', { class: cls }, [h('h3', { text: title }), h('ul', {}, items.map(function (t) { return h('li', { text: t }); }))]);
+    }
+
+    function show(id, scroll) {
+      var meta = lessons.find(function (l) { return l.id === id; }) || lessons[0];
+      state.current = meta.id;
+      history.replaceState(null, '', 'learn.html?lesson=' + meta.id + (location.hash === '#enrol' && !state.info.access ? '#enrol' : ''));
+      renderToc();
+      if (!unlocked(meta)) {
+        view.textContent = '';
+        view.appendChild(h('p', { class: 'eyebrow', text: 'Lesson ' + meta.id }));
+        view.appendChild(h('h2', { class: 'h2', text: meta.title }));
+        view.appendChild(h('p', { class: 'lede', text: 'This lesson opens when you enrol. The first lesson is free to read now.' }));
+        view.appendChild(h('div', { class: 'row' }, [
+          h('a', { class: 'btn', href: '#enrol', text: 'Enrol', onclick: function (ev) { ev.preventDefault(); box.scrollIntoView({ behavior: 'smooth', block: 'center' }); } }),
+          h('a', { class: 'btn ghost', href: 'learn.html?lesson=1', text: 'Read the free lesson', onclick: function (ev) { ev.preventDefault(); show(1, true); } }),
+        ]));
+        return;
+      }
+      view.textContent = '';
+      view.appendChild(h('p', { class: 'empty', text: 'Loading…' }));
+      api('GET', 'course/lessons/' + meta.id).then(function (r) {
+        var l = r.lesson, mod = state.info.course.modules[l.module - 1], done = state.info.progress.indexOf(l.id) >= 0;
+        view.textContent = '';
+        view.appendChild(h('p', { class: 'eyebrow', text: 'Module ' + l.module + ' · ' + mod.title }));
+        view.appendChild(h('h2', { class: 'h2', text: l.title }));
+        view.appendChild(h('p', { class: 'muted', text: 'Lesson ' + l.id + ' of ' + state.info.course.lesson_count + ' · about ' + l.minutes + ' minutes' }));
+        if (l.video) view.appendChild(h('div', { class: 'video' }, [h('iframe', { src: l.video, title: l.title, allow: 'fullscreen; picture-in-picture', allowfullscreen: '', loading: 'lazy' })]));
+        view.appendChild(h('p', { class: 'lede', text: l.summary }));
+        view.appendChild(section('Key ideas', l.points, 'points'));
+        view.appendChild(section('Talk about it together', l.talk, 'talk'));
+        view.appendChild(h('section', { class: 'try' }, [h('h3', { text: 'Try this' }), h('p', { text: l.action })]));
+        var nav = h('div', { class: 'row lesson-nav' });
+        if (state.info.access) {
+          nav.appendChild(h('button', { class: 'btn' + (done ? ' ghost' : ''), type: 'button', text: done ? '✓ Done (tap to undo)' : 'Mark as done', onclick: function (ev) {
+            ev.currentTarget.disabled = true;
+            api('PUT', 'course/progress/' + l.id, { done: !done }).then(function (p) {
+              state.info.progress = p.progress;
+              if (!done && l.next) show(l.next, true); else show(l.id, false);
+            });
+          } }));
+        } else if (l.preview) {
+          nav.appendChild(h('a', { class: 'btn', href: '#enrol', text: 'Enrol to continue', onclick: function (ev) { ev.preventDefault(); box.scrollIntoView({ behavior: 'smooth', block: 'center' }); } }));
+        }
+        if (l.prev) nav.appendChild(h('button', { class: 'btn ghost', type: 'button', text: '← Previous', onclick: function () { show(l.prev, true); } }));
+        if (l.next) nav.appendChild(h('button', { class: 'btn ghost', type: 'button', text: 'Next →', onclick: function () { show(l.next, true); } }));
+        view.appendChild(nav);
+        if (l.module === 7) view.appendChild(h('p', { class: 'note', text: 'General information about the law in India, not legal advice. For your own situation, book a consultation from your account.' }));
+        if (scroll && window.innerWidth < 900) view.scrollIntoView({ block: 'start' });
+      }, function (err) {
+        view.textContent = '';
+        view.appendChild(h('p', { class: 'form-error', text: err.message }));
+      });
+    }
+
+    function refresh() {
+      return api('GET', 'course').then(function (d) {
+        state.info = d;
+        lessons = [];
+        d.course.modules.forEach(function (m) { lessons = lessons.concat(m.lessons); });
+        renderEnrol();
+        var first = d.access ? (lessons.find(function (l) { return d.progress.indexOf(l.id) < 0; }) || lessons[0]).id : 1;
+        show(state.current || wanted() || first, false);
+        if (location.hash === '#enrol' && !d.access) setTimeout(function () { box.scrollIntoView({ block: 'center' }); }, 50);
+      }, function (err) { view.textContent = ''; view.appendChild(h('p', { class: 'form-error', text: err.message })); });
+    }
+
+    api('GET', 'auth/me').then(function (d) {
+      state.user = d.user;
+      document.getElementById('learn-hello').textContent = 'Welcome, ' + firstName(d.user.name);
+    }, function () {}).then(refresh);
+  }
+
   // ---------- admin ----------
   function adminPage() {
     var errBox = document.getElementById('admin-error');
-    var state = { bookings: [], users: [], pros: [] };
+    var state = { bookings: [], users: [], pros: [], enrolments: [], lessons: 0 };
     function fail(err) {
       if (err.status === 401) { location.href = 'login.html'; return; }
       errBox.textContent = err.status === 403 ? 'This page is for SharedLife admins. Log in with the admin email.' : err.message;
@@ -302,6 +495,10 @@
         document.getElementById('t-requested').textContent = c.requested;
         document.getElementById('t-week').textContent = d.last7days.new_users;
         document.getElementById('t-week-b').textContent = d.last7days.new_bookings;
+        var en = { active: 0, pending_payment: 0 };
+        (d.enrolments || []).forEach(function (r) { en[r.status] = r.n; });
+        document.getElementById('t-learners').textContent = en.active || 0;
+        document.getElementById('t-course-due').textContent = en.pending_payment || 0;
       }, fail);
     }
 
@@ -433,11 +630,60 @@
       }).catch(function (err) { busy(editForm, false); showError(editForm, err); });
     });
 
+
+    function setEnrolment(e, status) {
+      api('PATCH', 'admin/enrolments/' + e.id, { status: status }).then(function () { loadEnrolments(); summary(); }, fail);
+    }
+
+    function renderEnrolments() {
+      var tb = document.querySelector('#enrolments-table tbody');
+      var st = document.getElementById('f-estatus').value, q = document.getElementById('f-esearch').value;
+      var rows = state.enrolments.filter(function (e) { return (!st || e.status === st) && match(q, [e.user_name, e.user_email, e.user_phone]); });
+      tb.textContent = '';
+      if (!rows.length) tb.appendChild(h('tr', {}, [h('td', { colspan: 7, class: 'empty', text: state.enrolments.length ? 'No enrolments match these filters.' : 'No course enrolments yet.' })]));
+      rows.forEach(function (e) {
+        var actions = [];
+        if (e.status !== 'active') actions.push(h('button', { class: 'btn small', type: 'button', text: e.status === 'pending_payment' ? 'Mark as paid' : 'Restore access', onclick: function () { setEnrolment(e, 'active'); } }));
+        if (e.status !== 'cancelled') actions.push(h('button', { class: 'btn ghost small', type: 'button', text: 'Cancel', onclick: function (ev) {
+          var btn = ev.currentTarget;
+          if (btn.dataset.sure !== '1') { btn.dataset.sure = '1'; btn.textContent = 'Tap again to cancel'; return; }
+          setEnrolment(e, 'cancelled');
+        } }));
+        tb.appendChild(h('tr', {}, [
+          h('td', {}, [h('b', { text: e.user_name }), h('br'), h('small', { text: e.user_phone + ' · ' + e.user_email })]),
+          h('td', { text: fmtDate(e.created_at) }),
+          h('td', { text: rupees(e.amount_inr) }),
+          h('td', {}, [document.createTextNode(LABELS.method[e.method] || e.method), e.payment_id ? h('br') : null, e.payment_id ? h('small', { text: e.payment_id }) : null]),
+          h('td', { text: e.lessons_done + ' / ' + state.lessons }),
+          h('td', {}, [h('span', { class: 'pill s-' + (e.status === 'pending_payment' ? 'pending' : e.status), text: LABELS.estatus[e.status] })]),
+          h('td', {}, [h('div', { class: 'row tight' }, actions)]),
+        ]));
+      });
+    }
+
+    function loadEnrolments() {
+      return api('GET', 'admin/enrolments').then(function (d) { state.enrolments = d.enrolments; state.lessons = d.lesson_count; renderEnrolments(); }, fail);
+    }
+    ['f-estatus', 'f-esearch'].forEach(function (id) { document.getElementById(id).addEventListener('input', renderEnrolments); });
+    api('GET', 'health').then(function (d) {
+      document.getElementById('course-mode').textContent = d.course_payments === 'razorpay'
+        ? 'Online payments are on (Razorpay). Paid enrolments open automatically.'
+        : 'Online payments are off until Razorpay keys are added in Vercel. New enrolments wait as "Awaiting payment": collect payment by UPI or bank transfer, then tap Mark as paid.';
+    }, function () {});
+    var grant = document.getElementById('grant-form');
+    grant.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      showError(grant, null);
+      busy(grant, true);
+      api('POST', 'admin/enrolments', values(grant)).then(function () { busy(grant, false); grant.reset(); loadEnrolments(); summary(); })
+        .catch(function (err) { busy(grant, false); showError(grant, err); });
+    });
+
     summary();
-    loadUsers().then(loadBookings);
+    loadUsers().then(loadBookings).then(loadEnrolments);
   }
 
   SL.page = function (name) {
-    ({ register: registerPage, login: loginPage, account: accountPage, admin: adminPage }[name] || function () {})();
+    ({ register: registerPage, login: loginPage, account: accountPage, admin: adminPage, learn: learnPage }[name] || function () {})();
   };
 })();

@@ -10,6 +10,7 @@ The public site at https://www.sharedlife.in plus accounts, bookings and an admi
 
 - **Register / log in** as one of three account types: a couple or individual, a marriage counsellor, or an advocate. Counsellors and advocates start as *awaiting approval*.
 - **Book an appointment** (couples and individuals): service, preferred date and time of day, online or in person, notes. They can see and cancel their bookings.
+- **The SharedLife Course** (`/course.html`, `/learn.html`): 32 lessons in `api/_course-content.js` (served only through the API, never as a static file). Lesson 1 is a free preview; the rest open once enrolled. Price defaults to ₹3,999; set `COURSE_PRICE_INR` to change it. Payments use Razorpay when `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` are set; without them, enrolments wait as *awaiting payment* and an admin marks them paid from the Course tab.
 - **Admin dashboard** (`/admin.html`): counts, every booking and registration, approve or decline professionals, confirm a booking, set its time, assign a counsellor or advocate, and download everything as CSV (opens in Excel).
 - Approved professionals see the sessions assigned to them and can mark them completed.
 
@@ -19,6 +20,7 @@ The public site at https://www.sharedlife.in plus accounts, bookings and an admi
 2. **Environment variables** (Project → *Settings* → *Environment Variables*, for Production and Preview):
    - `SESSION_SECRET`: a long random string, at least 32 characters (for example the output of `openssl rand -hex 32`).
    - `ADMIN_EMAILS`: the email address(es) that get the admin dashboard, comma-separated.
+   - Optional, to take course payments online: `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` (Razorpay Dashboard → Account & Settings → API Keys). Optional `COURSE_PRICE_INR` to change the price.
 3. **Redeploy** (Deployments → ⋯ → Redeploy).
 4. Open `/register.html`, create an account with the admin email, then open `/admin.html`.
 

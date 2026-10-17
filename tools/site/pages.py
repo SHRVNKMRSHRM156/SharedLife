@@ -1,3 +1,5 @@
+import os
+
 EMAIL = "advocateshravansharma@gmail.com"
 
 CTA = """
@@ -113,7 +115,7 @@ PAGES["index"] = ("SharedLife", "Counselling, courses and Pre-Nuptial Agreements
       <a class="card" href="course.html">
         <span class="for">For individuals and couples</span>
         <h3>The SharedLife Course</h3>
-        <p>A 15-week course on marriage and relationships, from choosing a partner to designing a shared life.</p>
+        <p>A self-paced online course for couples, from choosing each other to designing your shared life.</p>
         <span class="go">View the course →</span>
       </a>
       <a class="card" href="workshops.html">
@@ -269,39 +271,67 @@ PAGES["prenup"] = ("Pre-Nuptial Agreement · SharedLife", "The SharedLife Pre-Nu
 """)
 
 # ---------------- COURSE ----------------
-PAGES["course"] = ("The SharedLife Course", "A 15-week course on marriage and relationships.", hero(
+def _course_outline():
+    """Module and lesson titles come from the lesson file the API serves, so the page and the course never drift apart."""
+    import json, subprocess
+    root = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
+    js = "import { outline } from './lib/course.js'; process.stdout.write(JSON.stringify(outline()));"
+    out = subprocess.run(["node", "--input-type=module", "-e", js], cwd=root, capture_output=True, text=True, check=True)
+    return json.loads(out.stdout)
+
+COURSE = _course_outline()
+COURSE_HOURS = round(COURSE["minutes"] / 60)
+COURSE_PRICE = f"₹{COURSE['price_inr']:,}"
+
+def _curriculum():
+    rows = []
+    for m in COURSE["modules"]:
+        lessons = "".join(
+            f'<li><span>{l["title"]}</span><small>{l["minutes"]} min{" · free preview" if l["preview"] else ""}</small></li>'
+            for l in m["lessons"])
+        rows.append(f'<details{" open" if m["n"] == 1 else ""}><summary><b>Module {m["n"]}</b> {m["title"]}</summary>'
+                    f'<p>{m["blurb"]}</p><ol class="lessons" start="{m["lessons"][0]["id"]}">{lessons}</ol></details>')
+    return "\n        ".join(rows)
+
+PAGES["course"] = ("The SharedLife Course", f"A self-paced online course for couples before and after marriage: {len(COURSE['modules'])} modules, {COURSE['lesson_count']} lessons, ending with your own Shared Life Plan.", hero(
     "The SharedLife Course", "Learn the skills of a lasting marriage",
-    "A 15-week course on marriage and relationships, for individuals and couples. It ends with each participant designing their own shared-life agreement.", "gold") + f"""
+    f"A self-paced online course for couples before and after marriage. {COURSE['lesson_count']} short lessons with exercises you do together, ending with your own Shared Life Plan.", "gold") + f"""
 <section>
   <div class="wrap split">
     <div style="display:flex;flex-direction:column;gap:28px">
       <div class="stats">
-        <div><b data-count="15">15</b><span>weeks</span></div>
-        <div><b data-count="45" data-prefix="~">~45</b><span>hours</span></div>
-        <div><b data-count="8">8</b><span>modules</span></div>
+        <div><b data-count="{len(COURSE['modules'])}">{len(COURSE['modules'])}</b><span>modules</span></div>
+        <div><b data-count="{COURSE['lesson_count']}">{COURSE['lesson_count']}</b><span>lessons</span></div>
+        <div><b data-count="{COURSE_HOURS}" data-prefix="~">~{COURSE_HOURS}</b><span>hours, at your pace</span></div>
       </div>
-      <p class="lede">Taught by specialists in family law and economics, with experienced counsellors leading the sessions on communication and conflict. Also offered as a 3-credit elective at Bennett University.</p>
+      <p class="lede">Created by SharedLife's co-founders, a family-law scholar and an economist, so the course covers feelings, money and the law in one place. Learn together on a phone or laptop, whenever suits you.</p>
+      <div class="tier pop price-card">
+        <span class="badge">For both partners</span>
+        <span class="name">The SharedLife Course</span>
+        <span class="price">{COURSE_PRICE}</span>
+        <ul>
+          <li>All {COURSE['lesson_count']} lessons, open as soon as you enrol</li>
+          <li>Questions and exercises to do together after every lesson</li>
+          <li>Your own Shared Life Plan by the end</li>
+          <li>Progress saved in your SharedLife account</li>
+          <li>One enrolment covers you both</li>
+        </ul>
+        <div class="row">
+          <a class="btn" href="learn.html#enrol">Enrol now</a>
+          <a class="btn ghost" href="learn.html?lesson=1">Try the first lesson free</a>
+        </div>
+      </div>
       <div class="card top-gold">
         <span class="for">Capstone</span>
-        <h3>Your own shared-life agreement</h3>
-        <p>In the final weeks, each participant designs a written plan for their own relationship, using everything the course covers.</p>
+        <h3>Your Shared Life Plan</h3>
+        <p>In the final module, you write a plan for your own marriage in your own words: your vision, how you talk and repair, money, home and family, and how you will plan for life's turns.</p>
       </div>
-      <div><a class="btn" href="contact.html">Ask about the next batch</a></div>
     </div>
-    <div style="overflow-x:auto">
-      <table class="syllabus">
-        <thead><tr><th>Weeks</th><th>Module</th></tr></thead>
-        <tbody>
-          <tr><td>1–2</td><td>Why marriage, and why now</td></tr>
-          <tr><td>3–4</td><td>Self before partnership</td></tr>
-          <tr><td>5–6</td><td>Choosing a partner</td></tr>
-          <tr><td>7–8</td><td>Communication and conflict</td></tr>
-          <tr><td>9–10</td><td>Money and work</td></tr>
-          <tr><td>11</td><td>Family, roles and boundaries</td></tr>
-          <tr><td>12–13</td><td>Marriage and the law</td></tr>
-          <tr><td>14–15</td><td>Designing a shared life</td></tr>
-        </tbody>
-      </table>
+    <div class="curriculum">
+      <h2 class="h3">What you will learn</h2>
+      <div class="faq modules">
+        {_curriculum()}
+      </div>
     </div>
   </div>
 </section>
@@ -312,12 +342,28 @@ PAGES["course"] = ("The SharedLife Course", "A 15-week course on marriage and re
     <div class="grid-3">
       <article class="card lift"><span class="icon i-blush">A</span><h3>Thinking about marriage</h3><p>Understand yourself and what you want from a partner before you choose.</p></article>
       <article class="card lift"><span class="icon i-sage">B</span><h3>Engaged couples</h3><p>Take the course together and arrive at your wedding with a shared plan.</p></article>
-      <article class="card lift"><span class="icon i-gold">C</span><h3>Married couples</h3><p>Refresh how you communicate, decide and handle conflict.</p></article>
+      <article class="card lift"><span class="icon i-gold">C</span><h3>Married couples</h3><p>Refresh how you talk, decide and work through differences.</p></article>
     </div>
   </div>
 </section>
-{cta("Join the next batch", "Write to us for dates, fees and how to enrol.")}
-""")
+
+<section>
+  <div class="wrap">
+    <div class="head"><p class="eyebrow">Questions</p><h2 class="h2">About the course</h2></div>
+    <div class="faq">
+      <details><summary>Do we both need to enrol?</summary><p>No. One enrolment covers a couple. Sit together and learn from one account, or share the account between you.</p></details>
+      <details><summary>How do we pay?</summary><p>By UPI, card, net banking or bank transfer when you enrol. All lessons open as soon as your payment is confirmed.</p></details>
+      <details><summary>Can we get a refund?</summary><p>Yes, within 7 days of enrolling if you have completed no more than 2 lessons. See our <a class="link" href="refunds.html">refund policy</a>.</p></details>
+      <details><summary>How long does it take?</summary><p>About {COURSE_HOURS} hours in all. Most couples take one or two lessons a week, and each lesson ends with a short exercise to do together.</p></details>
+      <details><summary>Can I take it on my own?</summary><p>Yes. Many lessons are about knowing yourself first, and the exercises work as personal reflection too.</p></details>
+      <details><summary>Is the law module legal advice?</summary><p>No. It explains how marriage law and Pre-Nuptial Agreements work in India in general terms. For advice on your situation, book a consultation and we will connect you with an independent advocate.</p></details>
+      <details><summary>Can we talk to someone as we go?</summary><p>Yes. You can book counselling or a consultation from your account at any point in the course.</p></details>
+    </div>
+  </div>
+</section>
+{cta("Start with the first lesson, free", "Read the opening lesson on sharing happiness, then enrol when you are ready.").replace('href="account.html#book">Book a free consultation', 'href="learn.html?lesson=1">Try the first lesson')}
+"""
+)
 
 # ---------------- WORKSHOPS ----------------
 PAGES["workshops"] = ("Workshops and Talks · SharedLife", "SharedLife workshops and talks for couples, colleges and workplaces.", hero(
@@ -456,4 +502,95 @@ PAGES["contact"] = ("Contact · SharedLife", "Book a free consultation with Shar
     </div>
   </div>
 </section>
+""")
+
+# ---------------- POLICIES ----------------
+# Plain-language policies (needed by payment providers). Draft for Shravan to review before relying on them.
+POLICY_UPDATED = "17 October 2026"
+
+def policy(key, title, desc, intro, body):
+    PAGES[key] = (f"{title} · SharedLife", desc, hero("Policies", title, intro) + f"""
+<section>
+  <div class="wrap narrow prose">
+    <p class="note">Last updated {POLICY_UPDATED}</p>
+    {body}
+    <h2 class="h3">Contact</h2>
+    <p>Questions about this policy: write to <a class="link" href="mailto:{EMAIL}">{EMAIL}</a> or use the <a class="link" href="contact.html">contact page</a>.</p>
+  </div>
+</section>
+""")
+
+policy("terms", "Terms of use", "The terms for using SharedLife's website, account, course and services.",
+       "The terms for using this website, your SharedLife account, The SharedLife Course and our services.", f"""
+    <h2 class="h3">About these terms</h2>
+    <p>SharedLife (“we”, “us”) offers couples counselling, The SharedLife Course, workshops and help with Pre-Nuptial Agreements through www.sharedlife.in. By creating an account, booking a service or enrolling in the course, you agree to these terms.</p>
+    <h2 class="h3">Your account</h2>
+    <ul>
+      <li>Give accurate details and keep your password private. You are responsible for activity on your account.</li>
+      <li>You must be 18 or older to create an account.</li>
+      <li>We may suspend an account that is misused, for example to harass others or to share course material publicly.</li>
+    </ul>
+    <h2 class="h3">The SharedLife Course</h2>
+    <ul>
+      <li>One enrolment is for one couple or individual, using one account. The price is shown on the <a class="link" href="course.html">course page</a> and at checkout, and includes applicable taxes.</li>
+      <li>Delivery is online: all lessons open in your account as soon as your payment is confirmed. Nothing is shipped.</li>
+      <li>Course material is for your personal use. Please do not copy, resell or publish it.</li>
+      <li>Refunds are covered by our <a class="link" href="refunds.html">refund and cancellation policy</a>.</li>
+    </ul>
+    <h2 class="h3">Counselling, workshops and Pre-Nuptial Agreements</h2>
+    <ul>
+      <li>Bookings are requests until we confirm a time with you. Fees for each service are agreed with you before the service begins.</li>
+      <li>Counselling is not a substitute for medical or psychiatric care. If you or someone else is in danger, contact emergency services (112) straight away.</li>
+      <li>Pre-Nuptial Agreements are drafted by independent advocates. Course lessons and website content are general information, not legal advice.</li>
+    </ul>
+    <h2 class="h3">Payments</h2>
+    <p>Online payments are processed by our payment partner (Razorpay). We do not see or store your card, UPI or bank details.</p>
+    <h2 class="h3">Limits</h2>
+    <p>We work hard to keep the website and course available and accurate, but cannot promise they will always be uninterrupted or error-free. To the extent the law allows, our liability for any claim is limited to the amount you paid us for the service concerned.</p>
+    <h2 class="h3">Changes and governing law</h2>
+    <p>We may update these terms and will show the date of the latest version on this page. These terms are governed by the laws of India, and courts in Delhi have jurisdiction.</p>
+""")
+
+policy("privacy", "Privacy policy", "How SharedLife collects, uses and looks after your personal information.",
+       "What we collect, why we collect it, and how we look after it.", f"""
+    <h2 class="h3">What we collect</h2>
+    <ul>
+      <li><b>Account details:</b> your name, email, mobile number and city, and anything optional you add, such as your partner's name or wedding date. For counsellors and advocates, professional details such as qualifications and registration numbers.</li>
+      <li><b>Bookings and course activity:</b> the services you request, preferred times, notes you choose to share, your course enrolment and which lessons you have completed.</li>
+      <li><b>Payments:</b> the amount, date and payment reference. Card, UPI and bank details are handled by our payment partner, Razorpay, and never reach us.</li>
+    </ul>
+    <h2 class="h3">How we use it</h2>
+    <ul>
+      <li>To run your account, confirm bookings, give you course access and contact you about the services you asked for.</li>
+      <li>To match you with a counsellor or advocate on our panel, who sees only what they need for your session.</li>
+      <li>We do not sell your information or use it for third-party advertising.</li>
+    </ul>
+    <h2 class="h3">Where it is kept</h2>
+    <p>Your information is stored in a secure database hosted in Singapore by our hosting providers (Vercel and Neon). Passwords are stored only in encrypted (hashed) form.</p>
+    <h2 class="h3">Your choices</h2>
+    <ul>
+      <li>You can update your optional details from your account page.</li>
+      <li>You can ask us for a copy of your information, ask us to correct it, or ask us to delete your account by writing to us. We may keep payment records where the law requires.</li>
+    </ul>
+    <h2 class="h3">Cookies</h2>
+    <p>We use one essential cookie to keep you logged in. We do not use advertising or tracking cookies.</p>
+""")
+
+policy("refunds", "Refund and cancellation policy", "Refunds and cancellations for The SharedLife Course and SharedLife services.",
+       "How cancellations and refunds work for the course and our services.", f"""
+    <h2 class="h3">The SharedLife Course</h2>
+    <ul>
+      <li>If the course is not right for you, ask for a full refund within <b>7 days</b> of enrolling, as long as you have completed no more than 2 lessons.</li>
+      <li>After that, the course is non-refundable, because all lessons open as soon as you enrol.</li>
+      <li>If you were charged twice or paid but your lessons did not open, write to us and we will fix it or refund the extra payment in full.</li>
+    </ul>
+    <h2 class="h3">Counselling and consultations</h2>
+    <ul>
+      <li>You can cancel a booking from your account at any time before it is confirmed, at no cost.</li>
+      <li>For a paid, confirmed session, cancel at least 24 hours before for a full refund or a free reschedule.</li>
+    </ul>
+    <h2 class="h3">Pre-Nuptial Agreements and workshops</h2>
+    <p>Fees and refund terms for Pre-Nuptial Agreements and workshops are agreed in writing before work begins.</p>
+    <h2 class="h3">How refunds are paid</h2>
+    <p>Approved refunds go back to the original payment method within 5 to 7 working days. Payments made by UPI or bank transfer are refunded to the same account.</p>
 """)
