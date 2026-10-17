@@ -93,6 +93,41 @@ APP_PAGES["account"] = ("My account · SharedLife", "Your SharedLife bookings.",
 
     <div id="pro-status" class="banner" hidden></div>
 
+    <details class="details-card" id="my-details" hidden>
+      <summary><span class="h3">My details</span><span class="muted" id="details-hint"></span></summary>
+      <form id="details-form" class="form" novalidate>
+        <div class="grid-2 fields">
+          <label class="field"><span>Full name</span><input name="name" id="d-name" autocomplete="name" required></label>
+          <label class="field"><span>Email</span><input id="d-email" type="email" readonly disabled><small>To change your email, write to us from the contact page.</small></label>
+          <label class="field"><span>Mobile number</span><input name="phone" id="d-phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
+          <label class="field"><span>City <em data-show-for="seeker">(optional)</em></span><input name="city" id="d-city" autocomplete="address-level2"></label>
+        </div>
+        <div class="grid-2 fields" data-role="seeker" hidden>
+          <label class="field"><span>Where are you in your journey?</span>
+            <select name="relationship" id="d-relationship"><option value="about_to_marry">About to marry</option><option value="married">Married</option><option value="other">Something else</option></select></label>
+          <label class="field"><span>Partner's name <em>(optional)</em></span><input name="partner_name" id="d-partner"></label>
+          <label class="field"><span>Wedding date <em>(optional)</em></span><input name="wedding_date" id="d-wedding" type="date"></label>
+        </div>
+        <div class="grid-2 fields" data-role="counsellor" hidden>
+          <label class="field"><span>Highest qualification</span><input name="qualification" id="d-qualification"></label>
+          <label class="field"><span>Years of experience</span><input name="experience_years" id="d-exp-c" type="number" min="0" max="80"></label>
+          <label class="field"><span>RCI or other registration no. <em>(optional)</em></span><input name="registration_no" id="d-reg"></label>
+          <label class="field"><span>Languages <em>(optional)</em></span><input name="languages" id="d-lang-c"></label>
+          <label class="field wide"><span>Areas of focus <em>(optional)</em></span><input name="specialisation" id="d-spec"></label>
+        </div>
+        <div class="grid-2 fields" data-role="advocate" hidden>
+          <label class="field"><span>Bar Council enrolment number</span><input name="enrolment_no" id="d-enrol"></label>
+          <label class="field"><span>State Bar Council</span><input name="bar_council" id="d-bar"></label>
+          <label class="field"><span>Years of practice</span><input name="experience_years" id="d-exp-a" type="number" min="0" max="80"></label>
+          <label class="field"><span>Languages <em>(optional)</em></span><input name="languages" id="d-lang-a"></label>
+          <label class="field wide"><span>Practice areas <em>(optional)</em></span><input name="practice_areas" id="d-areas"></label>
+        </div>
+        <p class="form-error" role="alert" hidden></p>
+        <p class="form-ok" role="status" hidden></p>
+        <button class="btn" type="submit">Save my details</button>
+      </form>
+    </details>
+
     <div id="seeker-area" hidden>
       <div class="split">
         <form id="book-form" class="form card" novalidate>

@@ -368,3 +368,12 @@ table.data td small { color: var(--muted); font-size: 13px; }
 dialog.dialog { border: 1px solid var(--line); border-radius: 20px; background: var(--surface); color: var(--ink); padding: 28px; width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 32px); }
 dialog.dialog::backdrop { background: rgba(10, 20, 15, .55); }
 .summary { font-size: 15px; color: var(--ink-soft); background: var(--bg); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; overflow-wrap: anywhere; }
+.details-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 0 24px; margin-bottom: 28px; }
+.details-card > summary { list-style: none; cursor: pointer; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; padding: 18px 0; }
+.details-card > summary::-webkit-details-marker { display: none; }
+.details-card > summary .h3 { margin: 0; }
+.details-card > summary::after { content: '+'; margin-left: auto; font-size: 22px; line-height: 1; color: var(--terra); font-weight: 800; }
+.details-card[open] > summary::after { content: '−'; }
+.details-card > summary .muted { color: var(--terra); font-weight: 700; }
+.details-card .form { padding-bottom: 24px; }
+.field input[readonly] { color: var(--muted); }
