@@ -136,6 +136,29 @@ test('login, me, logout and lockout', async () => {
   assert.equal(r.status, 429);
 });
 
+test('people update their own details; email, role and status stay put', async () => {
+  let r = await seeker('PATCH', '/api/auth/me', { name: 'Asha R. Rao', phone: '98765 43210', city: 'Gurugram', relationship: 'about_to_marry', partner_name: 'Ravi Kumar', wedding_date: future(60), email: 'hacker@example.com', role: 'advocate', status: 'approved' });
+  assert.equal(r.status, 200, JSON.stringify(r.body));
+  assert.equal(r.body.user.name, 'Asha R. Rao');
+  assert.equal(r.body.user.city, 'Gurugram');
+  assert.equal(r.body.user.profile.partner_name, 'Ravi Kumar');
+  assert.equal(r.body.user.email, 'asha@example.com');
+  assert.equal(r.body.user.role, 'seeker');
+  assert.equal(r.body.user.status, 'active');
+
+  r = await counsellor('PATCH', '/api/auth/me', { name: 'Dr Meera', phone: '9876543210', city: '', qualification: 'MA', experience_years: 9 });
+  assert.equal(r.status, 400);
+  assert.equal(r.body.field, 'city');
+  r = await counsellor('PATCH', '/api/auth/me', { name: 'Dr Meera', phone: '9876543210', city: 'Noida', qualification: 'MA Clinical Psychology', experience_years: 10, languages: 'Hindi' });
+  assert.equal(r.body.user.profile.experience_years, 10);
+  assert.equal(r.body.user.status, 'pending');
+
+  r = await stranger('PATCH', '/api/auth/me', { name: 'X' });
+  assert.equal(r.status, 401);
+  r = await seeker('PATCH', '/api/auth/me', { name: 'Asha' }, { Origin: 'https://evil.example' });
+  assert.equal(r.status, 403);
+});
+
 test('a forged or foreign session is rejected', async () => {
   const r = await stranger('GET', '/api/auth/me', undefined, { Cookie: 'sl_session=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIn0.bad' });
   assert.equal(r.status, 401);

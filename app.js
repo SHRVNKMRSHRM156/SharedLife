@@ -150,7 +150,8 @@
       document.getElementById('acct-hello').textContent = 'Hello, ' + firstName(u.name);
       document.getElementById('acct-role').textContent = LABELS.role[u.role] + ' account';
       document.getElementById('admin-link').hidden = !u.is_admin;
-      if (u.role === 'seeker') seekerArea(); else proArea(u);
+      detailsArea(u);
+      if (u.role === 'seeker') seekerArea(u); else proArea(u);
     }, function () { location.href = 'login.html' + (location.hash === '#book' ? '?next=book' : ''); });
 
     document.getElementById('logout').addEventListener('click', function () {
@@ -158,9 +159,49 @@
     });
   }
 
-  function seekerArea() {
+  // "My details": everyone can update their own name, phone, city and role details
+  var MISSING = { seeker: { city: 'city', partner_name: "partner's name", wedding_date: 'wedding date' } };
+
+  function detailsArea(u) {
+    var box = document.getElementById('my-details'), form = document.getElementById('details-form');
+    form.querySelectorAll('[data-role]').forEach(function (s) { s.hidden = s.getAttribute('data-role') !== u.role; });
+    form.querySelectorAll('[data-show-for]').forEach(function (s) { s.hidden = s.getAttribute('data-show-for').split(' ').indexOf(u.role) < 0; });
+    function fill(user) {
+      var data = Object.assign({ name: user.name, phone: user.phone, city: user.city }, user.profile || {});
+      document.getElementById('d-email').value = user.email;
+      form.querySelectorAll('input[name], select[name]').forEach(function (i) {
+        if (i.closest('[data-role][hidden]')) return;
+        var val = data[i.name];
+        if (val !== null && val !== undefined && val !== '') i.value = val;
+      });
+      var wanted = MISSING[user.role] || {}, gaps = [];
+      Object.keys(wanted).forEach(function (k) { if (!data[k]) gaps.push(wanted[k]); });
+      document.getElementById('details-hint').textContent = gaps.length ? 'Add your ' + gaps.join(', ').replace(/, ([^,]*)$/, ' and $1') : '';
+    }
+    fill(u);
+    box.hidden = false;
+    var ok = form.querySelector('.form-ok');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      showError(form, null);
+      ok.hidden = true;
+      busy(form, true);
+      api('PATCH', 'auth/me', values(form)).then(function (d) {
+        busy(form, false);
+        fill(d.user);
+        document.getElementById('acct-hello').textContent = 'Hello, ' + firstName(d.user.name);
+        var partner = document.getElementById('b-partner');
+        if (partner && !partner.value && d.user.profile && d.user.profile.partner_name) partner.value = d.user.profile.partner_name;
+        ok.textContent = 'Your details are saved.';
+        ok.hidden = false;
+      }).catch(function (err) { showError(form, err); busy(form, false); });
+    });
+  }
+
+  function seekerArea(u) {
     document.getElementById('seeker-area').hidden = false;
     var form = document.getElementById('book-form');
+    if (u.profile && u.profile.partner_name) document.getElementById('b-partner').value = u.profile.partner_name;
     var date = document.getElementById('b-date');
     date.min = ymd(1); date.max = ymd(120);
     var svc = /[?&]service=([a-z]+)/.exec(location.search);
