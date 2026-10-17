@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@400;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Serif+Devanagari:wght@400&display=swap">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="img/logo.png">
 </head>
@@ -86,6 +86,18 @@
         <button class="btn small" type="submit">Give access</button>
         <p class="form-error" role="alert" hidden></p>
       </form>
+      <h2 class="h3">Coupon codes</h2>
+      <form id="coupon-form" class="filters" novalidate>
+        <label class="field inline"><span>Code</span><input name="code" placeholder="EARLYBIRD99" autocapitalize="characters"></label>
+        <label class="field inline"><span>Discount %</span><input name="percent_off" type="number" min="1" max="100" placeholder="99"></label>
+        <button class="btn small" type="submit">Save coupon</button>
+        <p class="form-error" role="alert" hidden></p>
+      </form>
+      <div class="table-wrap"><table class="data" id="coupons-table">
+        <thead><tr><th>Code</th><th>Discount</th><th>Couple pays</th><th>Used</th><th>Status</th><th></th></tr></thead>
+        <tbody><tr><td colspan="6" class="empty">Loading…</td></tr></tbody>
+      </table></div>
+      <h2 class="h3">Enrolments</h2>
       <div class="filters">
         <label class="field inline"><span>Status</span><select id="f-estatus"><option value="">All</option><option value="pending_payment">Awaiting payment</option><option value="active">Active</option><option value="cancelled">Cancelled</option></select></label>
         <label class="field inline"><span>Search</span><input id="f-esearch" placeholder="Name, email or phone"></label>

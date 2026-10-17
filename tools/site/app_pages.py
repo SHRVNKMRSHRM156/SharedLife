@@ -182,7 +182,13 @@ APP_PAGES["learn"] = ("The SharedLife Course · SharedLife", "Your lessons in Th
         <h1 class="h2" id="learn-hello">Your lessons</h1>
         <p class="muted" id="learn-progress"></p>
       </div>
-      <div class="row"><a class="btn ghost" href="course.html">About the course</a></div>
+      <div class="row">
+        <div class="lang-switch" role="group" aria-label="Language / भाषा">
+          <button type="button" data-lang="en" lang="en">English</button>
+          <button type="button" data-lang="hi" lang="hi">हिंदी</button>
+        </div>
+        <a class="btn ghost" href="course.html">About the course</a>
+      </div>
     </div>
 
     <div id="enrol" class="banner enrol-box" hidden>
@@ -266,6 +272,18 @@ APP_PAGES["admin"] = ("Admin · SharedLife", "SharedLife admin dashboard.", """
         <button class="btn small" type="submit">Give access</button>
         <p class="form-error" role="alert" hidden></p>
       </form>
+      <h2 class="h3">Coupon codes</h2>
+      <form id="coupon-form" class="filters" novalidate>
+        <label class="field inline"><span>Code</span><input name="code" placeholder="EARLYBIRD99" autocapitalize="characters"></label>
+        <label class="field inline"><span>Discount %</span><input name="percent_off" type="number" min="1" max="100" placeholder="99"></label>
+        <button class="btn small" type="submit">Save coupon</button>
+        <p class="form-error" role="alert" hidden></p>
+      </form>
+      <div class="table-wrap"><table class="data" id="coupons-table">
+        <thead><tr><th>Code</th><th>Discount</th><th>Couple pays</th><th>Used</th><th>Status</th><th></th></tr></thead>
+        <tbody><tr><td colspan="6" class="empty">Loading…</td></tr></tbody>
+      </table></div>
+      <h2 class="h3">Enrolments</h2>
       <div class="filters">
         <label class="field inline"><span>Status</span><select id="f-estatus"><option value="">All</option><option value="pending_payment">Awaiting payment</option><option value="active">Active</option><option value="cancelled">Cancelled</option></select></label>
         <label class="field inline"><span>Search</span><input id="f-esearch" placeholder="Name, email or phone"></label>

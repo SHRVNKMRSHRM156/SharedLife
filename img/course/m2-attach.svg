@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="Two figures linked by a soft thread, moving closer and giving space">
+  <defs>
+    <style>
+      .left { animation: lean 6s ease-in-out infinite; }
+      .right { animation: lean2 6s ease-in-out infinite; }
+      .thread { transform-origin: 400px 230px; animation: sway 6s ease-in-out infinite; }
+      .heart { transform-origin: 400px 150px; animation: beat 3s ease-in-out infinite; }
+      @keyframes lean { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(40px); } }
+      @keyframes lean2 { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-40px); } }
+      @keyframes sway { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.69); } }
+      @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+      @media (prefers-reduced-motion: reduce) { .left, .right, .thread, .heart { animation: none; } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <ellipse cx="400" cy="345" rx="330" ry="34" fill="#D6E6D9"/>
+  <path class="thread" d="M270 230 Q400 300 530 230" fill="none" stroke="#EBA937" stroke-width="6" stroke-linecap="round"/>
+  <g class="left">
+    <ellipse cx="250" cy="335" rx="58" ry="10" fill="#183A2B" opacity=".15"/>
+    <path d="M200 335 C200 260 220 220 250 220 C280 220 300 260 300 335 Z" fill="#1F4D3A"/>
+    <circle cx="250" cy="180" r="38" fill="#F6D5C6"/>
+    <path d="M214 172 C220 140 280 140 286 172 C270 160 230 160 214 172 Z" fill="#183A2B"/>
+    <circle cx="270" cy="230" r="10" fill="#F6D5C6"/>
+  </g>
+  <g class="right">
+    <ellipse cx="550" cy="335" rx="58" ry="10" fill="#183A2B" opacity=".15"/>
+    <path d="M500 335 C500 260 520 220 550 220 C580 220 600 260 600 335 Z" fill="#C2512F"/>
+    <circle cx="550" cy="180" r="38" fill="#F6D5C6"/>
+    <path d="M512 180 C510 136 590 136 588 180 C584 156 516 156 512 180 Z" fill="#183A2B"/>
+    <circle cx="530" cy="230" r="10" fill="#F6D5C6"/>
+  </g>
+  <path class="heart" d="M400 172 C372 150 372 122 392 122 C400 122 400 130 400 132 C400 130 400 122 408 122 C428 122 428 150 400 172 Z" fill="#C2512F"/>
+  <circle cx="120" cy="110" r="16" fill="#EBA937" opacity=".6"/>
+  <circle cx="680" cy="100" r="22" fill="#D6E6D9"/>
+  <circle cx="700" cy="250" r="10" fill="#F6D5C6"/>
+  <circle cx="100" cy="260" r="12" fill="#D6E6D9"/>
+</svg>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="Two people on a park bench sharing a paper cone of peanuts, with a kite drifting above them">
+  <defs>
+    <style>
+      .kite { transform-origin: 548px 214px; animation: sway 6s ease-in-out infinite; }
+      .cloud { animation: drift 18s ease-in-out infinite alternate; }
+      .c2 { animation-duration: 24s; }
+      .spark { transform-box: fill-box; transform-origin: center; opacity: 0; animation: twinkle 3.6s ease-in-out infinite; }
+      .s2 { animation-delay: 1.2s; }
+      .s3 { animation-delay: 2.4s; }
+      @keyframes sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(4deg); } }
+      @keyframes drift { from { transform: translateX(0); } to { transform: translateX(60px); } }
+      @keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(.4); } 40%, 60% { opacity: 1; transform: scale(1); } }
+      @media (prefers-reduced-motion: reduce) { .kite, .cloud, .spark { animation: none; } .spark { opacity: 1; } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <circle cx="690" cy="78" r="30" fill="#EBA937" opacity=".75"/>
+  <g class="cloud"><ellipse cx="150" cy="80" rx="52" ry="16" fill="#D6E6D9"/><ellipse cx="176" cy="68" rx="30" ry="14" fill="#D6E6D9"/></g>
+  <g class="cloud c2"><ellipse cx="420" cy="56" rx="40" ry="12" fill="#D6E6D9"/></g>
+  <!-- ground -->
+  <rect y="322" width="800" height="78" fill="#D6E6D9"/>
+  <!-- tree -->
+  <rect x="96" y="200" width="16" height="124" fill="#183A2B"/>
+  <circle cx="104" cy="176" r="50" fill="#1F4D3A"/>
+  <circle cx="70" cy="206" r="32" fill="#1F4D3A"/>
+  <circle cx="140" cy="204" r="34" fill="#1F4D3A"/>
+  <circle cx="120" cy="160" r="8" fill="#C2512F"/>
+  <circle cx="82" cy="196" r="7" fill="#C2512F"/>
+  <!-- kite and string -->
+  <g class="kite">
+    <path d="M548 214 C590 180 600 140 588 112" fill="none" stroke="#183A2B" stroke-width="1.5"/>
+    <path d="M588 70 L612 104 L588 140 L564 104 Z" fill="#C2512F"/>
+    <path d="M588 70 L588 140 M564 104 L612 104" stroke="#EBA937" stroke-width="2"/>
+    <path d="M588 140 q-8 10 0 18 q8 8 0 18" fill="none" stroke="#EBA937" stroke-width="2"/>
+  </g>
+  <!-- bench back -->
+  <rect x="252" y="214" width="300" height="10" rx="4" fill="#183A2B"/>
+  <rect x="252" y="234" width="300" height="10" rx="4" fill="#183A2B"/>
+  <rect x="262" y="214" width="10" height="60" fill="#183A2B"/>
+  <rect x="532" y="214" width="10" height="60" fill="#183A2B"/>
+  <!-- left person -->
+  <rect x="314" y="274" width="14" height="52" rx="5" fill="#183A2B"/>
+  <rect x="336" y="274" width="14" height="52" rx="5" fill="#183A2B"/>
+  <path d="M300 280 C300 220 312 200 332 200 C352 200 364 220 364 280 Z" fill="#C2512F"/>
+  <circle cx="332" cy="172" r="24" fill="#F6D5C6"/>
+  <path d="M308 172 C304 136 360 136 356 172 C350 154 314 154 308 172 Z" fill="#183A2B"/>
+  <path d="M352 222 Q378 238 392 252" fill="none" stroke="#C2512F" stroke-width="11" stroke-linecap="round"/>
+  <circle cx="394" cy="254" r="6" fill="#F6D5C6"/>
+  <!-- right person -->
+  <rect x="450" y="274" width="14" height="52" rx="5" fill="#183A2B"/>
+  <rect x="472" y="274" width="14" height="52" rx="5" fill="#183A2B"/>
+  <path d="M436 280 C436 220 448 200 468 200 C488 200 500 220 500 280 Z" fill="#1F4D3A"/>
+  <path d="M446 206 L490 262" stroke="#EBA937" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="468" cy="172" r="24" fill="#F6D5C6"/>
+  <path d="M444 176 C438 136 498 136 492 176 C488 152 448 152 444 176 Z" fill="#183A2B"/>
+  <circle cx="490" cy="160" r="9" fill="#183A2B"/>
+  <path d="M448 222 Q424 238 412 252" fill="none" stroke="#1F4D3A" stroke-width="11" stroke-linecap="round"/>
+  <circle cx="410" cy="254" r="6" fill="#F6D5C6"/>
+  <!-- seat over legs top -->
+  <rect x="246" y="266" width="312" height="14" rx="5" fill="#1F4D3A"/>
+  <rect x="266" y="280" width="10" height="44" fill="#183A2B"/>
+  <rect x="528" y="280" width="10" height="44" fill="#183A2B"/>
+  <!-- paper cone of peanuts -->
+  <path d="M386 238 L418 238 L402 266 Z" fill="#EBA937"/>
+  <circle cx="394" cy="236" r="4" fill="#C2512F"/>
+  <circle cx="403" cy="233" r="4" fill="#C2512F"/>
+  <circle cx="411" cy="236" r="4" fill="#C2512F"/>
+  <!-- laughter sparkles -->
+  <path class="spark" d="M296 140 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4 z" fill="#EBA937"/>
+  <path class="spark s2" d="M512 132 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 l8 -3 z" fill="#EBA937"/>
+  <path class="spark s3" d="M400 150 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 l8 -3 z" fill="#C2512F"/>
+</svg>

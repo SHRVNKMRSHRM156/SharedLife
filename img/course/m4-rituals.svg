@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="Two cups of tea beside a glowing diya, a row of seven dots for the week, and the sun moving across the sky">
+  <defs>
+    <style>
+      .sun { transform-origin: 400px 380px; animation: arc 14s ease-in-out infinite alternate; }
+      .day { opacity: 0; animation: light 7s ease-in-out infinite; }
+      .d2 { animation-delay: .5s; } .d3 { animation-delay: 1s; } .d4 { animation-delay: 1.5s; }
+      .d5 { animation-delay: 2s; } .d6 { animation-delay: 2.5s; } .d7 { animation-delay: 3s; }
+      .flame { transform-box: fill-box; transform-origin: 50% 100%; animation: flicker 1.8s ease-in-out infinite; }
+      .halo { animation: halo 3.6s ease-in-out infinite; }
+      @keyframes arc { from { transform: rotate(-52deg); } to { transform: rotate(52deg); } }
+      @keyframes light { 0%, 8% { opacity: 0; } 18%, 70% { opacity: 1; } 85%, 100% { opacity: 0; } }
+      @keyframes flicker { 0%, 100% { transform: scale(1, 1); } 30% { transform: scale(.92, 1.08); } 60% { transform: scale(1.05, .94); } }
+      @keyframes halo { 0%, 100% { opacity: .5; } 50% { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) { .sun, .day, .flame, .halo { animation: none; } .day { opacity: 1; } .halo { opacity: .8; } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <!-- the day's arc and the sun -->
+  <path d="M195 220 A260 260 0 0 1 605 220" fill="none" stroke="#D6E6D9" stroke-width="4" stroke-dasharray="2 14" stroke-linecap="round"/>
+  <g class="sun">
+    <circle cx="400" cy="120" r="34" fill="#EBA937"/>
+    <circle cx="400" cy="120" r="48" fill="#EBA937" opacity=".25"/>
+  </g>
+  <!-- seven days of the week -->
+  <g fill="#D6E6D9">
+    <circle cx="280" cy="204" r="11"/><circle cx="320" cy="204" r="11"/><circle cx="360" cy="204" r="11"/><circle cx="400" cy="204" r="11"/>
+    <circle cx="440" cy="204" r="11"/><circle cx="480" cy="204" r="11"/><circle cx="520" cy="204" r="11"/>
+  </g>
+  <g fill="#C2512F">
+    <circle class="day" cx="280" cy="204" r="11"/><circle class="day d2" cx="320" cy="204" r="11"/><circle class="day d3" cx="360" cy="204" r="11"/><circle class="day d4" cx="400" cy="204" r="11"/>
+    <circle class="day d5" cx="440" cy="204" r="11"/><circle class="day d6" cx="480" cy="204" r="11"/>
+  </g>
+  <circle class="day d7" cx="520" cy="204" r="11" fill="#EBA937"/>
+  <!-- ledge -->
+  <rect x="0" y="330" width="800" height="70" fill="#D6E6D9"/>
+  <rect x="180" y="318" width="440" height="14" rx="7" fill="#183A2B"/>
+  <!-- cups -->
+  <path d="M276 274 L324 274 L318 318 L282 318 Z" fill="#C2512F"/>
+  <path d="M324 284 C338 284 338 306 321 306" fill="none" stroke="#C2512F" stroke-width="5"/>
+  <rect x="276" y="274" width="48" height="6" fill="#F6D5C6"/>
+  <path d="M476 274 L524 274 L518 318 L482 318 Z" fill="#1F4D3A"/>
+  <path d="M476 284 C462 284 462 306 479 306" fill="none" stroke="#1F4D3A" stroke-width="5"/>
+  <rect x="476" y="274" width="48" height="6" fill="#F6D5C6"/>
+  <!-- diya -->
+  <circle class="halo" cx="400" cy="262" r="38" fill="#F6D5C6" opacity=".6"/>
+  <path d="M362 296 Q400 330 438 296 Z" fill="#C2512F"/>
+  <path d="M362 296 L438 296" stroke="#183A2B" stroke-width="3" stroke-linecap="round"/>
+  <path class="flame" d="M400 244 C416 264 414 288 400 293 C386 288 384 264 400 244 Z" fill="#EBA937"/>
+  <path d="M400 272 C404 280 404 288 400 291 C396 288 396 280 400 272 Z" fill="#C2512F" opacity=".7"/>
+  <!-- small rangoli dots on the floor -->
+  <g fill="#F6D5C6"><circle cx="120" cy="364" r="5"/><circle cx="140" cy="364" r="5"/><circle cx="130" cy="352" r="5"/><circle cx="130" cy="376" r="5"/>
+  <circle cx="670" cy="364" r="5"/><circle cx="690" cy="364" r="5"/><circle cx="680" cy="352" r="5"/><circle cx="680" cy="376" r="5"/></g>
+</svg>

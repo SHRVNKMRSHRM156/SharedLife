@@ -12,7 +12,7 @@
     ustatus: { active: 'Active', pending: 'Awaiting approval', approved: 'Approved', rejected: 'Not approved', suspended: 'Suspended' },
     relationship: { about_to_marry: 'About to marry', married: 'Married', other: 'Other' },
     estatus: { pending_payment: 'Awaiting payment', active: 'Active', cancelled: 'Cancelled' },
-    method: { razorpay: 'Online', manual: 'UPI or bank transfer', complimentary: 'Complimentary', '': '–' },
+    method: { razorpay: 'Online', manual: 'UPI or bank transfer', complimentary: 'Complimentary or 100% coupon', '': '–' },
   };
   function rupees(n) { return '₹' + Number(n).toLocaleString('en-IN'); }
 
@@ -311,10 +311,36 @@
     });
   }
 
+  // Lesson text comes as { en, hi }; Hindi falls back to English while a lesson is still being translated.
+  var UI = {
+    en: { module: 'Module', lesson: 'Lesson', of: 'of', minutes: 'minutes', about: 'about', done: 'lessons done', story: 'Story', example: 'Example',
+      talk: 'Talk about it together', try: 'Try this', takeaways: 'Key takeaways', checklist: 'Tick what is true for you', draft: 'This lesson is still a draft and is being rewritten.',
+      hiSoon: '', mark: 'Mark as done', undo: '✓ Done (tap to undo)', prev: '← Previous', next: 'Next →', enrolNext: 'Enrol to continue', loading: 'Loading…',
+      locked: 'This lesson opens when you enrol. The first lesson is free to read now.', enrol: 'Enrol', free: 'Read the free lesson',
+      law: 'General information about the law in India, not legal advice. For your own situation, book a consultation from your account.',
+      quiz: 'Check yourself', right: 'Well spotted.', wrong: 'Not quite.', myths: 'Myth or reality?', myth: 'Myth', reality: 'Reality',
+      phrases: 'Say it like this', instead: 'Instead of', tryIt: 'Try', reflect: 'Your private notes', reflectHint: 'Saved only on this device. Nobody else, including SharedLife, can see it.',
+      tip: 'Counsellor’s tip', print: 'Print or save as PDF' },
+    hi: { module: 'मॉड्यूल', lesson: 'पाठ', of: 'में से', minutes: 'मिनट', about: 'लगभग', done: 'पाठ पूरे', story: 'कहानी', example: 'उदाहरण',
+      talk: 'साथ बैठकर बात करें', try: 'यह करके देखें', takeaways: 'मुख्य बातें', checklist: 'जो आप पर लागू हो, उस पर निशान लगाएँ', draft: 'यह पाठ अभी ड्राफ़्ट है और दोबारा लिखा जा रहा है।',
+      hiSoon: 'इस पाठ का हिंदी संस्करण जल्द आएगा। तब तक अंग्रेज़ी में पढ़ें।', mark: 'पूरा हुआ', undo: '✓ पूरा (हटाने के लिए दबाएँ)', prev: '← पिछला', next: 'अगला →', enrolNext: 'आगे पढ़ने के लिए एनरोल करें', loading: 'लोड हो रहा है…',
+      locked: 'यह पाठ एनरोल करने पर खुलेगा। पहला पाठ अभी मुफ़्त में पढ़ें।', enrol: 'एनरोल करें', free: 'मुफ़्त पाठ पढ़ें',
+      law: 'यह भारत के क़ानून की सामान्य जानकारी है, क़ानूनी सलाह नहीं। अपनी स्थिति के लिए अपने अकाउंट से परामर्श बुक करें।',
+      quiz: 'ख़ुद को परखें', right: 'बिल्कुल सही।', wrong: 'पूरी तरह नहीं।', myths: 'भ्रम या सच?', myth: 'भ्रम', reality: 'सच',
+      phrases: 'ऐसे कहकर देखें', instead: 'इसके बजाय', tryIt: 'यह कहें', reflect: 'आपके निजी नोट्स', reflectHint: 'सिर्फ़ इसी डिवाइस पर सेव होते हैं। कोई और, SharedLife भी नहीं, इन्हें देख सकता।',
+      tip: 'काउंसलर की सलाह', print: 'प्रिंट करें या PDF सेव करें' },
+  };
+  function getLang() { try { return localStorage.getItem('sl-lang') === 'hi' ? 'hi' : 'en'; } catch (e) { return 'en'; } }
+  function setLang(l) { try { localStorage.setItem('sl-lang', l); } catch (e) { /* private window */ } }
+
   function learnPage() {
-    var state = { info: null, user: null, current: null };
+    var state = { info: null, user: null, current: null, lang: getLang(), coupon: null };
     var box = document.getElementById('enrol'), toc = document.getElementById('toc'), view = document.getElementById('lesson');
     var lessons = [];
+    function t(k) { return UI[state.lang][k]; }
+    // Pick the reader's language from a { en, hi } value.
+    function tr(v) { return v && typeof v === 'object' && !Array.isArray(v) ? (v[state.lang] || v.en) : v; }
+    function hasHi(v) { return !v || typeof v !== 'object' || Boolean(v.hi); }
 
     function wanted() {
       var m = /[?&]lesson=(\d+)/.exec(location.search);
@@ -322,9 +348,24 @@
     }
     function unlocked(l) { return state.info.access || l.preview; }
 
+    document.querySelectorAll('.lang-switch [data-lang]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        state.lang = b.dataset.lang;
+        setLang(state.lang);
+        paintLang();
+        if (state.info) show(state.current, false);
+      });
+    });
+    function paintLang() {
+      document.querySelectorAll('.lang-switch [data-lang]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === state.lang)); });
+      view.setAttribute('lang', state.lang);
+      toc.setAttribute('lang', state.lang);
+    }
+    paintLang();
+
     function renderEnrol() {
       var d = state.info, e = d.enrolment, title = document.getElementById('enrol-title'), text = document.getElementById('enrol-text'), actions = document.getElementById('enrol-actions');
-      var price = rupees(d.course.price_inr);
+      var c = state.coupon, price = rupees(d.course.price_inr), pay = c ? rupees(c.amount_inr) : price;
       actions.textContent = '';
       showError(box, null);
       box.hidden = d.access;
@@ -332,7 +373,7 @@
       box.className = 'banner enrol-box';
       if (!state.user) {
         title.textContent = 'Enrol to open all ' + d.course.lesson_count + ' lessons';
-        text.textContent = price + ' for both partners. Create a free SharedLife account first, or log in if you have one.';
+        text.textContent = price + ' for both partners, in English and Hindi. Create a free SharedLife account first, or log in if you have one.';
         actions.appendChild(h('a', { class: 'btn', href: 'register.html?next=learn', text: 'Create an account and enrol' }));
         actions.appendChild(h('a', { class: 'btn ghost', href: 'login.html?next=learn', text: 'Log in' }));
       } else if (!d.can_enrol) {
@@ -344,8 +385,20 @@
         text.textContent = 'We will call or email you with UPI or bank transfer details for ' + rupees(e.amount_inr) + '. All lessons open as soon as your payment is confirmed.';
       } else {
         title.textContent = e && e.status === 'pending_payment' ? 'Complete your enrolment' : 'Enrol to open all ' + d.course.lesson_count + ' lessons';
-        text.textContent = price + ' for both partners. ' + (d.payments === 'razorpay' ? 'Pay securely by UPI, card or net banking.' : 'We will send you UPI or bank transfer details.');
-        actions.appendChild(h('button', { class: 'btn', type: 'button', text: d.payments === 'razorpay' ? 'Enrol and pay ' + price : 'Enrol for ' + price, onclick: enrol }));
+        text.textContent = '';
+        text.appendChild(c ? h('span', {}, [h('s', { text: price }), ' ', h('b', { text: pay }), ' for both partners with ' + c.code + ' (' + c.percent_off + '% off). '])
+          : document.createTextNode(price + ' for both partners. '));
+        text.appendChild(document.createTextNode(d.payments === 'razorpay' ? 'Pay securely by UPI, card or net banking.' : 'We will send you UPI or bank transfer details.'));
+        var input = h('input', { id: 'coupon', name: 'coupon', placeholder: 'Coupon code', autocapitalize: 'characters', value: c ? c.code : '' });
+        actions.appendChild(h('form', { class: 'coupon-form', novalidate: '', onsubmit: function (ev) {
+          ev.preventDefault();
+          var code = input.value.trim();
+          showError(box, null);
+          if (!code) { state.coupon = null; return renderEnrol(); }
+          api('GET', 'course/coupon?code=' + encodeURIComponent(code)).then(function (r) { state.coupon = r.coupon; renderEnrol(); },
+            function (err) { state.coupon = null; renderEnrol(); showError(box, err); });
+        } }, [h('label', { class: 'sr', for: 'coupon', text: 'Coupon code' }), input, h('button', { class: 'btn ghost small', type: 'submit', text: c ? 'Applied ✓' : 'Apply' })]));
+        actions.appendChild(h('button', { class: 'btn', type: 'button', text: d.payments === 'razorpay' ? 'Enrol and pay ' + pay : 'Enrol for ' + pay, onclick: enrol }));
       }
     }
 
@@ -353,7 +406,7 @@
       var btn = ev.currentTarget;
       showError(box, null);
       btn.disabled = true;
-      api('POST', 'course/enrol', {}).then(function (r) {
+      api('POST', 'course/enrol', state.coupon ? { coupon: state.coupon.code } : {}).then(function (r) {
         if (r.payment !== 'razorpay') { btn.disabled = false; return refresh(); }
         return loadScript('https://checkout.razorpay.com/v1/checkout.js').then(function () {
           var c = r.checkout;
@@ -384,17 +437,84 @@
           list.appendChild(h('li', {}, [h('a', {
             class: cls, href: 'learn.html?lesson=' + l.id, 'aria-current': state.current === l.id ? 'page' : null,
             onclick: function (ev) { ev.preventDefault(); show(l.id, true); },
-          }, [h('span', { class: 'mark', 'aria-hidden': 'true', text: done ? '✓' : open ? String(l.id) : '🔒' }), h('span', { text: l.title }), done ? h('span', { class: 'sr', text: ' (done)' }) : null, open ? null : h('span', { class: 'sr', text: ' (locked)' })])]));
+          }, [h('span', { class: 'mark', 'aria-hidden': 'true', text: done ? '✓' : open ? String(l.id) : '🔒' }), h('span', { text: tr(l.title) }), done ? h('span', { class: 'sr', text: ' (done)' }) : null, open ? null : h('span', { class: 'sr', text: ' (locked)' })])]));
         });
-        toc.appendChild(h('div', { class: 'toc-module' }, [h('p', { class: 'toc-head', text: 'Module ' + m.n + ' · ' + m.title }), list]));
+        toc.appendChild(h('div', { class: 'toc-module' }, [h('p', { class: 'toc-head', text: t('module') + ' ' + m.n + ' · ' + tr(m.title) }), list]));
       });
       var done = d.progress.length, total = d.course.lesson_count;
-      document.getElementById('learn-progress').textContent = d.access ? done + ' of ' + total + ' lessons done' : '';
+      document.getElementById('learn-progress').textContent = d.access ? done + ' / ' + total + ' ' + t('done') : '';
     }
 
-    function section(title, items, cls) {
-      return h('section', { class: cls }, [h('h3', { text: title }), h('ul', {}, items.map(function (t) { return h('li', { text: t }); }))]);
+    function paras(text) { return String(text || '').split(/\n\n+/).map(function (p) { return h('p', { text: p }); }); }
+    function items(tag, list, cls) { return h(tag, { class: cls }, (list || []).map(function (x) { return h('li', { text: x }); })); }
+    function arr(b) { return b[state.lang] && b[state.lang].length ? b[state.lang] : b.en || []; }
+
+    // One lesson block. Everything is set with textContent.
+    function block(b, i) {
+      switch (b.type) {
+        case 'p': return h('p', { text: tr(b) });
+        case 'h': return h('h3', { class: 'h3', text: tr(b) });
+        case 'note': return h('p', { class: 'note', text: tr(b) });
+        case 'try': return h('section', { class: 'try' }, [h('h3', { text: t('try') }), h('p', { text: tr(b) })]);
+        case 'story':
+        case 'example':
+          return h('aside', { class: 'tale ' + b.type }, [h('p', { class: 'tale-tag', text: t(b.type) }), b.title ? h('h3', { text: tr(b.title) }) : null].concat(paras(tr(b))));
+        case 'list': return items('ul', arr(b), 'points');
+        case 'takeaways': return h('section', { class: 'takeaways' }, [h('h3', { text: t('takeaways') }), items('ul', arr(b))]);
+        case 'talk': return h('section', { class: 'talk' }, [h('h3', { text: t('talk') }), items('ul', arr(b))]);
+        case 'checklist':
+          return h('section', { class: 'checklist' }, [h('h3', { text: t('checklist') })].concat(arr(b).map(function (x) {
+            return h('label', {}, [h('input', { type: 'checkbox' }), h('span', { text: x })]);
+          })));
+        case 'steps':
+          return h('ol', { class: 'steps' }, arr(b).map(function (s) { return h('li', {}, [h('b', { text: s[0] }), h('span', { text: s[1] })]); }));
+        case 'compare':
+          return h('div', { class: 'compare' }, [b.left, b.right].map(function (side, i) {
+            return h('div', { class: 'compare-col ' + (i ? 'right' : 'left') }, [h('h3', { text: tr(side.title) }), items('ul', arr(side))]);
+          }));
+        case 'figure':
+          return h('figure', { class: 'fig' + (b.animated ? ' animated' : '') }, [h('img', { src: b.src, alt: tr(b.alt) || '', loading: 'lazy' }), b.caption ? h('figcaption', { text: tr(b.caption) }) : null]);
+        case 'tip': return h('aside', { class: 'tip' }, [h('p', { class: 'tale-tag', text: t('tip') }), h('p', { text: tr(b) })]);
+        case 'myths':
+          return h('section', { class: 'myths' }, [h('h3', { text: t('myths') })].concat(arr(b).map(function (m) {
+            return h('div', { class: 'myth' }, [h('p', {}, [h('b', { text: t('myth') + ': ' }), m[0]]), h('p', {}, [h('b', { text: t('reality') + ': ' }), m[1]])]);
+          })));
+        case 'phrases':
+          return h('section', { class: 'phrases' }, [h('h3', { text: t('phrases') })].concat(arr(b).map(function (m) {
+            return h('div', { class: 'phrase' }, [h('p', { class: 'from' }, [h('small', { text: t('instead') }), m[0]]), h('p', { class: 'to' }, [h('small', { text: t('tryIt') }), m[1]])]);
+          })));
+        case 'quiz': return quiz(b);
+        case 'reflect': return reflect(b, i);
+        default: return null;
+      }
     }
+
+    // A scenario question: pick an answer, see why. Nothing is sent or scored.
+    function quiz(b) {
+      var why = h('p', { class: 'why', hidden: '' });
+      var opts = arr(b.options), buttons = [];
+      opts.forEach(function (o, n) {
+        buttons.push(h('button', { type: 'button', class: 'opt', text: o, onclick: function () {
+          buttons.forEach(function (x, k) { x.disabled = true; if (k === b.answer) x.classList.add('right'); });
+          if (n !== b.answer) buttons[n].classList.add('wrong');
+          why.textContent = (n === b.answer ? t('right') : t('wrong')) + ' ' + tr(b.why);
+          why.hidden = false;
+        } }));
+      });
+      return h('section', { class: 'quiz' }, [h('p', { class: 'tale-tag', text: t('quiz') }), h('h3', { text: tr(b.q) }), h('div', { class: 'opts' }, buttons), why]);
+    }
+
+    // Private journaling, kept in this browser only.
+    function reflect(b, i) {
+      var key = 'sl-note-' + state.current + '-' + i, saved = '';
+      try { saved = localStorage.getItem(key) || ''; } catch (e) { /* private window */ }
+      var area = h('textarea', { rows: '4', 'aria-label': tr(b) });
+      area.value = saved;
+      area.addEventListener('input', function () { try { localStorage.setItem(key, area.value); } catch (e) { /* ignore */ } });
+      return h('section', { class: 'reflect' }, [h('h3', { text: t('reflect') }), h('p', { text: tr(b) }), area, h('small', { class: 'muted', text: t('reflectHint') })]);
+    }
+
+    function scrollToEnrol(ev) { ev.preventDefault(); box.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
 
     function show(id, scroll) {
       var meta = lessons.find(function (l) { return l.id === id; }) || lessons[0];
@@ -403,31 +523,31 @@
       renderToc();
       if (!unlocked(meta)) {
         view.textContent = '';
-        view.appendChild(h('p', { class: 'eyebrow', text: 'Lesson ' + meta.id }));
-        view.appendChild(h('h2', { class: 'h2', text: meta.title }));
-        view.appendChild(h('p', { class: 'lede', text: 'This lesson opens when you enrol. The first lesson is free to read now.' }));
+        view.appendChild(h('p', { class: 'eyebrow', text: t('lesson') + ' ' + meta.id }));
+        view.appendChild(h('h2', { class: 'h2', text: tr(meta.title) }));
+        view.appendChild(h('p', { class: 'lede', text: t('locked') }));
         view.appendChild(h('div', { class: 'row' }, [
-          h('a', { class: 'btn', href: '#enrol', text: 'Enrol', onclick: function (ev) { ev.preventDefault(); box.scrollIntoView({ behavior: 'smooth', block: 'center' }); } }),
-          h('a', { class: 'btn ghost', href: 'learn.html?lesson=1', text: 'Read the free lesson', onclick: function (ev) { ev.preventDefault(); show(1, true); } }),
+          h('a', { class: 'btn', href: '#enrol', text: t('enrol'), onclick: scrollToEnrol }),
+          h('a', { class: 'btn ghost', href: 'learn.html?lesson=1', text: t('free'), onclick: function (ev) { ev.preventDefault(); show(1, true); } }),
         ]));
         return;
       }
       view.textContent = '';
-      view.appendChild(h('p', { class: 'empty', text: 'Loading…' }));
+      view.appendChild(h('p', { class: 'empty', text: t('loading') }));
       api('GET', 'course/lessons/' + meta.id).then(function (r) {
         var l = r.lesson, mod = state.info.course.modules[l.module - 1], done = state.info.progress.indexOf(l.id) >= 0;
         view.textContent = '';
-        view.appendChild(h('p', { class: 'eyebrow', text: 'Module ' + l.module + ' · ' + mod.title }));
-        view.appendChild(h('h2', { class: 'h2', text: l.title }));
-        view.appendChild(h('p', { class: 'muted', text: 'Lesson ' + l.id + ' of ' + state.info.course.lesson_count + ' · about ' + l.minutes + ' minutes' }));
-        if (l.video) view.appendChild(h('div', { class: 'video' }, [h('iframe', { src: l.video, title: l.title, allow: 'fullscreen; picture-in-picture', allowfullscreen: '', loading: 'lazy' })]));
-        view.appendChild(h('p', { class: 'lede', text: l.summary }));
-        view.appendChild(section('Key ideas', l.points, 'points'));
-        view.appendChild(section('Talk about it together', l.talk, 'talk'));
-        view.appendChild(h('section', { class: 'try' }, [h('h3', { text: 'Try this' }), h('p', { text: l.action })]));
+        view.appendChild(h('p', { class: 'eyebrow', text: t('module') + ' ' + l.module + ' · ' + tr(mod.title) }));
+        view.appendChild(h('h2', { class: 'h2', text: tr(l.title) }));
+        view.appendChild(h('p', { class: 'muted', text: t('lesson') + ' ' + l.id + ' / ' + state.info.course.lesson_count + ' · ' + t('about') + ' ' + l.minutes + ' ' + t('minutes') }));
+        if (state.lang === 'hi' && !hasHi(l.summary)) view.appendChild(h('p', { class: 'note', text: t('hiSoon') }));
+        if (l.draft) view.appendChild(h('p', { class: 'note', text: t('draft') }));
+        if (l.video) view.appendChild(h('div', { class: 'video' }, [h('iframe', { src: l.video, title: tr(l.title), allow: 'fullscreen; picture-in-picture', allowfullscreen: '', loading: 'lazy' })]));
+        view.appendChild(h('p', { class: 'lede', text: tr(l.summary) }));
+        (l.blocks || []).forEach(function (b, i) { var el = block(b, i); if (el) view.appendChild(el); });
         var nav = h('div', { class: 'row lesson-nav' });
         if (state.info.access) {
-          nav.appendChild(h('button', { class: 'btn' + (done ? ' ghost' : ''), type: 'button', text: done ? '✓ Done (tap to undo)' : 'Mark as done', onclick: function (ev) {
+          nav.appendChild(h('button', { class: 'btn' + (done ? ' ghost' : ''), type: 'button', text: done ? t('undo') : t('mark'), onclick: function (ev) {
             ev.currentTarget.disabled = true;
             api('PUT', 'course/progress/' + l.id, { done: !done }).then(function (p) {
               state.info.progress = p.progress;
@@ -435,13 +555,14 @@
             });
           } }));
         } else if (l.preview) {
-          nav.appendChild(h('a', { class: 'btn', href: '#enrol', text: 'Enrol to continue', onclick: function (ev) { ev.preventDefault(); box.scrollIntoView({ behavior: 'smooth', block: 'center' }); } }));
+          nav.appendChild(h('a', { class: 'btn', href: '#enrol', text: t('enrolNext'), onclick: scrollToEnrol }));
         }
-        if (l.prev) nav.appendChild(h('button', { class: 'btn ghost', type: 'button', text: '← Previous', onclick: function () { show(l.prev, true); } }));
-        if (l.next) nav.appendChild(h('button', { class: 'btn ghost', type: 'button', text: 'Next →', onclick: function () { show(l.next, true); } }));
+        if (l.prev) nav.appendChild(h('button', { class: 'btn ghost', type: 'button', text: t('prev'), onclick: function () { show(l.prev, true); } }));
+        if (l.next) nav.appendChild(h('button', { class: 'btn ghost', type: 'button', text: t('next'), onclick: function () { show(l.next, true); } }));
+        nav.appendChild(h('button', { class: 'btn ghost print-btn', type: 'button', text: t('print'), onclick: function () { window.print(); } }));
         view.appendChild(nav);
-        if (l.module === 7) view.appendChild(h('p', { class: 'note', text: 'General information about the law in India, not legal advice. For your own situation, book a consultation from your account.' }));
-        if (scroll && window.innerWidth < 900) view.scrollIntoView({ block: 'start' });
+        if (l.module === 7) view.appendChild(h('p', { class: 'note', text: t('law') }));
+        if (scroll) view.scrollIntoView({ block: 'start' });
       }, function (err) {
         view.textContent = '';
         view.appendChild(h('p', { class: 'form-error', text: err.message }));
@@ -652,7 +773,7 @@
         tb.appendChild(h('tr', {}, [
           h('td', {}, [h('b', { text: e.user_name }), h('br'), h('small', { text: e.user_phone + ' · ' + e.user_email })]),
           h('td', { text: fmtDate(e.created_at) }),
-          h('td', { text: rupees(e.amount_inr) }),
+          h('td', {}, [document.createTextNode(rupees(e.amount_inr)), e.coupon ? h('br') : null, e.coupon ? h('small', { text: e.coupon }) : null]),
           h('td', {}, [document.createTextNode(LABELS.method[e.method] || e.method), e.payment_id ? h('br') : null, e.payment_id ? h('small', { text: e.payment_id }) : null]),
           h('td', { text: e.lessons_done + ' / ' + state.lessons }),
           h('td', {}, [h('span', { class: 'pill s-' + (e.status === 'pending_payment' ? 'pending' : e.status), text: LABELS.estatus[e.status] })]),
@@ -679,8 +800,37 @@
         .catch(function (err) { busy(grant, false); showError(grant, err); });
     });
 
+    function loadCoupons() {
+      return api('GET', 'admin/coupons').then(function (d) {
+        var tb = document.querySelector('#coupons-table tbody');
+        tb.textContent = '';
+        if (!d.coupons.length) tb.appendChild(h('tr', {}, [h('td', { colspan: 6, class: 'empty', text: 'No coupon codes yet.' })]));
+        d.coupons.forEach(function (c) {
+          tb.appendChild(h('tr', {}, [
+            h('td', {}, [h('b', { text: c.code })]),
+            h('td', { text: c.percent_off + '%' }),
+            h('td', { text: rupees(Math.round(d.price_inr * (100 - c.percent_off)) / 100) }),
+            h('td', { text: String(c.used) }),
+            h('td', {}, [h('span', { class: 'pill s-' + (c.active ? 'active' : 'cancelled'), text: c.active ? 'On' : 'Off' })]),
+            h('td', {}, [h('button', { class: 'btn ghost small', type: 'button', text: c.active ? 'Switch off' : 'Switch on', onclick: function () {
+              api('POST', 'admin/coupons', { code: c.code, percent_off: c.percent_off, active: !c.active }).then(loadCoupons, fail);
+            } })]),
+          ]));
+        });
+      }, fail);
+    }
+    var couponForm = document.getElementById('coupon-form');
+    couponForm.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      showError(couponForm, null);
+      var v = values(couponForm);
+      busy(couponForm, true);
+      api('POST', 'admin/coupons', { code: v.code, percent_off: Number(v.percent_off), active: true }).then(function () { busy(couponForm, false); couponForm.reset(); loadCoupons(); })
+        .catch(function (err) { busy(couponForm, false); showError(couponForm, err); });
+    });
+
     summary();
-    loadUsers().then(loadBookings).then(loadEnrolments);
+    loadUsers().then(loadBookings).then(loadEnrolments).then(loadCoupons);
   }
 
   SL.page = function (name) {

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="A person speaking gently to their partner, with four small lights in a speech bubble glowing one after another">
+  <defs>
+    <style>
+      .dot { opacity: .25; animation: glow 6s ease-in-out infinite; }
+      .d2 { animation-delay: 1s; }
+      .d3 { animation-delay: 2s; }
+      .d4 { animation-delay: 3s; }
+      .bubble { transform-origin: 400px 115px; animation: breathe 6s ease-in-out infinite; }
+      .sun { transform-origin: 700px 80px; animation: spin 30s linear infinite; }
+      @keyframes glow { 0%, 10% { opacity: .25; } 20%, 70% { opacity: 1; } 85%, 100% { opacity: .25; } }
+      @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      @media (prefers-reduced-motion: reduce) { .dot, .bubble, .sun { animation: none; } .dot { opacity: 1; } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <ellipse cx="400" cy="352" rx="340" ry="30" fill="#D6E6D9"/>
+  <g class="sun">
+    <circle cx="700" cy="80" r="22" fill="#EBA937" opacity=".7"/>
+    <g stroke="#EBA937" stroke-width="5" stroke-linecap="round" opacity=".7">
+      <line x1="700" y1="44" x2="700" y2="32"/><line x1="700" y1="116" x2="700" y2="128"/>
+      <line x1="664" y1="80" x2="652" y2="80"/><line x1="736" y1="80" x2="748" y2="80"/>
+    </g>
+  </g>
+  <circle cx="80" cy="90" r="14" fill="#F6D5C6"/>
+  <circle cx="110" cy="280" r="10" fill="#D6E6D9"/>
+  <circle cx="720" cy="260" r="12" fill="#F6D5C6"/>
+  <g class="bubble">
+    <path d="M270 50 H530 Q560 50 560 80 V150 Q560 180 530 180 H300 L250 214 L262 180 H270 Q240 180 240 150 V80 Q240 50 270 50 Z" fill="#F6D5C6"/>
+    <circle class="dot" cx="290" cy="115" r="20" fill="#C2512F"/>
+    <circle class="dot d2" cx="363" cy="115" r="20" fill="#EBA937"/>
+    <circle class="dot d3" cx="436" cy="115" r="20" fill="#1F4D3A"/>
+    <path class="dot d4" d="M509 132 C487 116 487 94 503 94 C509 94 509 100 509 102 C509 100 509 94 515 94 C531 94 531 116 509 132 Z" fill="#C2512F"/>
+  </g>
+  <g>
+    <ellipse cx="220" cy="342" rx="60" ry="10" fill="#183A2B" opacity=".15"/>
+    <path d="M168 342 C168 292 186 266 220 266 C254 266 272 292 272 342 Z" fill="#1F4D3A"/>
+    <circle cx="222" cy="230" r="34" fill="#F6D5C6"/>
+    <path d="M188 226 C192 194 252 194 256 226 C240 214 204 214 188 226 Z" fill="#183A2B"/>
+    <circle cx="264" cy="298" r="10" fill="#F6D5C6"/>
+  </g>
+  <g>
+    <ellipse cx="580" cy="342" rx="60" ry="10" fill="#183A2B" opacity=".15"/>
+    <path d="M528 342 C528 292 546 266 580 266 C614 266 632 292 632 342 Z" fill="#C2512F"/>
+    <circle cx="578" cy="230" r="34" fill="#F6D5C6"/>
+    <path d="M544 232 C540 188 616 188 612 232 C606 208 550 208 544 232 Z" fill="#183A2B"/>
+    <path d="M548 236 C540 268 544 284 552 292 C552 268 556 252 560 242 Z" fill="#183A2B"/>
+    <circle cx="536" cy="298" r="10" fill="#F6D5C6"/>
+  </g>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" role="img" aria-label="An iceberg: a few expectations above the water, many below">
+  <defs>
+    <style>
+      .berg { animation: bob 5s ease-in-out infinite; }
+      .wave { animation: drift 6s linear infinite; }
+      .b { animation: rise 4s ease-in infinite; opacity: 0; }
+      .b2 { animation-delay: 1.3s; } .b3 { animation-delay: 2.6s; }
+      @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+      @keyframes drift { from { transform: translateX(0); } to { transform: translateX(-80px); } }
+      @keyframes rise { 0% { transform: translateY(0); opacity: 0; } 30% { opacity: .8; } 100% { transform: translateY(-160px); opacity: 0; } }
+      @media (prefers-reduced-motion: reduce) { .berg, .wave, .b { animation: none; } .b { opacity: .6; } }
+    </style>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2F6E54"/><stop offset="1" stop-color="#163A2B"/></linearGradient>
+  </defs>
+  <rect width="800" height="420" fill="#FBF6EE"/>
+  <circle cx="660" cy="70" r="36" fill="#EBA937"/>
+  <rect y="150" width="800" height="270" fill="url(#sea)"/>
+  <g class="berg">
+    <path d="M330 150 L380 70 L410 100 L440 60 L480 150 Z" fill="#FFFFFF" stroke="#D6E6D9" stroke-width="3"/>
+    <path d="M330 150 L480 150 L560 230 L530 330 L420 390 L300 360 L230 260 Z" fill="#CFE0D2" opacity=".55"/>
+    <g fill="#183A2B">
+      <circle cx="390" cy="125" r="6"/><circle cx="425" cy="118" r="6"/>
+    </g>
+    <g fill="#FBF4EA" opacity=".9">
+      <circle cx="300" cy="250" r="7"/><circle cx="340" cy="210" r="7"/><circle cx="390" cy="240" r="7"/><circle cx="440" cy="200" r="7"/><circle cx="490" cy="240" r="7"/>
+      <circle cx="320" cy="300" r="7"/><circle cx="370" cy="290" r="7"/><circle cx="420" cy="320" r="7"/><circle cx="470" cy="290" r="7"/><circle cx="510" cy="300" r="7"/>
+      <circle cx="400" cy="360" r="7"/><circle cx="360" cy="340" r="7"/><circle cx="450" cy="350" r="7"/><circle cx="270" cy="270" r="7"/><circle cx="530" cy="260" r="7"/>
+    </g>
+  </g>
+  <g class="wave">
+    <path d="M0 150 q20 -10 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#FBF4EA" stroke-width="4"/>
+  </g>
+  <circle class="b" cx="200" cy="400" r="5" fill="#D6E6D9"/>
+  <circle class="b b2" cx="610" cy="400" r="4" fill="#D6E6D9"/>
+  <circle class="b b3" cx="680" cy="400" r="6" fill="#D6E6D9"/>
+</svg>

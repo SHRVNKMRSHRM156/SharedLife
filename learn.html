@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@400;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Serif+Devanagari:wght@400&display=swap">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="img/logo.png">
 </head>
@@ -30,7 +30,13 @@
         <h1 class="h2" id="learn-hello">Your lessons</h1>
         <p class="muted" id="learn-progress"></p>
       </div>
-      <div class="row"><a class="btn ghost" href="course.html">About the course</a></div>
+      <div class="row">
+        <div class="lang-switch" role="group" aria-label="Language / भाषा">
+          <button type="button" data-lang="en" lang="en">English</button>
+          <button type="button" data-lang="hi" lang="hi">हिंदी</button>
+        </div>
+        <a class="btn ghost" href="course.html">About the course</a>
+      </div>
     </div>
 
     <div id="enrol" class="banner enrol-box" hidden>

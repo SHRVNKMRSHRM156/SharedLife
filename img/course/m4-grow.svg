@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="Two young plants growing from one clay pot, leaning towards each other as new leaves unfold">
+  <defs>
+    <style>
+      .plantL { transform-origin: 390px 300px; animation: leanL 8s ease-in-out infinite; }
+      .plantR { transform-origin: 410px 300px; animation: leanR 8s ease-in-out infinite; }
+      .bud { transform-box: fill-box; transform-origin: 50% 100%; animation: unfold 8s ease-in-out infinite; }
+      .b2 { animation-delay: 1s; }
+      .bloom { transform-box: fill-box; transform-origin: center; animation: bloom 8s ease-in-out infinite; }
+      .bird { animation: fly 16s linear infinite; }
+      @keyframes leanL { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(2.5deg); } }
+      @keyframes leanR { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-2.5deg); } }
+      @keyframes unfold { 0%, 10% { transform: scale(.2); } 45%, 100% { transform: scale(1); } }
+      @keyframes bloom { 0%, 30% { transform: scale(.6); } 55%, 90% { transform: scale(1); } 100% { transform: scale(.6); } }
+      @keyframes fly { from { transform: translateX(-120px); } to { transform: translateX(920px); } }
+      @media (prefers-reduced-motion: reduce) { .plantL, .plantR, .bud, .bloom, .bird { animation: none; } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <circle cx="660" cy="96" r="44" fill="#F6D5C6"/>
+  <circle cx="660" cy="96" r="28" fill="#EBA937" opacity=".8"/>
+  <path class="bird" d="M0 70 q8 -8 16 0 q8 -8 16 0" fill="none" stroke="#183A2B" stroke-width="3" stroke-linecap="round"/>
+  <!-- ground -->
+  <rect y="340" width="800" height="60" fill="#D6E6D9"/>
+  <ellipse cx="160" cy="340" rx="90" ry="22" fill="#D6E6D9"/>
+  <ellipse cx="650" cy="340" rx="110" ry="26" fill="#D6E6D9"/>
+  <!-- left plant -->
+  <g class="plantL">
+    <path d="M392 300 C372 250 330 210 352 150 C362 122 378 106 388 96" fill="none" stroke="#1F4D3A" stroke-width="7" stroke-linecap="round"/>
+    <ellipse cx="350" cy="250" rx="30" ry="12" transform="rotate(25 350 250)" fill="#1F4D3A"/>
+    <ellipse cx="386" cy="216" rx="26" ry="11" transform="rotate(-30 386 216)" fill="#183A2B"/>
+    <ellipse cx="330" cy="178" rx="24" ry="10" transform="rotate(30 330 178)" fill="#1F4D3A"/>
+    <path class="bud" d="M362 140 C346 128 340 112 344 100 C358 104 368 120 362 140 Z" fill="#1F4D3A"/>
+    <g class="bloom"><circle cx="388" cy="92" r="12" fill="#C2512F"/><circle cx="388" cy="92" r="5" fill="#EBA937"/></g>
+  </g>
+  <!-- right plant -->
+  <g class="plantR">
+    <path d="M408 300 C428 250 470 210 448 150 C438 122 422 106 412 96" fill="none" stroke="#183A2B" stroke-width="7" stroke-linecap="round"/>
+    <ellipse cx="450" cy="250" rx="30" ry="12" transform="rotate(-25 450 250)" fill="#183A2B"/>
+    <ellipse cx="414" cy="216" rx="26" ry="11" transform="rotate(30 414 216)" fill="#1F4D3A"/>
+    <ellipse cx="470" cy="178" rx="24" ry="10" transform="rotate(-30 470 178)" fill="#183A2B"/>
+    <path class="bud b2" d="M438 140 C454 128 460 112 456 100 C442 104 432 120 438 140 Z" fill="#183A2B"/>
+    <g class="bloom"><circle cx="412" cy="92" r="12" fill="#EBA937"/><circle cx="412" cy="92" r="5" fill="#C2512F"/></g>
+  </g>
+  <!-- one clay pot -->
+  <rect x="330" y="290" width="140" height="18" rx="6" fill="#C2512F"/>
+  <path d="M340 306 L460 306 L446 352 L354 352 Z" fill="#C2512F"/>
+  <path d="M346 324 L454 324" stroke="#EBA937" stroke-width="4"/>
+  <g fill="#F6D5C6"><circle cx="372" cy="338" r="4"/><circle cx="400" cy="338" r="4"/><circle cx="428" cy="338" r="4"/></g>
+</svg>

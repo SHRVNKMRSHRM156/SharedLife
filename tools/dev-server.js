@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { handle } from '../lib/api.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
-const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.png': 'image/png', '.jpg': 'image/jpeg' };
+const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml' };
 
 http.createServer(async (req, res) => {
   if (req.url.startsWith('/api/')) return handle(req, res);

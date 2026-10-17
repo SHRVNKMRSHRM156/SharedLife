@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="Two cups of chai with steam curling together, and two hands resting close on a folded shawl">
+  <defs>
+    <style>
+      .steam { fill: none; stroke: #1F4D3A; stroke-width: 5; stroke-linecap: round; opacity: 0; animation: rise 5s ease-in-out infinite; }
+      .st2 { animation-delay: 2.5s; }
+      .handL { animation: nearL 8s ease-in-out infinite; }
+      .handR { animation: nearR 8s ease-in-out infinite; }
+      .moon { animation: glow 6s ease-in-out infinite; }
+      @keyframes rise { 0% { opacity: 0; transform: translateY(14px); } 30%, 60% { opacity: .45; } 100% { opacity: 0; transform: translateY(-16px); } }
+      @keyframes nearL { 0%, 100% { transform: translate(0, 0); } 45%, 80% { transform: translate(8px, -3px); } }
+      @keyframes nearR { 0%, 100% { transform: translate(0, 0); } 45%, 80% { transform: translate(-8px, -3px); } }
+      @keyframes glow { 0%, 100% { opacity: .75; } 50% { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) { .steam, .handL, .handR, .moon { animation: none; } .steam { opacity: .45; } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <!-- window with moon -->
+  <rect x="590" y="30" width="150" height="120" rx="8" fill="#183A2B"/>
+  <rect x="600" y="40" width="130" height="100" rx="4" fill="#1F4D3A"/>
+  <rect x="662" y="40" width="6" height="100" fill="#183A2B"/>
+  <circle class="moon" cx="630" cy="78" r="18" fill="#EBA937"/>
+  <circle cx="639" cy="72" r="15" fill="#1F4D3A"/>
+  <circle cx="700" cy="66" r="3" fill="#FBF6EE" opacity=".7"/>
+  <circle cx="712" cy="112" r="2.5" fill="#FBF6EE" opacity=".7"/>
+  <circle cx="684" cy="96" r="2" fill="#FBF6EE" opacity=".7"/>
+  <!-- plant -->
+  <path d="M60 160 L100 160 L94 196 L66 196 Z" fill="#C2512F"/>
+  <path d="M80 160 C70 128 52 118 44 100 M80 160 C86 130 104 118 116 106 M80 160 C80 136 82 118 80 92" fill="none" stroke="#1F4D3A" stroke-width="6" stroke-linecap="round"/>
+  <rect x="30" y="196" width="100" height="8" rx="4" fill="#183A2B"/>
+  <!-- steam -->
+  <path class="steam" d="M352 150 C340 130 364 114 352 94 C344 78 368 66 392 52"/>
+  <path class="steam" d="M448 150 C460 130 436 114 448 94 C456 78 432 66 408 52"/>
+  <path class="steam st2" d="M352 150 C340 130 364 114 352 94 C344 78 368 66 392 52"/>
+  <path class="steam st2" d="M448 150 C460 130 436 114 448 94 C456 78 432 66 408 52"/>
+  <!-- table top -->
+  <path d="M150 196 L650 196 L720 400 L80 400 Z" fill="#D6E6D9"/>
+  <path d="M150 196 L650 196" stroke="#183A2B" stroke-width="8" stroke-linecap="round"/>
+  <!-- cups -->
+  <ellipse cx="354" cy="204" rx="30" ry="6" fill="#183A2B" opacity=".15"/>
+  <path d="M328 158 L380 158 L374 204 L334 204 Z" fill="#C2512F"/>
+  <path d="M380 168 C396 168 396 190 377 190" fill="none" stroke="#C2512F" stroke-width="5"/>
+  <rect x="328" y="158" width="52" height="7" fill="#F6D5C6"/>
+  <ellipse cx="446" cy="204" rx="30" ry="6" fill="#183A2B" opacity=".15"/>
+  <path d="M420 158 L472 158 L466 204 L426 204 Z" fill="#1F4D3A"/>
+  <path d="M420 168 C404 168 404 190 423 190" fill="none" stroke="#1F4D3A" stroke-width="5"/>
+  <rect x="420" y="158" width="52" height="7" fill="#F6D5C6"/>
+  <!-- folded shawl lying across the table -->
+  <path d="M190 240 L620 228 L640 318 L176 330 Z" fill="#C2512F"/>
+  <path d="M188 254 L622 242 M178 316 L636 304" stroke="#EBA937" stroke-width="5"/>
+  <g fill="#EBA937"><circle cx="250" cy="284" r="5"/><circle cx="330" cy="282" r="5"/><circle cx="470" cy="278" r="5"/><circle cx="550" cy="276" r="5"/></g>
+  <g stroke="#EBA937" stroke-width="3" stroke-linecap="round"><path d="M620 236 l14 -4 M624 252 l14 -4 M628 268 l14 -4 M632 284 l14 -4 M636 300 l14 -4"/></g>
+  <!-- two hands resting close -->
+  <g class="handL">
+    <path d="M190 400 C220 350 270 310 336 290" fill="none" stroke="#1F4D3A" stroke-width="40" stroke-linecap="round"/>
+    <path d="M326 276 L344 306" stroke="#EBA937" stroke-width="8" stroke-linecap="round"/>
+    <path d="M340 276 C362 266 384 268 390 278 C394 288 384 298 360 304 Z" fill="#F6D5C6"/>
+  </g>
+  <g class="handR">
+    <path d="M610 400 C580 350 530 310 464 290" fill="none" stroke="#183A2B" stroke-width="40" stroke-linecap="round"/>
+    <path d="M460 276 C438 266 416 268 410 278 C406 288 416 298 440 304 Z" fill="#F6D5C6"/>
+  </g>
+</svg>
