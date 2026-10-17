@@ -317,12 +317,18 @@
       talk: 'Talk about it together', try: 'Try this', takeaways: 'Key takeaways', checklist: 'Tick what is true for you', draft: 'This lesson is still a draft and is being rewritten.',
       hiSoon: '', mark: 'Mark as done', undo: '✓ Done (tap to undo)', prev: '← Previous', next: 'Next →', enrolNext: 'Enrol to continue', loading: 'Loading…',
       locked: 'This lesson opens when you enrol. The first lesson is free to read now.', enrol: 'Enrol', free: 'Read the free lesson',
-      law: 'General information about the law in India, not legal advice. For your own situation, book a consultation from your account.' },
+      law: 'General information about the law in India, not legal advice. For your own situation, book a consultation from your account.',
+      quiz: 'Check yourself', right: 'Well spotted.', wrong: 'Not quite.', myths: 'Myth or reality?', myth: 'Myth', reality: 'Reality',
+      phrases: 'Say it like this', instead: 'Instead of', tryIt: 'Try', reflect: 'Your private notes', reflectHint: 'Saved only on this device. Nobody else, including SharedLife, can see it.',
+      tip: 'Counsellor’s tip', print: 'Print or save as PDF' },
     hi: { module: 'मॉड्यूल', lesson: 'पाठ', of: 'में से', minutes: 'मिनट', about: 'लगभग', done: 'पाठ पूरे', story: 'कहानी', example: 'उदाहरण',
       talk: 'साथ बैठकर बात करें', try: 'यह करके देखें', takeaways: 'मुख्य बातें', checklist: 'जो आप पर लागू हो, उस पर निशान लगाएँ', draft: 'यह पाठ अभी ड्राफ़्ट है और दोबारा लिखा जा रहा है।',
       hiSoon: 'इस पाठ का हिंदी संस्करण जल्द आएगा। तब तक अंग्रेज़ी में पढ़ें।', mark: 'पूरा हुआ', undo: '✓ पूरा (हटाने के लिए दबाएँ)', prev: '← पिछला', next: 'अगला →', enrolNext: 'आगे पढ़ने के लिए एनरोल करें', loading: 'लोड हो रहा है…',
       locked: 'यह पाठ एनरोल करने पर खुलेगा। पहला पाठ अभी मुफ़्त में पढ़ें।', enrol: 'एनरोल करें', free: 'मुफ़्त पाठ पढ़ें',
-      law: 'यह भारत के क़ानून की सामान्य जानकारी है, क़ानूनी सलाह नहीं। अपनी स्थिति के लिए अपने अकाउंट से परामर्श बुक करें।' },
+      law: 'यह भारत के क़ानून की सामान्य जानकारी है, क़ानूनी सलाह नहीं। अपनी स्थिति के लिए अपने अकाउंट से परामर्श बुक करें।',
+      quiz: 'ख़ुद को परखें', right: 'बिल्कुल सही।', wrong: 'पूरी तरह नहीं।', myths: 'भ्रम या सच?', myth: 'भ्रम', reality: 'सच',
+      phrases: 'ऐसे कहकर देखें', instead: 'इसके बजाय', tryIt: 'यह कहें', reflect: 'आपके निजी नोट्स', reflectHint: 'सिर्फ़ इसी डिवाइस पर सेव होते हैं। कोई और, SharedLife भी नहीं, इन्हें देख सकता।',
+      tip: 'काउंसलर की सलाह', print: 'प्रिंट करें या PDF सेव करें' },
   };
   function getLang() { try { return localStorage.getItem('sl-lang') === 'hi' ? 'hi' : 'en'; } catch (e) { return 'en'; } }
   function setLang(l) { try { localStorage.setItem('sl-lang', l); } catch (e) { /* private window */ } }
@@ -444,7 +450,7 @@
     function arr(b) { return b[state.lang] && b[state.lang].length ? b[state.lang] : b.en || []; }
 
     // One lesson block. Everything is set with textContent.
-    function block(b) {
+    function block(b, i) {
       switch (b.type) {
         case 'p': return h('p', { text: tr(b) });
         case 'h': return h('h3', { class: 'h3', text: tr(b) });
@@ -468,8 +474,44 @@
           }));
         case 'figure':
           return h('figure', { class: 'fig' + (b.animated ? ' animated' : '') }, [h('img', { src: b.src, alt: tr(b.alt) || '', loading: 'lazy' }), b.caption ? h('figcaption', { text: tr(b.caption) }) : null]);
+        case 'tip': return h('aside', { class: 'tip' }, [h('p', { class: 'tale-tag', text: t('tip') }), h('p', { text: tr(b) })]);
+        case 'myths':
+          return h('section', { class: 'myths' }, [h('h3', { text: t('myths') })].concat(arr(b).map(function (m) {
+            return h('div', { class: 'myth' }, [h('p', {}, [h('b', { text: t('myth') + ': ' }), m[0]]), h('p', {}, [h('b', { text: t('reality') + ': ' }), m[1]])]);
+          })));
+        case 'phrases':
+          return h('section', { class: 'phrases' }, [h('h3', { text: t('phrases') })].concat(arr(b).map(function (m) {
+            return h('div', { class: 'phrase' }, [h('p', { class: 'from' }, [h('small', { text: t('instead') }), m[0]]), h('p', { class: 'to' }, [h('small', { text: t('tryIt') }), m[1]])]);
+          })));
+        case 'quiz': return quiz(b);
+        case 'reflect': return reflect(b, i);
         default: return null;
       }
+    }
+
+    // A scenario question: pick an answer, see why. Nothing is sent or scored.
+    function quiz(b) {
+      var why = h('p', { class: 'why', hidden: '' });
+      var opts = arr(b.options), buttons = [];
+      opts.forEach(function (o, n) {
+        buttons.push(h('button', { type: 'button', class: 'opt', text: o, onclick: function () {
+          buttons.forEach(function (x, k) { x.disabled = true; if (k === b.answer) x.classList.add('right'); });
+          if (n !== b.answer) buttons[n].classList.add('wrong');
+          why.textContent = (n === b.answer ? t('right') : t('wrong')) + ' ' + tr(b.why);
+          why.hidden = false;
+        } }));
+      });
+      return h('section', { class: 'quiz' }, [h('p', { class: 'tale-tag', text: t('quiz') }), h('h3', { text: tr(b.q) }), h('div', { class: 'opts' }, buttons), why]);
+    }
+
+    // Private journaling, kept in this browser only.
+    function reflect(b, i) {
+      var key = 'sl-note-' + state.current + '-' + i, saved = '';
+      try { saved = localStorage.getItem(key) || ''; } catch (e) { /* private window */ }
+      var area = h('textarea', { rows: '4', 'aria-label': tr(b) });
+      area.value = saved;
+      area.addEventListener('input', function () { try { localStorage.setItem(key, area.value); } catch (e) { /* ignore */ } });
+      return h('section', { class: 'reflect' }, [h('h3', { text: t('reflect') }), h('p', { text: tr(b) }), area, h('small', { class: 'muted', text: t('reflectHint') })]);
     }
 
     function scrollToEnrol(ev) { ev.preventDefault(); box.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
@@ -502,7 +544,7 @@
         if (l.draft) view.appendChild(h('p', { class: 'note', text: t('draft') }));
         if (l.video) view.appendChild(h('div', { class: 'video' }, [h('iframe', { src: l.video, title: tr(l.title), allow: 'fullscreen; picture-in-picture', allowfullscreen: '', loading: 'lazy' })]));
         view.appendChild(h('p', { class: 'lede', text: tr(l.summary) }));
-        (l.blocks || []).forEach(function (b) { var el = block(b); if (el) view.appendChild(el); });
+        (l.blocks || []).forEach(function (b, i) { var el = block(b, i); if (el) view.appendChild(el); });
         var nav = h('div', { class: 'row lesson-nav' });
         if (state.info.access) {
           nav.appendChild(h('button', { class: 'btn' + (done ? ' ghost' : ''), type: 'button', text: done ? t('undo') : t('mark'), onclick: function (ev) {
@@ -517,6 +559,7 @@
         }
         if (l.prev) nav.appendChild(h('button', { class: 'btn ghost', type: 'button', text: t('prev'), onclick: function () { show(l.prev, true); } }));
         if (l.next) nav.appendChild(h('button', { class: 'btn ghost', type: 'button', text: t('next'), onclick: function () { show(l.next, true); } }));
+        nav.appendChild(h('button', { class: 'btn ghost print-btn', type: 'button', text: t('print'), onclick: function () { window.print(); } }));
         view.appendChild(nav);
         if (l.module === 7) view.appendChild(h('p', { class: 'note', text: t('law') }));
         if (scroll) view.scrollIntoView({ block: 'start' });

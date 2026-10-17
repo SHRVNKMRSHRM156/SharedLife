@@ -455,6 +455,43 @@ dialog.dialog::backdrop { background: rgba(10, 20, 15, .55); }
 .coupon-form input { font: inherit; padding: 9px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); width: 170px; text-transform: uppercase; }
 #enrol-actions { align-items: center; }
 @media (max-width: 640px) { .lesson .compare { grid-template-columns: 1fr; } }
+.lesson .tip { background: var(--sage); border-radius: 16px; padding: 18px 22px; display: flex; flex-direction: column; gap: 6px; line-height: 1.6; }
+.lesson .tip .tale-tag { color: var(--green) !important; }
+.lesson .myths { display: flex; flex-direction: column; gap: 10px; }
+.lesson .myth { border: 1px solid var(--line); border-radius: 16px; padding: 14px 18px; display: flex; flex-direction: column; gap: 6px; line-height: 1.55; }
+.lesson .myth p:first-child { color: var(--muted); }
+.lesson .myth p:first-child b { color: var(--terra); }
+.lesson .myth p:last-child b { color: var(--green); }
+.lesson .phrases { display: flex; flex-direction: column; gap: 10px; }
+.lesson .phrase { display: grid; grid-template-columns: 1fr 1fr; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); }
+.lesson .phrase p { padding: 12px 16px; line-height: 1.5; display: flex; flex-direction: column; gap: 4px; }
+.lesson .phrase small { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.lesson .phrase .from { background: var(--blush); color: var(--ink-soft); }
+.lesson .phrase .from small { color: #7A3219; }
+.lesson .phrase .to { background: var(--sage); color: var(--ink); }
+.lesson .phrase .to small { color: var(--green); }
+.lesson .quiz { border: 2px solid var(--marigold); border-radius: 16px; padding: 20px 22px; }
+.lesson .quiz .tale-tag { color: #9A6B10 !important; }
+.lesson .quiz h3 { font-size: 19px; line-height: 1.4; }
+.lesson .opts { display: flex; flex-direction: column; gap: 8px; }
+.lesson .opt { text-align: left; font: inherit; line-height: 1.45; padding: 11px 16px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.lesson .opt:hover:not(:disabled) { border-color: var(--ink); }
+.lesson .opt:disabled { cursor: default; opacity: .75; }
+.lesson .opt.right { background: var(--sage); border-color: var(--green); opacity: 1; font-weight: 700; }
+.lesson .opt.right::before { content: '✓ '; }
+.lesson .opt.wrong { background: var(--blush); border-color: var(--terra); opacity: 1; }
+.lesson .quiz .why { line-height: 1.6; color: var(--ink-soft); }
+.lesson .reflect { border: 1px dashed var(--muted); border-radius: 16px; padding: 18px 22px; }
+.lesson .reflect textarea { font: inherit; width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); resize: vertical; }
+@media (max-width: 640px) { .lesson .phrase { grid-template-columns: 1fr; } }
+@media print {
+  nav.nav, footer, .toc, .enrol-box, .dash-head .row, .lesson-nav, .learn-grid > nav { display: none !important; }
+  .learn-grid { display: block !important; }
+  .lesson { border: 0; padding: 0; }
+  .lesson .fig.animated { break-inside: avoid; }
+  .lesson section, .lesson aside, .lesson .myth, .lesson .phrase { break-inside: avoid; }
+  body { background: #fff; }
+}
 @media (max-width: 900px) {
   .learn-grid { grid-template-columns: 1fr; }
   .toc { position: static; max-height: 340px; order: 2; }

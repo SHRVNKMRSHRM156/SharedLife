@@ -10,6 +10,7 @@
 //   compare                    { type, left:{title, en:[], hi:[]}, right:{...} }
 //   figure                     { type, src, animated?, alt:{en,hi}, caption:{en,hi} }
 import m1 from './m1.js';
+import m2 from './m2.js';
 import { LESSONS as OLD } from './legacy.js';
 
 export const MODULES = [
@@ -31,13 +32,9 @@ export const MODULES = [
     blurb: { en: 'Bringing it together in your own plan, and keeping it alive year after year.', hi: 'सब कुछ अपने प्लान में समेटना, और उसे हर साल जीवित रखना।' } },
 ];
 
-// Modules 2 to 8 are still the earlier English drafts, waiting to be rewritten in the Module 1 style.
+// Modules 3 to 8 are still the earlier English drafts, waiting to be rewritten in the Module 1 style.
 // [new module, Hindi title, old lesson id or null, English title if it changes]
 const DRAFTS = [
-  [2, 'अपने मूल्य और ज़रूरतें', 5],
-  [2, 'आपके भीतर आपके परिवार की कहानी', 6],
-  [2, 'भावनात्मक आदतें और जुड़ाव', 7],
-  [2, 'वे सवाल जो एक-दूसरे से पूछने चाहिए', 12, 'Questions worth asking each other'],
   [3, 'ऐसा सुनना जो दिल तक पहुँचे', 13],
   [3, 'बिना दोष दिए अपनी ज़रूरतें कहना', 14],
   [3, 'मतभेद सुलझाना और रिश्ता जोड़ना', 15],
@@ -64,10 +61,12 @@ const DRAFTS = [
   [8, 'अपने प्लान को जीवित रखना', 32],
 ];
 
+const WRITTEN = [...m1, ...m2];
+
 const draft = ([module, hi, oldId, en], i) => {
   const o = OLD.find((l) => l.id === oldId);
   return {
-    id: m1.length + 1 + i, module, minutes: o ? o.minutes : 12, draft: true,
+    id: WRITTEN.length + 1 + i, module, minutes: o ? o.minutes : 12, draft: true,
     title: { en: en || o.title, hi },
     summary: { en: o ? o.summary : 'This lesson is being written.' },
     blocks: o ? [
@@ -78,4 +77,4 @@ const draft = ([module, hi, oldId, en], i) => {
   };
 };
 
-export const LESSONS = [...m1, ...DRAFTS.map(draft)];
+export const LESSONS = [...WRITTEN, ...DRAFTS.map(draft)];
