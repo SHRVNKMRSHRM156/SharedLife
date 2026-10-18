@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="Two people seated across a low round table with a calm third person between them, a jug of water and glasses on the table, and a window with soft light showing a path outside that forks and joins again">
+  <defs>
+    <style>
+      .ray { opacity: .16; animation: glow 6s ease-in-out infinite; }
+      .r2 { animation-delay: -2s; }
+      .r3 { animation-delay: -4s; }
+      .trail { stroke-dasharray: 6 12; animation: flow 5s linear infinite; }
+      .guide { transform-origin: 400px 250px; animation: nod 6s ease-in-out infinite; }
+      .leaf { transform-box: fill-box; transform-origin: 50% 100%; animation: sway 7s ease-in-out infinite; }
+      .ripple { animation: shimmer 3.5s ease-in-out infinite; }
+      .sun { animation: float 10s ease-in-out infinite alternate; }
+      @keyframes glow { 0%, 100% { opacity: .10; } 50% { opacity: .26; } }
+      @keyframes flow { to { stroke-dashoffset: -72; } }
+      @keyframes nod { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(1.5deg); } }
+      @keyframes sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+      @keyframes shimmer { 0%, 100% { opacity: .35; } 50% { opacity: .85; } }
+      @keyframes float { from { transform: translateY(4px); } to { transform: translateY(-4px); } }
+      @media (prefers-reduced-motion: reduce) { .ray, .trail, .guide, .leaf, .ripple, .sun { animation: none; } .ray { opacity: .18; } }
+    </style>
+    <clipPath id="pane"><rect x="290" y="24" width="220" height="104" rx="6"/></clipPath>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <!-- floor -->
+  <ellipse cx="400" cy="350" rx="360" ry="32" fill="#D6E6D9"/>
+  <!-- window with a view of a path that forks and joins again -->
+  <rect x="280" y="14" width="240" height="124" rx="10" fill="#1F4D3A"/>
+  <g clip-path="url(#pane)">
+    <rect x="290" y="24" width="220" height="104" fill="#D6E6D9"/>
+    <circle class="sun" cx="462" cy="40" r="12" fill="#EBA937"/>
+    <path d="M290 66 Q350 52 400 62 Q456 50 510 60 L510 128 L290 128 Z" fill="#1F4D3A" opacity=".5"/>
+    <path d="M290 76 Q400 66 510 76 L510 128 L290 128 Z" fill="#1F4D3A"/>
+    <!-- the path: one way in, two ways round, one way on -->
+    <path d="M400 128 L400 108 C374 104 372 74 396 68 M400 108 C426 104 428 74 404 68 M400 69 L400 56" fill="none" stroke="#F6D5C6" stroke-width="6" stroke-linecap="round"/>
+    <path class="trail" d="M400 128 L400 108 C374 104 372 74 396 68 L400 58" fill="none" stroke="#EBA937" stroke-width="2" stroke-linecap="round"/>
+    <path class="trail" d="M400 108 C426 104 428 74 404 68" fill="none" stroke="#EBA937" stroke-width="2" stroke-linecap="round"/>
+    <rect x="398" y="94" width="4" height="7" fill="#183A2B"/><path d="M400 76 L408 95 L392 95 Z" fill="#EBA937"/>
+    <g fill="#183A2B"><circle cx="330" cy="88" r="8"/><circle cx="476" cy="84" r="9"/><circle cx="352" cy="104" r="6"/></g>
+  </g>
+  <rect x="272" y="134" width="256" height="9" rx="4" fill="#183A2B"/>
+  <!-- soft light falling into the room -->
+  <g fill="#EBA937">
+    <path class="ray" d="M296 143 L250 330 L318 330 L340 143 Z"/>
+    <path class="ray r2" d="M372 143 L362 330 L438 330 L428 143 Z"/>
+    <path class="ray r3" d="M460 143 L482 330 L550 330 L504 143 Z"/>
+  </g>
+  <!-- plants in the corners -->
+  <g>
+    <rect x="58" y="290" width="44" height="50" rx="6" fill="#C2512F"/>
+    <path class="leaf" d="M80 292 Q56 250 70 214 Q86 252 80 292 Z" fill="#1F4D3A"/>
+    <path class="leaf" d="M80 292 Q104 252 98 220 Q78 254 80 292 Z" fill="#183A2B"/>
+  </g>
+  <g>
+    <rect x="698" y="290" width="44" height="50" rx="6" fill="#EBA937"/>
+    <path class="leaf" d="M720 292 Q696 256 704 222 Q724 256 720 292 Z" fill="#183A2B"/>
+    <path class="leaf" d="M720 292 Q746 256 742 226 Q718 256 720 292 Z" fill="#1F4D3A"/>
+  </g>
+  <!-- the calm person in the middle, behind the table -->
+  <g class="guide">
+    <path d="M350 300 C350 244 368 222 400 222 C432 222 450 244 450 300 Z" fill="#D6E6D9" stroke="#1F4D3A" stroke-width="3"/>
+    <circle cx="400" cy="190" r="30" fill="#F6D5C6"/>
+    <path d="M370 188 C366 150 434 150 430 188 C422 170 378 170 370 188 Z" fill="#183A2B"/>
+    <path d="M388 204 Q400 211 412 204" fill="none" stroke="#183A2B" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <!-- person on the left -->
+  <g>
+    <ellipse cx="190" cy="342" rx="64" ry="10" fill="#183A2B" opacity=".15"/>
+    <path d="M135 342 C135 264 156 224 190 224 C224 224 245 264 245 342 Z" fill="#C2512F"/>
+    <circle cx="192" cy="180" r="40" fill="#F6D5C6"/>
+    <path d="M152 180 C148 130 236 130 232 180 C226 152 160 152 152 180 Z" fill="#183A2B"/>
+    <path d="M156 184 C146 224 150 252 160 264 C160 232 164 208 170 192 Z" fill="#183A2B"/>
+    <circle cx="242" cy="262" r="11" fill="#F6D5C6"/>
+  </g>
+  <!-- person on the right -->
+  <g>
+    <ellipse cx="610" cy="342" rx="64" ry="10" fill="#183A2B" opacity=".15"/>
+    <path d="M555 342 C555 264 576 224 610 224 C644 224 665 264 665 342 Z" fill="#1F4D3A"/>
+    <circle cx="608" cy="180" r="40" fill="#F6D5C6"/>
+    <path d="M570 174 C576 138 642 138 648 174 C630 160 588 160 570 174 Z" fill="#183A2B"/>
+    <circle cx="570" cy="184" r="7" fill="#F6D5C6"/>
+    <circle cx="558" cy="262" r="11" fill="#F6D5C6"/>
+  </g>
+  <!-- low round table -->
+  <ellipse cx="400" cy="336" rx="96" ry="9" fill="#183A2B" opacity=".15"/>
+  <rect x="352" y="296" width="10" height="40" fill="#183A2B"/>
+  <rect x="438" y="296" width="10" height="40" fill="#183A2B"/>
+  <ellipse cx="400" cy="296" rx="120" ry="14" fill="#183A2B"/>
+  <ellipse cx="400" cy="290" rx="120" ry="14" fill="#1F4D3A"/>
+  <!-- jug of water and two glasses -->
+  <path d="M384 288 L380 246 Q392 238 404 240 L410 246 L406 288 Z" fill="#D6E6D9" stroke="#183A2B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M406 252 C420 252 420 274 406 274" fill="none" stroke="#183A2B" stroke-width="3"/>
+  <path class="ripple" d="M384 262 L405 262" stroke="#FBF6EE" stroke-width="3" stroke-linecap="round"/>
+  <path d="M330 288 L327 262 L349 262 L346 288 Z" fill="#D6E6D9" stroke="#183A2B" stroke-width="2.5"/>
+  <rect class="ripple" x="331" y="270" width="14" height="3" rx="1.5" fill="#FBF6EE"/>
+  <path d="M454 288 L451 262 L473 262 L470 288 Z" fill="#D6E6D9" stroke="#183A2B" stroke-width="2.5"/>
+  <rect class="ripple" x="455" y="270" width="14" height="3" rx="1.5" fill="#FBF6EE"/>
+</svg>
