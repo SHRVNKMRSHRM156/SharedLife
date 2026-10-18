@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="A terracotta piggy bank in the middle with two cloth purses on either side, and coins travelling from both purses into the shared piggy bank">
+  <defs>
+    <style>
+      .coin { opacity: 0; }
+      .from-left { animation: left 4s ease-in-out infinite; }
+      .from-right { animation: right 4s ease-in-out infinite; animation-delay: 2s; }
+      .pig { animation: bob 4s ease-in-out infinite; }
+      .glow { animation: glow 4s ease-in-out infinite; }
+      .purse { transform-box: fill-box; transform-origin: 50% 100%; }
+      .pl { animation: tip 4s ease-in-out infinite; }
+      .pr { animation: tip 4s ease-in-out infinite; animation-delay: 2s; }
+      @keyframes left { 0% { transform: translate(0, 0); opacity: 0; } 8% { opacity: 1; } 45% { transform: translate(105px, -80px); } 80% { transform: translate(205px, 0); opacity: 1; } 88%, 100% { transform: translate(205px, 14px); opacity: 0; } }
+      @keyframes right { 0% { transform: translate(0, 0); opacity: 0; } 8% { opacity: 1; } 45% { transform: translate(-105px, -80px); } 80% { transform: translate(-205px, 0); opacity: 1; } 88%, 100% { transform: translate(-205px, 14px); opacity: 0; } }
+      @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+      @keyframes glow { 0%, 100% { opacity: .35; } 50% { opacity: .7; } }
+      @keyframes tip { 0%, 30%, 100% { transform: rotate(0deg); } 10% { transform: rotate(-4deg); } 20% { transform: rotate(3deg); } }
+      @media (prefers-reduced-motion: reduce) { .coin, .pig, .glow, .purse { animation: none; } .coin { opacity: 0; } .glow { opacity: .5; } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <rect x="0" y="330" width="800" height="70" fill="#D6E6D9"/>
+  <!-- soft glow behind the piggy bank -->
+  <circle class="glow" cx="400" cy="230" r="150" fill="#F6D5C6"/>
+  <!-- left purse: a cloth potli -->
+  <g class="purse pl">
+    <path d="M160 196 L148 158 Q160 170 170 156 Q180 172 190 154 Q200 172 210 156 Q220 170 232 158 L220 196 Z" fill="#183A2B"/>
+    <path d="M166 196 C108 214 102 314 190 316 C278 314 272 214 214 196 Z" fill="#1F4D3A"/>
+    <rect x="158" y="188" width="64" height="12" rx="6" fill="#EBA937"/>
+    <path d="M214 198 L226 230 M206 198 L210 234" stroke="#EBA937" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="226" cy="234" r="5" fill="#EBA937"/><circle cx="210" cy="238" r="5" fill="#EBA937"/>
+    <circle cx="190" cy="266" r="16" fill="#EBA937"/>
+    <circle cx="190" cy="266" r="7" fill="#1F4D3A"/>
+  </g>
+  <!-- right purse: a cloth potli -->
+  <g class="purse pr">
+    <path d="M580 196 L568 158 Q580 170 590 156 Q600 172 610 154 Q620 172 630 156 Q640 170 652 158 L640 196 Z" fill="#C2512F"/>
+    <path d="M586 196 C528 214 522 314 610 316 C698 314 692 214 634 196 Z" fill="#EBA937"/>
+    <rect x="578" y="188" width="64" height="12" rx="6" fill="#1F4D3A"/>
+    <path d="M634 198 L646 230 M626 198 L630 234" stroke="#1F4D3A" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="646" cy="234" r="5" fill="#1F4D3A"/><circle cx="630" cy="238" r="5" fill="#1F4D3A"/>
+    <circle cx="610" cy="266" r="16" fill="#C2512F"/>
+    <circle cx="610" cy="266" r="7" fill="#EBA937"/>
+  </g>
+  <!-- coins on their way -->
+  <g class="coin from-left"><circle cx="195" cy="170" r="13" fill="#EBA937"/><circle cx="195" cy="170" r="6" fill="none" stroke="#C2512F" stroke-width="2"/></g>
+  <g class="coin from-right"><circle cx="605" cy="170" r="13" fill="#EBA937"/><circle cx="605" cy="170" r="6" fill="none" stroke="#C2512F" stroke-width="2"/></g>
+  <!-- piggy bank -->
+  <g class="pig">
+    <ellipse cx="400" cy="336" rx="118" ry="10" fill="#183A2B" opacity=".18"/>
+    <rect x="330" y="290" width="26" height="44" rx="8" fill="#C2512F"/>
+    <rect x="440" y="290" width="26" height="44" rx="8" fill="#C2512F"/>
+    <path d="M286 246 C268 230 268 214 284 210" fill="none" stroke="#C2512F" stroke-width="6" stroke-linecap="round"/>
+    <ellipse cx="398" cy="250" rx="118" ry="80" fill="#C2512F"/>
+    <path d="M340 186 L352 152 L374 180 Z" fill="#C2512F"/>
+    <path d="M430 180 L452 150 L462 186 Z" fill="#C2512F"/>
+    <path d="M346 182 L353 162 L366 180 Z" fill="#F6D5C6"/>
+    <ellipse cx="514" cy="256" rx="22" ry="26" fill="#F6D5C6"/>
+    <circle cx="508" cy="252" r="4" fill="#183A2B"/><circle cx="520" cy="252" r="4" fill="#183A2B"/>
+    <circle cx="470" cy="226" r="7" fill="#183A2B"/>
+    <rect x="368" y="172" width="64" height="10" rx="5" fill="#183A2B"/>
+  </g>
+</svg>

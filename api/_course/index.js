@@ -13,6 +13,7 @@ import m1 from './m1.js';
 import m2 from './m2.js';
 import m3 from './m3.js';
 import m4 from './m4.js';
+import m5 from './m5.js';
 import { LESSONS as OLD } from './legacy.js';
 
 export const MODULES = [
@@ -34,13 +35,9 @@ export const MODULES = [
     blurb: { en: 'Bringing it together in your own plan, and keeping it alive year after year.', hi: 'सब कुछ अपने प्लान में समेटना, और उसे हर साल जीवित रखना।' } },
 ];
 
-// Modules 5 to 8 are still the earlier English drafts, waiting to be rewritten in the Module 1 style.
+// Modules 6 to 8 are still the earlier English drafts, waiting to be rewritten in the Module 1 style.
 // [new module, Hindi title, old lesson id or null, English title if it changes]
 const DRAFTS = [
-  [5, 'पैसे के स्वभाव', 17],
-  [5, 'बजट, बचत और खाते', 18],
-  [5, 'दो करियर, एक घर', 19],
-  [5, 'ज़िंदगी के मोड़ों की तैयारी', 20],
   [6, 'संयुक्त परिवार, एकल परिवार और बीच की जगह', 21],
   [6, 'घर के काम का बँटवारा', 22],
   [6, 'माता-पिता, ससुराल और स्वस्थ सीमाएँ', 23],
@@ -55,7 +52,7 @@ const DRAFTS = [
   [8, 'अपने प्लान को जीवित रखना', 32],
 ];
 
-const WRITTEN = [...m1, ...m2, ...m3, ...m4];
+const WRITTEN = [...m1, ...m2, ...m3, ...m4, ...m5];
 
 const draft = ([module, hi, oldId, en], i) => {
   const o = OLD.find((l) => l.id === oldId);
