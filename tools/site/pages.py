@@ -45,7 +45,7 @@ PAGES["index"] = ("SharedLife", "Counselling, courses and Pre-Nuptial Agreements
       </div>
       <p class="reassure rise d3"><span>Private and confidential</span><span>Experienced counsellors</span><span>Agreements drafted with advocates</span></p>
     </div>
-    <div class="logo-plate"><img src="img/logo.png" alt="SharedLife logo: two cranes standing together"></div>
+    <div class="logo-plate"><img src="img/logo.png" alt="SharedLife logo: two cranes bowing towards each other above a heart woven with an infinity knot. Courses, Counselling, Agreements."></div>
   </div>
 </header>
 

@@ -16,7 +16,7 @@ NAV = [("index", "./", "Home"), ("counselling", "counselling.html", "Counselling
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@400;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Serif+Devanagari:wght@400&display=swap">\n'
-         '<link rel="stylesheet" href="styles.css">\n<link rel="icon" href="img/logo.png">')
+         '<link rel="stylesheet" href="styles.css">\n<link rel="icon" href="img/favicon.svg" type="image/svg+xml">\n<link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">\n<link rel="apple-touch-icon" href="img/apple-touch-icon.png">')
 
 
 def header(key):
@@ -26,7 +26,7 @@ def header(key):
     acct = ' aria-current="page"' if key in ("login", "register", "account", "admin") else ""
     return f"""<nav class="nav" aria-label="Main">
   <div class="wrap">
-    <a class="brand" href="./"><img src="img/logo.png" alt="">SharedLife</a>
+    <a class="brand" href="./"><img src="img/logo-mark.svg" alt="">SharedLife</a>
     <ul class="menu">{items}<li class="m-only"><a href="contact.html"{" aria-current=\"page\"" if key == "contact" else ""}>Contact</a></li><li><a href="login.html" data-account-link{acct}>Log in</a></li></ul>
     <a class="btn cta" href="account.html#book">Book a consultation</a>
     <button class="toggle" type="button" aria-expanded="false">Menu</button>
@@ -38,7 +38,7 @@ FOOTER = """<footer>
   <div class="wrap">
     <div class="cols">
       <div style="display:flex;flex-direction:column;gap:12px">
-        <a class="brand" href="./"><img src="img/logo.png" alt="">SharedLife</a>
+        <a class="brand" href="./"><img src="img/logo-mark.svg" alt="">SharedLife</a>
         <p>Designing a Shared Life. Counselling, courses and Pre-Nuptial Agreements for couples.</p>
       </div>
       <div><h4>Services</h4><ul><li><a href="counselling.html">Couples counselling</a></li><li><a href="prenup.html">Pre-Nuptial Agreement</a></li><li><a href="course.html">The SharedLife Course</a></li><li><a href="workshops.html">Workshops and talks</a></li></ul></div>
