@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="Two hands, each holding a pen, over one shared document on a wooden table, with two cups of chai and a small plant putting out a new leaf in warm light from a window">
+  <defs>
+    <style>
+      .beam { animation: glow 6s ease-in-out infinite; }
+      .sun { transform-box: fill-box; transform-origin: 50% 50%; animation: pulse 6s ease-in-out infinite; }
+      .steam1 { animation: rise 4.5s ease-in-out infinite; }
+      .steam2 { animation: rise 4.5s ease-in-out infinite; animation-delay: 2.2s; }
+      .handL { animation: bobL 5s ease-in-out infinite; }
+      .handR { animation: bobR 5s ease-in-out infinite; animation-delay: 1.2s; }
+      .sign { stroke-dasharray: 90; animation: write 6s ease-in-out infinite; }
+      .leaf { transform-box: fill-box; transform-origin: 0% 100%; animation: grow 7s ease-in-out infinite; }
+      @keyframes glow { 0%, 100% { opacity: .16; } 50% { opacity: .3; } }
+      @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+      @keyframes rise { 0% { opacity: 0; transform: translateY(8px); } 40% { opacity: .9; } 100% { opacity: 0; transform: translateY(-26px); } }
+      @keyframes bobL { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(2px, -5px); } }
+      @keyframes bobR { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-2px, -5px); } }
+      @keyframes write { 0% { stroke-dashoffset: 90; } 45%, 80% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 90; } }
+      @keyframes grow { 0%, 100% { transform: scale(.75) rotate(-6deg); } 50% { transform: scale(1) rotate(4deg); } }
+      @media (prefers-reduced-motion: reduce) { .beam, .sun, .steam1, .steam2, .handL, .handR, .sign, .leaf { animation: none; } .sign { stroke-dashoffset: 0; } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <!-- wall band -->
+  <rect x="0" y="150" width="800" height="90" fill="#D6E6D9" opacity=".7"/>
+  <!-- window with warm sun -->
+  <rect x="70" y="30" width="170" height="150" rx="6" fill="#FCE8BF" stroke="#1F4D3A" stroke-width="5"/>
+  <circle class="sun" cx="170" cy="92" r="30" fill="#EBA937"/>
+  <path d="M155 30 L155 180 M70 105 L240 105" stroke="#1F4D3A" stroke-width="4"/>
+  <!-- light beams falling on the table -->
+  <path class="beam" d="M240 40 L560 250 L420 250 L240 175 Z" fill="#EBA937"/>
+  <path class="beam" d="M240 110 L380 250 L300 250 L240 180 Z" fill="#EBA937" style="animation-delay: 1.5s"/>
+  <!-- table -->
+  <rect x="0" y="240" width="800" height="160" fill="#F2E4CB"/>
+  <rect x="0" y="236" width="800" height="8" fill="#C2512F"/>
+  <g stroke="#EBA937" stroke-width="2" opacity=".6" fill="none">
+    <path d="M30 280 Q200 272 360 282"/><path d="M480 300 Q620 292 780 302"/><path d="M60 360 Q240 352 400 364"/><path d="M520 380 Q660 372 790 382"/>
+  </g>
+  <!-- plant in a pot -->
+  <path d="M672 236 L680 196 L730 196 L738 236 Z" fill="#C2512F"/>
+  <rect x="674" y="190" width="62" height="10" rx="3" fill="#183A2B"/>
+  <path d="M705 192 Q702 160 706 132" stroke="#1F4D3A" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M704 170 Q680 160 672 140 Q694 142 704 166 Z" fill="#2F6E54"/>
+  <path d="M706 156 Q730 148 740 128 Q716 128 706 152 Z" fill="#1F4D3A"/>
+  <path class="leaf" d="M706 134 Q700 112 712 100 Q722 116 708 134 Z" fill="#2F6E54"/>
+  <!-- two cups of chai -->
+  <g>
+    <ellipse cx="196" cy="270" rx="34" ry="7" fill="#EBA937" opacity=".5"/>
+    <path d="M176 232 L180 266 Q196 272 212 266 L216 232 Z" fill="#FBF6EE" stroke="#1F4D3A" stroke-width="3"/>
+    <ellipse cx="196" cy="233" rx="20" ry="5" fill="#C2512F" opacity=".8"/>
+    <path d="M216 240 Q230 242 226 254 Q222 260 213 258" stroke="#1F4D3A" stroke-width="3" fill="none"/>
+    <path class="steam1" d="M190 222 Q184 210 192 200 Q198 192 192 182" stroke="#9FB8A8" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+  <g>
+    <ellipse cx="600" cy="270" rx="34" ry="7" fill="#EBA937" opacity=".5"/>
+    <path d="M580 232 L584 266 Q600 272 616 266 L620 232 Z" fill="#FBF6EE" stroke="#1F4D3A" stroke-width="3"/>
+    <ellipse cx="600" cy="233" rx="20" ry="5" fill="#C2512F" opacity=".8"/>
+    <path d="M580 240 Q566 242 570 254 Q574 260 583 258" stroke="#1F4D3A" stroke-width="3" fill="none"/>
+    <path class="steam2" d="M604 222 Q598 210 606 200 Q612 192 606 182" stroke="#9FB8A8" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+  <!-- shared document -->
+  <g transform="rotate(-2 400 300)">
+    <rect x="306" y="226" width="188" height="150" rx="5" fill="#FFFFFF" stroke="#1F4D3A" stroke-width="3"/>
+    <rect x="330" y="246" width="90" height="8" rx="4" fill="#1F4D3A" opacity=".75"/>
+    <g fill="#D6E6D9">
+      <rect x="330" y="266" width="140" height="6" rx="3"/><rect x="330" y="280" width="128" height="6" rx="3"/>
+      <rect x="330" y="294" width="140" height="6" rx="3"/><rect x="330" y="308" width="110" height="6" rx="3"/>
+    </g>
+    <path d="M330 352 L390 352 M410 352 L470 352" stroke="#1F4D3A" stroke-width="2"/>
+    <path d="M336 346 Q344 334 350 344 Q356 354 362 340 Q366 334 372 344" stroke="#183A2B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path class="sign" d="M416 346 Q424 332 430 344 Q436 354 442 338 Q448 332 456 344" stroke="#C2512F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </g>
+  <!-- left hand with pen -->
+  <g class="handL">
+    <path d="M120 400 L300 328 Q318 324 324 340 L322 356 L170 400 Z" fill="#1F4D3A"/>
+    <rect x="300" y="326" width="16" height="34" rx="6" fill="#FBF6EE" transform="rotate(-22 308 343)"/>
+    <ellipse cx="336" cy="336" rx="24" ry="17" fill="#F6D5C6"/>
+    <path d="M344 324 L376 290" stroke="#C2512F" stroke-width="7" stroke-linecap="round"/>
+    <path d="M343 326 L337 334" stroke="#183A2B" stroke-width="4" stroke-linecap="round"/>
+    <path d="M330 324 Q346 318 354 328" stroke="#F6D5C6" stroke-width="9" fill="none" stroke-linecap="round"/>
+  </g>
+  <!-- right hand with pen and bangles -->
+  <g class="handR">
+    <path d="M690 400 L504 330 Q486 326 482 342 L486 358 L640 400 Z" fill="#C2512F"/>
+    <g fill="none" stroke="#EBA937" stroke-width="4"><ellipse cx="494" cy="342" rx="6" ry="16"/><ellipse cx="503" cy="344" rx="6" ry="16"/></g>
+    <ellipse cx="466" cy="338" rx="23" ry="16" fill="#F6D5C6"/>
+    <path d="M456 326 L428 292" stroke="#1F4D3A" stroke-width="7" stroke-linecap="round"/>
+    <path d="M457 328 L462 336" stroke="#183A2B" stroke-width="4" stroke-linecap="round"/>
+    <path d="M474 326 Q458 320 450 330" stroke="#F6D5C6" stroke-width="9" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

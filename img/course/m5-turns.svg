@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="A winding road through green hills towards a rising sun, with a wooden signpost at a bend and clouds drifting overhead">
+  <defs>
+    <style>
+      .sun { animation: rise 12s ease-in-out infinite alternate; }
+      .rays { transform-origin: 560px 150px; animation: turn 40s linear infinite; }
+      .lane { animation: travel 3s linear infinite; }
+      .cloud1 { animation: drift 26s ease-in-out infinite alternate; }
+      .cloud2 { animation: drift 34s ease-in-out infinite alternate-reverse; }
+      .arm { transform-box: fill-box; }
+      .arm-r { transform-origin: 0% 50%; animation: nod 5s ease-in-out infinite; }
+      .arm-l { transform-origin: 100% 50%; animation: nod 5s ease-in-out infinite; animation-delay: 1.2s; }
+      @keyframes rise { from { transform: translateY(26px); } to { transform: translateY(0); } }
+      @keyframes turn { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      @keyframes travel { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -60; } }
+      @keyframes drift { from { transform: translateX(-30px); } to { transform: translateX(40px); } }
+      @keyframes nod { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
+      @media (prefers-reduced-motion: reduce) { .sun, .rays, .lane, .cloud1, .cloud2, .arm { animation: none; } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <!-- sun behind the hills -->
+  <g class="sun">
+    <g class="rays" stroke="#EBA937" stroke-width="5" stroke-linecap="round" opacity=".5">
+      <path d="M560 70 L560 88"/><path d="M560 212 L560 230"/><path d="M480 150 L498 150"/><path d="M622 150 L640 150"/>
+      <path d="M503 93 L516 106"/><path d="M604 194 L617 207"/><path d="M503 207 L516 194"/><path d="M604 106 L617 93"/>
+    </g>
+    <circle cx="560" cy="150" r="48" fill="#EBA937"/>
+  </g>
+  <!-- clouds -->
+  <g class="cloud1" fill="#F6D5C6"><ellipse cx="190" cy="80" rx="54" ry="18"/><ellipse cx="222" cy="68" rx="34" ry="20"/><ellipse cx="166" cy="72" rx="26" ry="16"/></g>
+  <g class="cloud2" fill="#D6E6D9"><ellipse cx="660" cy="60" rx="44" ry="15"/><ellipse cx="684" cy="50" rx="28" ry="16"/></g>
+  <!-- hills -->
+  <path d="M0 220 Q140 150 300 196 Q460 240 600 180 Q700 140 800 176 L800 400 L0 400 Z" fill="#D6E6D9"/>
+  <path d="M0 272 Q180 218 360 256 Q560 296 800 238 L800 400 L0 400 Z" fill="#1F4D3A"/>
+  <path d="M0 330 Q220 300 420 326 Q620 352 800 318 L800 400 L0 400 Z" fill="#183A2B"/>
+  <!-- winding road -->
+  <path d="M330 400 C330 340 520 340 500 290 C484 252 340 266 372 230 C394 206 470 210 470 192" fill="none" stroke="#F6D5C6" stroke-width="44" stroke-linecap="round"/>
+  <path class="lane" d="M330 400 C330 340 520 340 500 290 C484 252 340 266 372 230 C394 206 470 210 470 192" fill="none" stroke="#FBF6EE" stroke-width="4" stroke-dasharray="18 12" stroke-linecap="round"/>
+  <!-- signpost at the bend -->
+  <rect x="228" y="226" width="10" height="110" rx="3" fill="#183A2B"/>
+  <path class="arm arm-r" d="M238 236 L304 236 L320 250 L304 264 L238 264 Z" fill="#C2512F"/>
+  <path class="arm arm-l" d="M228 274 L170 274 L154 288 L170 302 L228 302 Z" fill="#EBA937"/>
+  <ellipse cx="233" cy="338" rx="22" ry="6" fill="#183A2B" opacity=".5"/>
+  <!-- a few flowers by the road -->
+  <g fill="#EBA937"><circle cx="600" cy="352" r="6"/><circle cx="618" cy="360" r="6"/><circle cx="120" cy="362" r="6"/></g>
+  <g fill="#C2512F"><circle cx="609" cy="346" r="5"/><circle cx="134" cy="356" r="5"/></g>
+</svg>

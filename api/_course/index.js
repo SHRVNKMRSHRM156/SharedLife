@@ -13,6 +13,10 @@ import m1 from './m1.js';
 import m2 from './m2.js';
 import m3 from './m3.js';
 import m4 from './m4.js';
+import m5 from './m5.js';
+import m6 from './m6.js';
+import m7 from './m7.js';
+import m8 from './m8.js';
 import { LESSONS as OLD } from './legacy.js';
 
 export const MODULES = [
@@ -34,28 +38,11 @@ export const MODULES = [
     blurb: { en: 'Bringing it together in your own plan, and keeping it alive year after year.', hi: 'सब कुछ अपने प्लान में समेटना, और उसे हर साल जीवित रखना।' } },
 ];
 
-// Modules 5 to 8 are still the earlier English drafts, waiting to be rewritten in the Module 1 style.
+// Modules 7 and 8 are still the earlier English drafts, waiting to be rewritten in the Module 1 style.
 // [new module, Hindi title, old lesson id or null, English title if it changes]
-const DRAFTS = [
-  [5, 'पैसे के स्वभाव', 17],
-  [5, 'बजट, बचत और खाते', 18],
-  [5, 'दो करियर, एक घर', 19],
-  [5, 'ज़िंदगी के मोड़ों की तैयारी', 20],
-  [6, 'संयुक्त परिवार, एकल परिवार और बीच की जगह', 21],
-  [6, 'घर के काम का बँटवारा', 22],
-  [6, 'माता-पिता, ससुराल और स्वस्थ सीमाएँ', 23],
-  [6, 'बच्चे: कब, कैसे और क्या', 24],
-  [7, 'भारत में विवाह क़ानून कैसे काम करता है', 25],
-  [7, 'हर जीवनसाथी को पता होने वाले अधिकार', 26],
-  [7, 'भारत में प्री-नप्शियल एग्रीमेंट', 27],
-  [7, 'मध्यस्थता, और जब राहें अलग हों', 28],
-  [8, 'आपका साझा सपना', 29],
-  [8, 'पैसा, घर और परिवार का प्लान', 30],
-  [8, 'अपना साझा जीवन प्लान लिखना', 31],
-  [8, 'अपने प्लान को जीवित रखना', 32],
-];
+const DRAFTS = []; // every lesson is written; kept for future modules
 
-const WRITTEN = [...m1, ...m2, ...m3, ...m4];
+const WRITTEN = [...m1, ...m2, ...m3, ...m4, ...m5, ...m6, ...m7, ...m8];
 
 const draft = ([module, hi, oldId, en], i) => {
   const o = OLD.find((l) => l.id === oldId);

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="Two glass jars on a shelf, one filling slowly with single coins and the other in quick little bursts, with a marigold between them">
+  <defs>
+    <style>
+      .coin { opacity: 0; }
+      .slow { animation: drop 4.8s ease-in infinite; }
+      .quick { animation: drop 2.4s ease-in infinite; }
+      .q2 { animation-delay: .25s; } .q3 { animation-delay: .5s; }
+      .fill { transform-box: fill-box; transform-origin: 50% 100%; }
+      .fill-slow { animation: rise 14s ease-in-out infinite alternate; }
+      .fill-quick { animation: rise 9s ease-in-out infinite alternate; }
+      .flower { transform-box: fill-box; transform-origin: 50% 100%; animation: sway 5s ease-in-out infinite; }
+      .leaf { transform-box: fill-box; transform-origin: 50% 0%; animation: flutter 6s ease-in-out infinite; }
+      .l2 { animation-delay: 1s; } .l3 { animation-delay: 2s; } .l4 { animation-delay: 3s; }
+      @keyframes drop { 0% { transform: translateY(0); opacity: 0; } 8% { opacity: 1; } 62% { transform: translateY(150px); opacity: 1; } 70%, 100% { transform: translateY(150px); opacity: 0; } }
+      @keyframes rise { from { transform: scaleY(.55); } to { transform: scaleY(1); } }
+      @keyframes sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+      @keyframes flutter { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+      @media (prefers-reduced-motion: reduce) { .coin, .fill, .flower, .leaf { animation: none; } .coin { opacity: 0; } .fill { transform: scaleY(.8); } }
+    </style>
+    <clipPath id="jarL"><path d="M224 176 Q224 158 244 158 L336 158 Q356 158 356 176 L356 286 Q356 304 336 304 L244 304 Q224 304 224 286 Z"/></clipPath>
+    <clipPath id="jarR"><path d="M444 176 Q444 158 464 158 L556 158 Q576 158 576 176 L576 286 Q576 304 556 304 L464 304 Q444 304 444 286 Z"/></clipPath>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <!-- toran of mango leaves -->
+  <path d="M0 22 Q400 62 800 22" fill="none" stroke="#183A2B" stroke-width="3"/>
+  <g fill="#1F4D3A">
+    <ellipse class="leaf" cx="120" cy="48" rx="9" ry="20"/><ellipse class="leaf l2" cx="220" cy="56" rx="9" ry="20"/>
+    <ellipse class="leaf l3" cx="320" cy="60" rx="9" ry="20"/><ellipse class="leaf l4" cx="480" cy="60" rx="9" ry="20"/>
+    <ellipse class="leaf" cx="580" cy="56" rx="9" ry="20"/><ellipse class="leaf l2" cx="680" cy="48" rx="9" ry="20"/>
+  </g>
+  <g fill="#EBA937"><circle cx="170" cy="46" r="7"/><circle cx="270" cy="53" r="7"/><circle cx="400" cy="56" r="8"/><circle cx="530" cy="53" r="7"/><circle cx="630" cy="46" r="7"/></g>
+  <!-- wall and shelf -->
+  <rect x="0" y="322" width="800" height="78" fill="#D6E6D9"/>
+  <rect x="150" y="304" width="500" height="18" rx="6" fill="#1F4D3A"/>
+  <path d="M200 322 L200 350 L224 322 Z M600 322 L600 350 L576 322 Z" fill="#183A2B"/>
+  <!-- falling coins, left: one at a time -->
+  <g class="coin slow"><circle cx="290" cy="70" r="12" fill="#EBA937"/><circle cx="290" cy="70" r="6" fill="none" stroke="#C2512F" stroke-width="2"/></g>
+  <!-- falling coins, right: quick bursts -->
+  <g class="coin quick"><circle cx="496" cy="70" r="10" fill="#EBA937"/></g>
+  <g class="coin quick q2"><circle cx="512" cy="64" r="10" fill="#EBA937"/></g>
+  <g class="coin quick q3"><circle cx="528" cy="70" r="10" fill="#EBA937"/></g>
+  <!-- left jar -->
+  <path d="M224 176 Q224 158 244 158 L336 158 Q356 158 356 176 L356 286 Q356 304 336 304 L244 304 Q224 304 224 286 Z" fill="#D6E6D9" opacity=".55"/>
+  <g clip-path="url(#jarL)">
+    <g class="fill fill-slow">
+      <rect x="224" y="232" width="132" height="72" fill="#EBA937"/>
+      <g fill="#C2512F" opacity=".35"><circle cx="250" cy="250" r="7"/><circle cx="282" cy="262" r="7"/><circle cx="316" cy="248" r="7"/><circle cx="338" cy="272" r="7"/><circle cx="262" cy="284" r="7"/></g>
+    </g>
+  </g>
+  <path d="M224 176 Q224 158 244 158 L336 158 Q356 158 356 176 L356 286 Q356 304 336 304 L244 304 Q224 304 224 286 Z" fill="none" stroke="#183A2B" stroke-width="5"/>
+  <rect x="236" y="142" width="108" height="18" rx="8" fill="#1F4D3A"/>
+  <path d="M240 190 L240 260" stroke="#FBF6EE" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+  <!-- right jar -->
+  <path d="M444 176 Q444 158 464 158 L556 158 Q576 158 576 176 L576 286 Q576 304 556 304 L464 304 Q444 304 444 286 Z" fill="#F6D5C6" opacity=".55"/>
+  <g clip-path="url(#jarR)">
+    <g class="fill fill-quick">
+      <rect x="444" y="214" width="132" height="90" fill="#EBA937"/>
+      <g fill="#C2512F" opacity=".35"><circle cx="470" cy="236" r="7"/><circle cx="504" cy="226" r="7"/><circle cx="540" cy="240" r="7"/><circle cx="560" cy="262" r="7"/><circle cx="486" cy="270" r="7"/><circle cx="522" cy="288" r="7"/></g>
+    </g>
+  </g>
+  <path d="M444 176 Q444 158 464 158 L556 158 Q576 158 576 176 L576 286 Q576 304 556 304 L464 304 Q444 304 444 286 Z" fill="none" stroke="#183A2B" stroke-width="5"/>
+  <rect x="456" y="142" width="108" height="18" rx="8" fill="#C2512F"/>
+  <path d="M460 190 L460 260" stroke="#FBF6EE" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+  <!-- marigold in a small pot -->
+  <g class="flower">
+    <path d="M400 300 L400 238" stroke="#1F4D3A" stroke-width="5"/>
+    <ellipse cx="388" cy="268" rx="12" ry="6" fill="#1F4D3A" transform="rotate(-30 388 268)"/>
+    <g fill="#EBA937"><circle cx="400" cy="214" r="11"/><circle cx="386" cy="224" r="11"/><circle cx="414" cy="224" r="11"/><circle cx="390" cy="240" r="11"/><circle cx="410" cy="240" r="11"/></g>
+    <circle cx="400" cy="229" r="9" fill="#C2512F"/>
+  </g>
+  <path d="M380 282 L420 282 L414 304 L386 304 Z" fill="#C2512F"/>
+  <rect x="376" y="278" width="48" height="8" rx="3" fill="#183A2B"/>
+</svg>

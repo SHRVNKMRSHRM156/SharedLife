@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="Two briefcases side by side beside one front door glowing with warm light, a pot of tulsi nearby and a wall clock ticking">
+  <defs>
+    <style>
+      .light { animation: warm 5s ease-in-out infinite; }
+      .spill { animation: spill 5s ease-in-out infinite; }
+      .minute { transform-origin: 640px 120px; animation: spin 12s linear infinite; }
+      .hour { transform-origin: 640px 120px; animation: spin 144s linear infinite; }
+      .tulsi { transform-box: fill-box; transform-origin: 50% 100%; animation: sway 6s ease-in-out infinite; }
+      @keyframes warm { 0%, 100% { opacity: .85; } 50% { opacity: 1; } }
+      @keyframes spill { 0%, 100% { opacity: .25; } 50% { opacity: .45; } }
+      @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      @keyframes sway { 0%, 100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.5deg); } }
+      @media (prefers-reduced-motion: reduce) { .light, .spill, .minute, .hour, .tulsi { animation: none; } .spill { opacity: .35; } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <!-- floor -->
+  <rect x="0" y="340" width="800" height="60" fill="#D6E6D9"/>
+  <!-- light spilling onto the floor -->
+  <path class="spill" d="M348 340 L452 340 L520 400 L280 400 Z" fill="#EBA937"/>
+  <!-- door -->
+  <rect x="326" y="96" width="148" height="246" rx="6" fill="#183A2B"/>
+  <rect class="light" x="342" y="112" width="116" height="228" rx="4" fill="#EBA937"/>
+  <path d="M342 112 L380 124 L380 330 L342 340 Z" fill="#1F4D3A"/>
+  <circle cx="372" cy="232" r="4" fill="#EBA937"/>
+  <!-- marigold garland over the door -->
+  <path d="M326 96 Q400 130 474 96" fill="none" stroke="#C2512F" stroke-width="8" stroke-linecap="round" stroke-dasharray="1 12"/>
+  <!-- doormat -->
+  <rect x="352" y="342" width="96" height="10" rx="4" fill="#F6D5C6"/>
+  <!-- two briefcases -->
+  <g>
+    <path d="M168 254 L168 240 Q168 230 178 230 L206 230 Q216 230 216 240 L216 254" fill="none" stroke="#183A2B" stroke-width="6"/>
+    <rect x="140" y="252" width="104" height="88" rx="10" fill="#1F4D3A"/>
+    <rect x="140" y="282" width="104" height="6" fill="#183A2B"/>
+    <rect x="184" y="278" width="16" height="14" rx="3" fill="#EBA937"/>
+  </g>
+  <g>
+    <path d="M272 264 L272 252 Q272 244 280 244 L300 244 Q308 244 308 252 L308 264" fill="none" stroke="#183A2B" stroke-width="6"/>
+    <rect x="252" y="262" width="76" height="78" rx="9" fill="#C2512F"/>
+    <rect x="252" y="290" width="76" height="5" fill="#183A2B"/>
+    <rect x="282" y="286" width="14" height="12" rx="3" fill="#EBA937"/>
+  </g>
+  <!-- wall clock, no numbers -->
+  <circle cx="640" cy="120" r="44" fill="#FBF6EE" stroke="#183A2B" stroke-width="6"/>
+  <g fill="#1F4D3A"><circle cx="640" cy="86" r="3"/><circle cx="674" cy="120" r="3"/><circle cx="640" cy="154" r="3"/><circle cx="606" cy="120" r="3"/></g>
+  <rect class="hour" x="637" y="96" width="6" height="26" rx="3" fill="#183A2B"/>
+  <rect class="minute" x="638.5" y="86" width="3" height="36" rx="1.5" fill="#C2512F"/>
+  <circle cx="640" cy="120" r="5" fill="#183A2B"/>
+  <!-- tulsi in a pot -->
+  <g class="tulsi">
+    <path d="M620 280 L620 236 M620 262 L600 244 M620 256 L642 240" stroke="#1F4D3A" stroke-width="4" stroke-linecap="round"/>
+    <g fill="#1F4D3A">
+      <ellipse cx="620" cy="228" rx="9" ry="14"/><ellipse cx="598" cy="240" rx="8" ry="12" transform="rotate(-35 598 240)"/>
+      <ellipse cx="644" cy="236" rx="8" ry="12" transform="rotate(35 644 236)"/><ellipse cx="608" cy="262" rx="7" ry="10" transform="rotate(-50 608 262)"/>
+      <ellipse cx="632" cy="258" rx="7" ry="10" transform="rotate(50 632 258)"/>
+    </g>
+  </g>
+  <path d="M586 278 L654 278 L644 340 L596 340 Z" fill="#C2512F"/>
+  <rect x="580" y="272" width="80" height="12" rx="4" fill="#EBA937"/>
+  <g fill="#F6D5C6"><circle cx="606" cy="308" r="4"/><circle cx="620" cy="308" r="4"/><circle cx="634" cy="308" r="4"/></g>
+</svg>

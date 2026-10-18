@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="A couple seated at a registration desk signing a large register together, a certificate with a round seal beside them, two witnesses standing behind, and strings of marigolds hanging above">
+  <defs>
+    <style>
+      .garland { transform-origin: 400px 0px; animation: sway 7s ease-in-out infinite; }
+      .pen { transform-origin: 452px 292px; animation: write 2.4s ease-in-out infinite; }
+      .seal { transform-box: fill-box; transform-origin: 50% 50%; animation: glow 3.6s ease-in-out infinite; }
+      .petal { animation: fall 6s linear infinite; opacity: 0; }
+      .p2 { animation-delay: 1.5s; } .p3 { animation-delay: 3s; } .p4 { animation-delay: 4.5s; }
+      .nod { transform-origin: 150px 250px; animation: nod 5s ease-in-out infinite; }
+      @keyframes sway { 0%, 100% { transform: rotate(-.6deg); } 50% { transform: rotate(.6deg); } }
+      @keyframes write { 0%, 100% { transform: translate(0,0) rotate(0deg); } 25% { transform: translate(6px,1px) rotate(3deg); } 50% { transform: translate(12px,0) rotate(-2deg); } 75% { transform: translate(6px,-1px) rotate(2deg); } }
+      @keyframes glow { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+      @keyframes fall { 0% { opacity: 0; transform: translate(0,0) rotate(0deg); } 15% { opacity: .9; } 85% { opacity: .7; } 100% { opacity: 0; transform: translate(18px,170px) rotate(160deg); } }
+      @keyframes nod { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-2deg); } }
+      @media (prefers-reduced-motion: reduce) { .garland, .pen, .seal, .petal, .nod { animation: none; } .petal { opacity: .7; } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <!-- soft wall band and window -->
+  <rect x="0" y="0" width="800" height="250" fill="#FBF6EE"/>
+  <circle cx="60" cy="210" r="26" fill="#D6E6D9"/>
+  <circle cx="752" cy="190" r="20" fill="#EBA937" opacity=".5"/>
+  <rect x="300" y="70" width="200" height="70" rx="10" fill="#D6E6D9" opacity=".7"/>
+  <!-- witnesses standing behind -->
+  <g class="nod">
+    <path d="M98 400 C98 210 118 174 150 174 C182 174 202 210 202 400 Z" fill="#EBA937"/>
+    <circle cx="150" cy="134" r="34" fill="#F6D5C6"/>
+    <path d="M117 128 C122 94 178 94 183 128 C168 116 132 116 117 128 Z" fill="#183A2B"/>
+  </g>
+  <g>
+    <path d="M608 400 C608 216 628 180 660 180 C692 180 712 216 712 400 Z" fill="#D6E6D9"/>
+    <circle cx="660" cy="140" r="34" fill="#F6D5C6"/>
+    <path d="M627 134 C632 100 688 100 693 134 C678 122 642 122 627 134 Z" fill="#183A2B"/>
+  </g>
+  <path d="M634 184 L660 212 L686 184" fill="none" stroke="#1F4D3A" stroke-width="4" stroke-linecap="round"/>
+  <!-- couple seated at the desk -->
+  <g>
+    <path d="M278 400 C278 242 298 206 330 206 C362 206 382 242 382 400 Z" fill="#C2512F"/>
+    <circle cx="330" cy="166" r="34" fill="#F6D5C6"/>
+    <path d="M294 168 C290 120 370 120 366 168 C358 142 302 142 294 168 Z" fill="#183A2B"/>
+    <path d="M296 172 C286 210 290 236 300 248 C300 216 302 194 308 180 Z" fill="#183A2B"/>
+  </g>
+  <circle cx="330" cy="156" r="3" fill="#C2512F"/>
+  <path d="M296 214 C312 236 348 236 364 214" fill="none" stroke="#EBA937" stroke-width="4"/>
+  <path d="M300 206 C290 240 288 270 296 300" fill="none" stroke="#EBA937" stroke-width="5" opacity=".8"/>
+  <g>
+    <path d="M418 400 C418 240 438 204 470 204 C502 204 522 240 522 400 Z" fill="#1F4D3A"/>
+    <circle cx="470" cy="164" r="34" fill="#F6D5C6"/>
+    <path d="M437 158 C442 124 498 124 503 158 C488 146 452 146 437 158 Z" fill="#183A2B"/>
+  </g>
+  <rect x="438" y="196" width="64" height="8" rx="4" fill="#EBA937" opacity=".8"/>
+  <!-- desk -->
+  <path d="M120 300 L160 268 L640 268 L680 300 Z" fill="#1F4D3A"/>
+  <rect x="120" y="300" width="560" height="16" fill="#183A2B"/>
+  <rect x="140" y="316" width="520" height="84" fill="#183A2B"/>
+  <rect x="150" y="300" width="500" height="5" fill="#EBA937" opacity=".9"/>
+  <g fill="#1F4D3A"><rect x="170" y="330" width="140" height="56" rx="6"/><rect x="490" y="330" width="140" height="56" rx="6"/></g>
+  <circle cx="400" cy="358" r="16" fill="#EBA937" opacity=".85"/>
+  <circle cx="400" cy="358" r="8" fill="#C2512F"/>
+  <!-- open register -->
+  <path d="M318 296 L330 274 L400 278 L400 300 Z" fill="#FBF6EE" stroke="#183A2B" stroke-width="2"/>
+  <path d="M482 296 L470 274 L400 278 L400 300 Z" fill="#FBF6EE" stroke="#183A2B" stroke-width="2"/>
+  <g stroke="#D6E6D9" stroke-width="2"><path d="M336 282 L392 285"/><path d="M332 288 L392 291"/><path d="M408 285 L464 282"/><path d="M408 291 L468 288"/></g>
+  <path d="M412 294 Q426 289 440 293" fill="none" stroke="#C2512F" stroke-width="2"/>
+  <circle cx="360" cy="290" r="10" fill="#F6D5C6"/>
+  <circle cx="338" cy="292" r="9" fill="#F6D5C6"/>
+  <g class="pen"><circle cx="446" cy="290" r="10" fill="#F6D5C6"/><path d="M450 292 L472 262" stroke="#183A2B" stroke-width="4" stroke-linecap="round"/><circle cx="472" cy="262" r="3" fill="#EBA937"/></g>
+  <!-- certificate with seal -->
+  <path d="M548 284 L560 196 L640 202 L632 290 Z" fill="#FBF6EE" stroke="#EBA937" stroke-width="5" stroke-linejoin="round"/>
+  <g stroke="#D6E6D9" stroke-width="3" stroke-linecap="round"><path d="M572 214 L626 218"/><path d="M570 228 L618 231"/><path d="M569 242 L624 246"/></g>
+  <path d="M592 268 L586 296 L596 290 L602 298 L604 270 Z" fill="#C2512F"/>
+  <path d="M606 268 L604 296 L612 290 L620 296 L614 268 Z" fill="#C2512F"/>
+  <g class="seal"><circle cx="603" cy="264" r="15" fill="#C2512F"/><circle cx="603" cy="264" r="9" fill="none" stroke="#EBA937" stroke-width="2.5"/></g>
+  <!-- brass pot of marigolds -->
+  <path d="M712 400 Q700 352 732 344 L758 344 Q790 352 778 400 Z" fill="#EBA937"/>
+  <rect x="722" y="336" width="46" height="10" rx="5" fill="#C2512F"/>
+  <circle cx="728" cy="322" r="10" fill="#EBA937"/>
+  <circle cx="746" cy="312" r="10" fill="#C2512F"/>
+  <circle cx="764" cy="324" r="10" fill="#EBA937"/>
+  <circle cx="736" cy="334" r="10" fill="#C2512F"/>
+  <circle cx="756" cy="334" r="10" fill="#EBA937"/>
+  <circle cx="746" cy="326" r="10" fill="#EBA937"/>
+  <path d="M734 320 L724 302 M760 322 L772 304" stroke="#1F4D3A" stroke-width="3" stroke-linecap="round"/>
+  <!-- marigold garlands -->
+  <g class="garland">
+    <path d="M-10 0 Q130.0 92 270 0" fill="none" stroke="#1F4D3A" stroke-width="2"/>
+    <circle cx="-10" cy="0" r="7" fill="#EBA937"/>
+    <circle cx="3" cy="8" r="7" fill="#C2512F"/>
+    <circle cx="17" cy="16" r="7" fill="#EBA937"/>
+    <circle cx="30" cy="23" r="7" fill="#EBA937"/>
+    <circle cx="43" cy="28" r="7" fill="#C2512F"/>
+    <circle cx="57" cy="33" r="7" fill="#EBA937"/>
+    <circle cx="70" cy="38" r="7" fill="#C2512F"/>
+    <circle cx="83" cy="41" r="7" fill="#EBA937"/>
+    <circle cx="97" cy="43" r="7" fill="#EBA937"/>
+    <circle cx="110" cy="45" r="7" fill="#C2512F"/>
+    <circle cx="123" cy="46" r="7" fill="#EBA937"/>
+    <circle cx="137" cy="46" r="7" fill="#C2512F"/>
+    <circle cx="150" cy="45" r="7" fill="#EBA937"/>
+    <circle cx="163" cy="43" r="7" fill="#EBA937"/>
+    <circle cx="177" cy="41" r="7" fill="#C2512F"/>
+    <circle cx="190" cy="38" r="7" fill="#EBA937"/>
+    <circle cx="203" cy="33" r="7" fill="#C2512F"/>
+    <circle cx="217" cy="28" r="7" fill="#EBA937"/>
+    <circle cx="230" cy="23" r="7" fill="#EBA937"/>
+    <circle cx="243" cy="16" r="7" fill="#C2512F"/>
+    <circle cx="257" cy="8" r="7" fill="#EBA937"/>
+    <circle cx="270" cy="0" r="7" fill="#C2512F"/>
+    <path d="M265 0 Q400.0 104 535 0" fill="none" stroke="#1F4D3A" stroke-width="2"/>
+    <circle cx="265" cy="0" r="7" fill="#EBA937"/>
+    <circle cx="278" cy="10" r="7" fill="#EBA937"/>
+    <circle cx="292" cy="19" r="7" fill="#C2512F"/>
+    <circle cx="306" cy="27" r="7" fill="#EBA937"/>
+    <circle cx="319" cy="33" r="7" fill="#C2512F"/>
+    <circle cx="332" cy="39" r="7" fill="#EBA937"/>
+    <circle cx="346" cy="44" r="7" fill="#EBA937"/>
+    <circle cx="360" cy="47" r="7" fill="#C2512F"/>
+    <circle cx="373" cy="50" r="7" fill="#EBA937"/>
+    <circle cx="386" cy="51" r="7" fill="#C2512F"/>
+    <circle cx="400" cy="52" r="7" fill="#EBA937"/>
+    <circle cx="414" cy="51" r="7" fill="#EBA937"/>
+    <circle cx="427" cy="50" r="7" fill="#C2512F"/>
+    <circle cx="440" cy="47" r="7" fill="#EBA937"/>
+    <circle cx="454" cy="44" r="7" fill="#C2512F"/>
+    <circle cx="468" cy="39" r="7" fill="#EBA937"/>
+    <circle cx="481" cy="33" r="7" fill="#EBA937"/>
+    <circle cx="494" cy="27" r="7" fill="#C2512F"/>
+    <circle cx="508" cy="19" r="7" fill="#EBA937"/>
+    <circle cx="522" cy="10" r="7" fill="#C2512F"/>
+    <circle cx="535" cy="0" r="7" fill="#EBA937"/>
+    <path d="M530 0 Q670.0 92 810 0" fill="none" stroke="#1F4D3A" stroke-width="2"/>
+    <circle cx="530" cy="0" r="7" fill="#EBA937"/>
+    <circle cx="543" cy="8" r="7" fill="#C2512F"/>
+    <circle cx="557" cy="16" r="7" fill="#EBA937"/>
+    <circle cx="570" cy="23" r="7" fill="#C2512F"/>
+    <circle cx="583" cy="28" r="7" fill="#EBA937"/>
+    <circle cx="597" cy="33" r="7" fill="#EBA937"/>
+    <circle cx="610" cy="38" r="7" fill="#C2512F"/>
+    <circle cx="623" cy="41" r="7" fill="#EBA937"/>
+    <circle cx="637" cy="43" r="7" fill="#C2512F"/>
+    <circle cx="650" cy="45" r="7" fill="#EBA937"/>
+    <circle cx="663" cy="46" r="7" fill="#EBA937"/>
+    <circle cx="677" cy="46" r="7" fill="#C2512F"/>
+    <circle cx="690" cy="45" r="7" fill="#EBA937"/>
+    <circle cx="703" cy="43" r="7" fill="#C2512F"/>
+    <circle cx="717" cy="41" r="7" fill="#EBA937"/>
+    <circle cx="730" cy="38" r="7" fill="#EBA937"/>
+    <circle cx="743" cy="33" r="7" fill="#C2512F"/>
+    <circle cx="757" cy="28" r="7" fill="#EBA937"/>
+    <circle cx="770" cy="23" r="7" fill="#C2512F"/>
+    <circle cx="783" cy="16" r="7" fill="#EBA937"/>
+    <circle cx="797" cy="8" r="7" fill="#EBA937"/>
+    <circle cx="810" cy="0" r="7" fill="#C2512F"/>
+    <circle cx="268" cy="6" r="6.5" fill="#EBA937"/>
+    <circle cx="268" cy="19" r="6.5" fill="#C2512F"/>
+    <circle cx="268" cy="32" r="6.5" fill="#EBA937"/>
+    <circle cx="268" cy="45" r="6.5" fill="#C2512F"/>
+    <circle cx="268" cy="58" r="6.5" fill="#EBA937"/>
+    <circle cx="268" cy="71" r="6.5" fill="#C2512F"/>
+    <path d="M268 84 L262 96 L274 96 Z" fill="#1F4D3A"/>
+    <circle cx="532" cy="6" r="6.5" fill="#EBA937"/>
+    <circle cx="532" cy="19" r="6.5" fill="#C2512F"/>
+    <circle cx="532" cy="32" r="6.5" fill="#EBA937"/>
+    <circle cx="532" cy="45" r="6.5" fill="#C2512F"/>
+    <circle cx="532" cy="58" r="6.5" fill="#EBA937"/>
+    <circle cx="532" cy="71" r="6.5" fill="#C2512F"/>
+    <path d="M532 84 L526 96 L538 96 Z" fill="#1F4D3A"/>
+    <circle cx="40" cy="6" r="6.5" fill="#EBA937"/>
+    <circle cx="40" cy="19" r="6.5" fill="#C2512F"/>
+    <circle cx="40" cy="32" r="6.5" fill="#EBA937"/>
+    <circle cx="40" cy="45" r="6.5" fill="#C2512F"/>
+    <circle cx="40" cy="58" r="6.5" fill="#EBA937"/>
+    <circle cx="40" cy="71" r="6.5" fill="#C2512F"/>
+    <path d="M40 84 L34 96 L46 96 Z" fill="#1F4D3A"/>
+    <circle cx="760" cy="6" r="6.5" fill="#EBA937"/>
+    <circle cx="760" cy="19" r="6.5" fill="#C2512F"/>
+    <circle cx="760" cy="32" r="6.5" fill="#EBA937"/>
+    <circle cx="760" cy="45" r="6.5" fill="#C2512F"/>
+    <circle cx="760" cy="58" r="6.5" fill="#EBA937"/>
+    <circle cx="760" cy="71" r="6.5" fill="#C2512F"/>
+    <path d="M760 84 L754 96 L766 96 Z" fill="#1F4D3A"/>
+  </g>
+  <ellipse class="petal" cx="150" cy="90" rx="5" ry="3" fill="#EBA937"/>
+  <ellipse class="petal p2" cx="360" cy="100" rx="5" ry="3" fill="#C2512F"/>
+  <ellipse class="petal p3" cx="520" cy="96" rx="5" ry="3" fill="#EBA937"/>
+  <ellipse class="petal p4" cx="690" cy="92" rx="5" ry="3" fill="#C2512F"/>
+  <ellipse class="petal p3" cx="250" cy="104" rx="5" ry="3" fill="#EBA937"/>
+</svg>
