@@ -304,7 +304,7 @@ PAGES["course"] = ("The SharedLife Course", f"A self-paced online course in Engl
         <div><b data-count="{COURSE['lesson_count']}">{COURSE['lesson_count']}</b><span>lessons</span></div>
         <div><b data-count="{COURSE_HOURS}" data-prefix="~">~{COURSE_HOURS}</b><span>hours, at your pace</span></div>
       </div>
-      <p class="lede">Created by SharedLife's co-founders, a family-law scholar and an economist, so the course covers feelings, money and the law in one place. Every lesson is told through stories and examples from Indian homes, with illustrations, and you can switch between English and Hindi at any time.</p>
+      <p class="lede">Created by SharedLife's founder, a family-law scholar, with guidance from our mentor, an economist, so the course covers feelings, money and the law in one place. Every lesson is told through stories and examples from Indian homes, with illustrations, and you can switch between English and Hindi at any time.</p>
       <div class="tier pop price-card">
         <span class="badge">For both partners</span>
         <span class="name">The SharedLife Course</span>
@@ -434,12 +434,12 @@ PAGES["about"] = ("About Us · SharedLife", "The philosophy and people behind Sh
 
 <section class="band">
   <div class="wrap">
-    <div class="head"><p class="eyebrow">Founders</p><h2 class="h2">Family law and economics, in one team</h2></div>
+    <div class="head"><p class="eyebrow">Founder &amp; Mentor</p><h2 class="h2">Family law and economics, in one team</h2></div>
     <div class="grid-2">
       <article class="card founder">
         <img src="img/shravan.jpg" alt="Shravan Kumar Sharma">
         <div>
-          <span class="role">Co-founder</span>
+          <span class="role">Founder</span>
           <h3>Shravan Kumar Sharma</h3>
           <p>Advocate and PhD Scholar at the School of Law, Bennett University.</p>
         </div>
@@ -447,7 +447,7 @@ PAGES["about"] = ("About Us · SharedLife", "The philosophy and people behind Sh
       <article class="card founder">
         <img src="img/sanjeev.jpg" alt="Prof. (Dr.) Sanjeev Kumar">
         <div>
-          <span class="role">Co-founder</span>
+          <span class="role">Mentor &amp; Advisor</span>
           <h3>Prof. (Dr.) Sanjeev Kumar</h3>
           <p>Professor, School of Liberal Arts, Bennett University. PhD in Economics, with postdoctoral training at Yale, where he later taught.</p>
         </div>
