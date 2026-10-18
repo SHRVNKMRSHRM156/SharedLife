@@ -16,6 +16,7 @@ import m4 from './m4.js';
 import m5 from './m5.js';
 import m6 from './m6.js';
 import m7 from './m7.js';
+import m8 from './m8.js';
 import { LESSONS as OLD } from './legacy.js';
 
 export const MODULES = [
@@ -39,14 +40,9 @@ export const MODULES = [
 
 // Modules 7 and 8 are still the earlier English drafts, waiting to be rewritten in the Module 1 style.
 // [new module, Hindi title, old lesson id or null, English title if it changes]
-const DRAFTS = [
-  [8, 'आपका साझा सपना', 29],
-  [8, 'पैसा, घर और परिवार का प्लान', 30],
-  [8, 'अपना साझा जीवन प्लान लिखना', 31],
-  [8, 'अपने प्लान को जीवित रखना', 32],
-];
+const DRAFTS = []; // every lesson is written; kept for future modules
 
-const WRITTEN = [...m1, ...m2, ...m3, ...m4, ...m5, ...m6, ...m7];
+const WRITTEN = [...m1, ...m2, ...m3, ...m4, ...m5, ...m6, ...m7, ...m8];
 
 const draft = ([module, hi, oldId, en], i) => {
   const o = OLD.find((l) => l.id === oldId);

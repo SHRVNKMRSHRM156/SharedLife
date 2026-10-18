@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="A couple seen from behind, sitting together on a terrace at dusk with diyas on the parapet, looking towards a winding road, distant hills, a rising moon, the first stars and a kite">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1F4D3A" stop-opacity=".55"/>
+      <stop offset=".55" stop-color="#F6D5C6"/>
+      <stop offset="1" stop-color="#FCE8BF"/>
+    </linearGradient>
+    <style>
+      .moon { animation: rise 14s ease-in-out infinite alternate; }
+      .halo { transform-box: fill-box; transform-origin: 50% 50%; animation: pulse 7s ease-in-out infinite; }
+      .star { transform-box: fill-box; transform-origin: center; animation: twinkle 4s ease-in-out infinite; }
+      .st2 { animation-delay: 1.3s; }
+      .st3 { animation-delay: 2.6s; }
+      .kite { transform-origin: 170px 150px; animation: sway 7s ease-in-out infinite; }
+      .flame { transform-box: fill-box; transform-origin: 50% 100%; animation: flicker 1.8s ease-in-out infinite; }
+      .fl2 { animation-delay: .5s; }
+      .fl3 { animation-delay: 1s; }
+      .lane { animation: travel 4s linear infinite; }
+      .lean { transform-origin: 380px 340px; animation: lean 8s ease-in-out infinite; }
+      @keyframes rise { from { transform: translateY(22px); } to { transform: translateY(0); } }
+      @keyframes pulse { 0%, 100% { opacity: .25; transform: scale(1); } 50% { opacity: .45; transform: scale(1.08); } }
+      @keyframes twinkle { 0%, 100% { opacity: .2; transform: scale(.6); } 50% { opacity: 1; transform: scale(1); } }
+      @keyframes sway { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(5deg); } }
+      @keyframes flicker { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(.85, 1.15); } }
+      @keyframes travel { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -60; } }
+      @keyframes lean { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-1.2deg); } }
+      @media (prefers-reduced-motion: reduce) { .moon, .halo, .star, .kite, .flame, .lane, .lean { animation: none; } .star { opacity: 1; } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <rect width="800" height="260" fill="url(#sky)"/>
+  <!-- first stars -->
+  <g fill="#FBF6EE">
+    <path class="star" d="M320 40 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 l8 -3 z"/>
+    <path class="star st2" d="M470 70 l2 6 l6 2 l-6 2 l-2 6 l-2 -6 l-6 -2 l6 -2 z"/>
+    <path class="star st3" d="M720 46 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 l8 -3 z"/>
+    <path class="star st2" d="M60 34 l2 6 l6 2 l-6 2 l-2 6 l-2 -6 l-6 -2 l6 -2 z"/>
+    <path class="star" d="M410 26 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 l5 -2 z"/>
+  </g>
+  <!-- rising moon -->
+  <g class="moon">
+    <circle class="halo" cx="560" cy="140" r="52" fill="#FCE8BF"/>
+    <circle cx="560" cy="140" r="32" fill="#FBF6EE"/>
+  </g>
+  <!-- kite drifting -->
+  <g class="kite">
+    <path d="M170 150 C150 200 120 240 60 268" fill="none" stroke="#183A2B" stroke-width="1.5"/>
+    <path d="M170 92 L196 122 L170 152 L144 122 Z" fill="#C2512F"/>
+    <path d="M170 92 L170 152 M144 122 L196 122" stroke="#EBA937" stroke-width="2"/>
+    <path d="M170 152 q-8 10 0 18 q8 8 0 18" fill="none" stroke="#EBA937" stroke-width="2"/>
+  </g>
+  <!-- distant hills -->
+  <path d="M0 214 Q120 170 250 200 Q380 228 500 196 Q620 166 800 204 L800 400 L0 400 Z" fill="#D6E6D9"/>
+  <path d="M0 246 Q160 206 330 236 Q470 258 560 230 Q680 196 800 232 L800 400 L0 400 Z" fill="#1F4D3A" opacity=".75"/>
+  <path d="M0 270 Q200 240 400 262 Q600 284 800 256 L800 400 L0 400 Z" fill="#1F4D3A"/>
+  <!-- winding road towards the horizon -->
+  <path d="M500 300 C540 284 640 282 610 262 C586 246 540 248 580 234 C606 226 650 222 676 210" fill="none" stroke="#F6D5C6" stroke-width="14" stroke-linecap="round"/>
+  <path class="lane" d="M500 300 C540 284 640 282 610 262 C586 246 540 248 580 234 C606 226 650 222 676 210" fill="none" stroke="#FBF6EE" stroke-width="2" stroke-dasharray="12 8" stroke-linecap="round"/>
+  <!-- trees along the slope -->
+  <g fill="#183A2B">
+    <circle cx="140" cy="266" r="14"/><circle cx="160" cy="272" r="10"/>
+    <circle cx="640" cy="262" r="13"/><circle cx="662" cy="268" r="9"/>
+  </g>
+  <!-- terrace parapet -->
+  <rect x="0" y="292" width="800" height="50" fill="#C2512F"/>
+  <rect x="0" y="286" width="800" height="10" rx="3" fill="#F2E4CB"/>
+  <g stroke="#FBF6EE" stroke-width="2" opacity=".35">
+    <path d="M0 318 L800 318"/><path d="M110 296 L110 318 M260 318 L260 342 M560 296 L560 318 M700 318 L700 342"/>
+  </g>
+  <!-- terrace floor -->
+  <rect x="0" y="342" width="800" height="58" fill="#F2E4CB"/>
+  <!-- diyas on the parapet -->
+  <g>
+    <path d="M86 286 Q100 298 114 286 Z" fill="#C2512F" stroke="#183A2B" stroke-width="1.5"/>
+    <path class="flame" d="M100 284 C94 276 98 268 100 262 C102 268 106 276 100 284 Z" fill="#EBA937"/>
+    <path d="M196 286 Q210 298 224 286 Z" fill="#C2512F" stroke="#183A2B" stroke-width="1.5"/>
+    <path class="flame fl2" d="M210 284 C204 276 208 268 210 262 C212 268 216 276 210 284 Z" fill="#EBA937"/>
+    <path d="M26 286 Q40 298 54 286 Z" fill="#C2512F" stroke="#183A2B" stroke-width="1.5"/>
+    <path class="flame fl3" d="M40 284 C34 276 38 268 40 262 C42 268 46 276 40 284 Z" fill="#EBA937"/>
+    <path d="M686 286 Q700 298 714 286 Z" fill="#C2512F" stroke="#183A2B" stroke-width="1.5"/>
+    <path class="flame" d="M700 284 C694 276 698 268 700 262 C702 268 706 276 700 284 Z" fill="#EBA937"/>
+  </g>
+  <!-- tulsi pot on the parapet -->
+  <path d="M736 286 L740 262 L772 262 L776 286 Z" fill="#EBA937"/>
+  <g fill="#1F4D3A"><ellipse cx="748" cy="252" rx="7" ry="12"/><ellipse cx="764" cy="250" rx="7" ry="13"/><ellipse cx="756" cy="242" rx="6" ry="12"/></g>
+  <!-- couple seen from behind, sitting on a durrie -->
+  <rect x="284" y="344" width="200" height="22" rx="4" fill="#EBA937" opacity=".8"/>
+  <path d="M290 352 L478 352" stroke="#C2512F" stroke-width="3"/>
+  <g class="lean">
+    <!-- her: saree pallu and plait -->
+    <path d="M300 356 C298 290 312 262 340 262 C368 262 380 290 378 356 Z" fill="#C2512F"/>
+    <path d="M318 268 C330 300 352 324 376 340 L378 356 L360 356 C344 330 324 300 312 276 Z" fill="#EBA937"/>
+    <rect x="332" y="246" width="16" height="20" rx="5" fill="#F6D5C6"/>
+    <circle cx="340" cy="230" r="21" fill="#183A2B"/>
+    <path d="M340 248 C336 268 344 288 338 306" fill="none" stroke="#183A2B" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="324" cy="222" r="4" fill="#EBA937"/>
+  </g>
+  <!-- him: kurta, arm around her shoulder -->
+  <path d="M388 356 C386 288 402 260 430 260 C458 260 472 288 470 356 Z" fill="#1F4D3A"/>
+  <rect x="422" y="242" width="16" height="22" rx="5" fill="#F6D5C6"/>
+  <circle cx="430" cy="226" r="22" fill="#183A2B"/>
+  <path d="M402 288 C388 282 374 280 362 282" fill="none" stroke="#183A2B" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="359" cy="283" r="6" fill="#F6D5C6"/>
+</svg>

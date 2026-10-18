@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="A warm kitchen table with an open notebook and pen, a steel dabba of coins, two cups of chai and a small plant, below a wall calendar with a few days marked and a house-shaped key holder with two sets of keys">
+  <defs>
+    <style>
+      .steam1 { animation: rise 4.5s ease-in-out infinite; }
+      .steam2 { animation: rise 4.5s ease-in-out infinite; animation-delay: 2.2s; }
+      .keys1 { transform-box: fill-box; transform-origin: 50% 0%; animation: swing 6s ease-in-out infinite; }
+      .keys2 { transform-box: fill-box; transform-origin: 50% 0%; animation: swing 6s ease-in-out infinite; animation-delay: 1.4s; }
+      .coin { animation: drop 5s ease-in infinite; }
+      .mark { transform-box: fill-box; transform-origin: 50% 50%; animation: pulse 5s ease-in-out infinite; }
+      .line { stroke-dasharray: 120; animation: write 7s ease-in-out infinite; }
+      .leaf { transform-box: fill-box; transform-origin: 0% 100%; animation: grow 7s ease-in-out infinite; }
+      @keyframes rise { 0% { opacity: 0; transform: translateY(8px); } 40% { opacity: .9; } 100% { opacity: 0; transform: translateY(-26px); } }
+      @keyframes swing { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+      @keyframes drop { 0%, 30% { opacity: 0; transform: translateY(-40px); } 40% { opacity: 1; } 62% { opacity: 1; transform: translateY(0); } 70%, 100% { opacity: 0; transform: translateY(6px); } }
+      @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+      @keyframes write { 0% { stroke-dashoffset: 120; } 45%, 80% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 120; } }
+      @keyframes grow { 0%, 100% { transform: scale(.75) rotate(-6deg); } 50% { transform: scale(1) rotate(4deg); } }
+      @media (prefers-reduced-motion: reduce) { .steam1, .steam2, .keys1, .keys2, .coin, .mark, .line, .leaf { animation: none; } .line { stroke-dashoffset: 0; } .coin { opacity: 0; } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <!-- wall band -->
+  <rect x="0" y="150" width="800" height="90" fill="#D6E6D9" opacity=".7"/>
+  <!-- wall calendar -->
+  <path d="M150 22 L150 36" stroke="#183A2B" stroke-width="3"/>
+  <rect x="80" y="34" width="140" height="150" rx="6" fill="#FFFFFF" stroke="#1F4D3A" stroke-width="4"/>
+  <rect x="80" y="34" width="140" height="30" rx="6" fill="#C2512F"/>
+  <rect x="80" y="54" width="140" height="10" fill="#C2512F"/>
+  <g fill="#D6E6D9">
+    <rect x="92" y="76" width="16" height="14" rx="2"/><rect x="114" y="76" width="16" height="14" rx="2"/><rect x="136" y="76" width="16" height="14" rx="2"/><rect x="158" y="76" width="16" height="14" rx="2"/><rect x="180" y="76" width="16" height="14" rx="2"/>
+    <rect x="92" y="98" width="16" height="14" rx="2"/><rect x="114" y="98" width="16" height="14" rx="2"/><rect x="136" y="98" width="16" height="14" rx="2"/><rect x="158" y="98" width="16" height="14" rx="2"/><rect x="180" y="98" width="16" height="14" rx="2"/>
+    <rect x="92" y="120" width="16" height="14" rx="2"/><rect x="114" y="120" width="16" height="14" rx="2"/><rect x="136" y="120" width="16" height="14" rx="2"/><rect x="158" y="120" width="16" height="14" rx="2"/><rect x="180" y="120" width="16" height="14" rx="2"/>
+    <rect x="92" y="142" width="16" height="14" rx="2"/><rect x="114" y="142" width="16" height="14" rx="2"/><rect x="136" y="142" width="16" height="14" rx="2"/><rect x="158" y="142" width="16" height="14" rx="2"/><rect x="180" y="142" width="16" height="14" rx="2"/>
+    <rect x="92" y="164" width="16" height="10" rx="2"/><rect x="114" y="164" width="16" height="10" rx="2"/>
+  </g>
+  <!-- marked days -->
+  <rect class="mark" x="158" y="76" width="16" height="14" rx="2" fill="#EBA937"/>
+  <rect class="mark" x="114" y="120" width="16" height="14" rx="2" fill="#C2512F" style="animation-delay: 1.6s"/>
+  <rect class="mark" x="180" y="142" width="16" height="14" rx="2" fill="#1F4D3A" style="animation-delay: 3.2s"/>
+  <!-- house-shaped key holder -->
+  <path d="M290 88 L340 52 L390 88 L390 128 L290 128 Z" fill="#EBA937" stroke="#1F4D3A" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M370 66 L370 50 L382 50 L382 75" fill="#C2512F" stroke="#1F4D3A" stroke-width="3"/>
+  <g fill="#183A2B"><rect x="310" y="124" width="6" height="12" rx="2"/><rect x="337" y="124" width="6" height="12" rx="2"/><rect x="364" y="124" width="6" height="12" rx="2"/></g>
+  <g class="keys1">
+    <path d="M313 136 L313 146" stroke="#1F4D3A" stroke-width="2"/>
+    <circle cx="313" cy="152" r="7" fill="none" stroke="#1F4D3A" stroke-width="3"/>
+    <path d="M313 159 L313 186 M313 176 L320 176 M313 183 L319 183" stroke="#9FB8A8" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <g class="keys2">
+    <path d="M367 136 L367 146" stroke="#1F4D3A" stroke-width="2"/>
+    <circle cx="367" cy="152" r="7" fill="none" stroke="#1F4D3A" stroke-width="3"/>
+    <path d="M367 159 L367 182 M367 172 L374 172 M367 179 L373 179" stroke="#9FB8A8" stroke-width="4" stroke-linecap="round"/>
+    <rect x="374" y="150" width="10" height="14" rx="3" fill="#C2512F"/>
+  </g>
+  <!-- table -->
+  <rect x="0" y="240" width="800" height="160" fill="#F2E4CB"/>
+  <rect x="0" y="236" width="800" height="8" fill="#C2512F"/>
+  <g stroke="#EBA937" stroke-width="2" opacity=".6" fill="none">
+    <path d="M30 290 Q200 282 360 292"/><path d="M500 300 Q640 292 790 302"/><path d="M40 370 Q240 362 420 374"/><path d="M540 384 Q670 376 790 386"/>
+  </g>
+  <!-- plant in a pot -->
+  <path d="M672 236 L680 196 L730 196 L738 236 Z" fill="#C2512F"/>
+  <rect x="674" y="190" width="62" height="10" rx="3" fill="#183A2B"/>
+  <path d="M705 192 Q702 160 706 132" stroke="#1F4D3A" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M704 170 Q680 160 672 140 Q694 142 704 166 Z" fill="#2F6E54"/>
+  <path d="M706 156 Q730 148 740 128 Q716 128 706 152 Z" fill="#1F4D3A"/>
+  <path class="leaf" d="M706 134 Q700 112 712 100 Q722 116 708 134 Z" fill="#2F6E54"/>
+  <!-- open notebook -->
+  <ellipse cx="400" cy="352" rx="170" ry="10" fill="#EBA937" opacity=".35"/>
+  <path d="M400 270 Q340 258 250 266 L236 346 Q330 336 400 350 Z" fill="#FFFFFF" stroke="#1F4D3A" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M400 270 Q460 258 550 266 L564 346 Q470 336 400 350 Z" fill="#FFFFFF" stroke="#1F4D3A" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M400 270 L400 350" stroke="#1F4D3A" stroke-width="3"/>
+  <g stroke="#9FB8A8" stroke-width="3" stroke-linecap="round" fill="none">
+    <path d="M262 286 Q320 280 384 288"/><path d="M258 302 Q320 296 384 304"/><path d="M255 318 Q310 312 360 318"/><path d="M252 334 Q300 328 384 336"/>
+    <path d="M418 288 Q480 280 536 286"/><path d="M418 304 Q480 296 539 302"/>
+  </g>
+  <path class="line" d="M418 320 Q480 312 542 318" stroke="#C2512F" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <!-- pen -->
+  <path d="M556 332 L620 290" stroke="#1F4D3A" stroke-width="7" stroke-linecap="round"/>
+  <path d="M556 332 L548 338" stroke="#EBA937" stroke-width="4" stroke-linecap="round"/>
+  <!-- steel dabba of coins -->
+  <g>
+    <ellipse cx="110" cy="300" rx="44" ry="8" fill="#EBA937" opacity=".4"/>
+    <path d="M70 232 L70 292 Q110 304 150 292 L150 232" fill="#D6E6D9" stroke="#1F4D3A" stroke-width="3"/>
+    <ellipse cx="110" cy="232" rx="40" ry="10" fill="#9FB8A8" stroke="#1F4D3A" stroke-width="3"/>
+    <path d="M70 262 Q110 272 150 262" stroke="#9FB8A8" stroke-width="2" fill="none"/>
+    <g fill="#EBA937" stroke="#C2512F" stroke-width="1.5"><ellipse cx="98" cy="230" rx="11" ry="4"/><ellipse cx="120" cy="232" rx="11" ry="4"/><ellipse cx="108" cy="226" rx="11" ry="4"/></g>
+    <ellipse class="coin" cx="112" cy="222" rx="11" ry="4" fill="#EBA937" stroke="#C2512F" stroke-width="1.5"/>
+    <!-- lid resting beside -->
+    <ellipse cx="180" cy="296" rx="26" ry="7" fill="#9FB8A8" stroke="#1F4D3A" stroke-width="3"/>
+  </g>
+  <!-- two cups of chai -->
+  <g>
+    <ellipse cx="236" cy="236" rx="30" ry="6" fill="#EBA937" opacity=".5"/>
+    <path d="M218 200 L222 232 Q236 238 250 232 L254 200 Z" fill="#FBF6EE" stroke="#1F4D3A" stroke-width="3"/>
+    <ellipse cx="236" cy="201" rx="18" ry="4.5" fill="#C2512F" opacity=".8"/>
+    <path d="M254 207 Q267 209 263 220 Q259 226 251 224" stroke="#1F4D3A" stroke-width="3" fill="none"/>
+    <path class="steam1" d="M231 190 Q225 178 233 168 Q239 160 233 150" stroke="#9FB8A8" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+  <g>
+    <ellipse cx="600" cy="236" rx="30" ry="6" fill="#EBA937" opacity=".5"/>
+    <path d="M582 200 L586 232 Q600 238 614 232 L618 200 Z" fill="#FBF6EE" stroke="#1F4D3A" stroke-width="3"/>
+    <ellipse cx="600" cy="201" rx="18" ry="4.5" fill="#C2512F" opacity=".8"/>
+    <path d="M582 207 Q569 209 573 220 Q577 226 585 224" stroke="#1F4D3A" stroke-width="3" fill="none"/>
+    <path class="steam2" d="M604 190 Q598 178 606 168 Q612 160 606 150" stroke="#9FB8A8" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

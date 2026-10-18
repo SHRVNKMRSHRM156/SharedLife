@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="A couple sitting together on a picnic mat under a tree with small lanterns and ribbons hanging from its branches, one for each year, an open notebook between them, a calendar page with one day circled, and a gentle sun rising over the hills">
+  <defs>
+    <style>
+      .ray { opacity: .16; animation: glow 6s ease-in-out infinite; }
+      .r2 { animation-delay: -2s; }
+      .r3 { animation-delay: -4s; }
+      .sun { animation: rise 12s ease-in-out infinite alternate; }
+      .hang { transform-box: fill-box; transform-origin: 50% 0; animation: sway 6s ease-in-out infinite; }
+      .h2 { animation-delay: -1.5s; }
+      .h3 { animation-delay: -3s; }
+      .h4 { animation-delay: -4.5s; }
+      .lamp { animation: shimmer 4s ease-in-out infinite; }
+      .ring { transform-box: fill-box; transform-origin: 50% 50%; animation: pulse 3.5s ease-in-out infinite; }
+      .bird { animation: drift 14s ease-in-out infinite alternate; }
+      .pair { transform-origin: 375px 336px; animation: lean 7s ease-in-out infinite; }
+      @keyframes glow { 0%, 100% { opacity: .10; } 50% { opacity: .26; } }
+      @keyframes rise { from { transform: translateY(6px); } to { transform: translateY(-6px); } }
+      @keyframes sway { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+      @keyframes shimmer { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+      @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+      @keyframes drift { from { transform: translateX(-14px); } to { transform: translateX(14px); } }
+      @keyframes lean { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(.8deg); } }
+      @media (prefers-reduced-motion: reduce) { .ray, .sun, .hang, .lamp, .ring, .bird, .pair { animation: none; } .ray { opacity: .18; } .lamp { opacity: .9; } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <!-- the rising sun and its soft rays -->
+  <g fill="#EBA937">
+    <path class="ray" d="M716 250 L600 60 L650 50 Z"/>
+    <path class="ray r2" d="M716 250 L680 30 L730 34 Z"/>
+    <path class="ray r3" d="M716 250 L780 70 L800 110 Z"/>
+  </g>
+  <circle class="sun" cx="716" cy="246" r="46" fill="#EBA937"/>
+  <!-- two birds -->
+  <g class="bird" fill="none" stroke="#1F4D3A" stroke-width="2.5" stroke-linecap="round">
+    <path d="M570 96 Q578 88 586 96 Q594 88 602 96"/>
+    <path d="M610 72 Q616 66 622 72 Q628 66 634 72"/>
+  </g>
+  <!-- hills at dawn -->
+  <path d="M0 258 Q180 226 380 250 Q560 272 800 240 L800 400 L0 400 Z" fill="#D6E6D9"/>
+  <path d="M0 300 Q300 280 560 290 Q700 284 800 272 L800 400 L0 400 Z" fill="#1F4D3A" opacity=".08"/>
+  <!-- the tree -->
+  <path d="M160 344 C168 290 168 220 160 130 L192 130 C186 220 188 290 200 344 Z" fill="#183A2B"/>
+  <path d="M184 168 C260 150 380 134 520 128" fill="none" stroke="#183A2B" stroke-width="8" stroke-linecap="round"/>
+  <path d="M168 160 C140 150 100 146 60 150" fill="none" stroke="#183A2B" stroke-width="7" stroke-linecap="round"/>
+  <g>
+    <circle cx="176" cy="70" r="74" fill="#1F4D3A"/>
+    <circle cx="86" cy="104" r="50" fill="#183A2B"/>
+    <circle cx="270" cy="84" r="58" fill="#183A2B"/>
+    <circle cx="130" cy="54" r="44" fill="#1F4D3A"/>
+    <circle cx="232" cy="50" r="44" fill="#1F4D3A"/>
+    <circle cx="346" cy="100" r="40" fill="#1F4D3A"/>
+    <circle cx="420" cy="118" r="26" fill="#183A2B"/>
+    <circle cx="44" cy="134" r="28" fill="#1F4D3A"/>
+  </g>
+  <!-- lanterns and ribbons, one for each year -->
+  <g class="hang">
+    <path d="M78 148 L78 160" stroke="#183A2B" stroke-width="2"/>
+    <rect x="73" y="156" width="10" height="5" rx="2" fill="#C2512F"/>
+    <rect class="lamp" x="69" y="160" width="18" height="22" rx="7" fill="#EBA937"/>
+  </g>
+  <g class="hang h2">
+    <path d="M128 148 L128 158" stroke="#183A2B" stroke-width="2"/>
+    <path d="M128 158 L120 192 L128 186 L136 192 Z" fill="#C2512F"/>
+  </g>
+  <g class="hang h3">
+    <path d="M300 148 L300 158" stroke="#183A2B" stroke-width="2"/>
+    <rect x="295" y="154" width="10" height="5" rx="2" fill="#C2512F"/>
+    <rect class="lamp" x="291" y="158" width="18" height="22" rx="7" fill="#EBA937"/>
+  </g>
+  <g class="hang h4">
+    <path d="M360 139 L360 150" stroke="#183A2B" stroke-width="2"/>
+    <path d="M360 150 L352 182 L360 176 L368 182 Z" fill="#C2512F"/>
+  </g>
+  <g class="hang">
+    <path d="M420 134 L420 146" stroke="#183A2B" stroke-width="2"/>
+    <rect x="415" y="142" width="10" height="5" rx="2" fill="#C2512F"/>
+    <rect class="lamp" x="411" y="146" width="18" height="22" rx="7" fill="#EBA937"/>
+  </g>
+  <g class="hang h3">
+    <path d="M478 130 L478 142" stroke="#183A2B" stroke-width="2"/>
+    <path d="M478 142 L470 174 L478 168 L486 174 Z" fill="#C2512F"/>
+  </g>
+  <!-- picnic mat -->
+  <path d="M236 330 L520 330 L552 356 L206 356 Z" fill="#C2512F"/>
+  <g stroke="#F6D5C6" stroke-width="3" opacity=".7">
+    <path d="M296 330 L282 356"/><path d="M356 330 L350 356"/><path d="M416 330 L420 356"/><path d="M476 330 L490 356"/>
+  </g>
+  <!-- the couple, sitting close -->
+  <g class="pair">
+    <g>
+      <path d="M262 336 C262 276 280 252 308 252 C336 252 354 276 354 336 Z" fill="#EBA937"/>
+      <circle cx="310" cy="218" r="32" fill="#F6D5C6"/>
+      <path d="M278 218 C274 176 346 176 342 218 C336 196 284 196 278 218 Z" fill="#183A2B"/>
+      <path d="M281 222 C272 252 276 272 284 282 C284 258 288 238 292 226 Z" fill="#183A2B"/>
+      <circle cx="352" cy="312" r="10" fill="#F6D5C6"/>
+    </g>
+    <g>
+      <path d="M396 336 C396 276 414 252 442 252 C470 252 488 276 488 336 Z" fill="#1F4D3A"/>
+      <circle cx="440" cy="218" r="32" fill="#F6D5C6"/>
+      <path d="M410 212 C416 182 466 182 472 212 C456 200 426 200 410 212 Z" fill="#183A2B"/>
+      <circle cx="410" cy="222" r="6" fill="#F6D5C6"/>
+      <circle cx="398" cy="312" r="10" fill="#F6D5C6"/>
+    </g>
+  </g>
+  <!-- open notebook between them -->
+  <path d="M375 340 L337 334 L341 318 L375 324 Z" fill="#FBF6EE" stroke="#183A2B" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M375 340 L413 334 L409 318 L375 324 Z" fill="#FBF6EE" stroke="#183A2B" stroke-width="2.5" stroke-linejoin="round"/>
+  <g stroke="#1F4D3A" stroke-width="1.5" opacity=".5"><path d="M349 324 L369 327"/><path d="M349 330 L369 333"/><path d="M381 327 L401 324"/><path d="M381 333 L401 330"/></g>
+  <!-- two cups of tea -->
+  <path d="M498 348 L495 328 L513 328 L510 348 Z" fill="#D6E6D9" stroke="#183A2B" stroke-width="2.5"/>
+  <path d="M520 350 L517 330 L535 330 L532 350 Z" fill="#D6E6D9" stroke="#183A2B" stroke-width="2.5"/>
+  <!-- calendar page with one circled day -->
+  <g transform="translate(36 0)">
+    <path d="M548 344 L560 330 M640 344 L628 330" stroke="#183A2B" stroke-width="4" stroke-linecap="round"/>
+    <rect x="540" y="236" width="108" height="100" rx="6" fill="#FBF6EE" stroke="#183A2B" stroke-width="3"/>
+    <rect x="540" y="236" width="108" height="22" rx="6" fill="#C2512F"/>
+    <rect x="540" y="250" width="108" height="8" fill="#C2512F"/>
+    <circle cx="566" cy="236" r="4" fill="#183A2B"/><circle cx="622" cy="236" r="4" fill="#183A2B"/>
+    <g fill="#1F4D3A" opacity=".45">
+      <rect x="552" y="268" width="10" height="8" rx="2"/><rect x="570" y="268" width="10" height="8" rx="2"/><rect x="588" y="268" width="10" height="8" rx="2"/><rect x="606" y="268" width="10" height="8" rx="2"/><rect x="624" y="268" width="10" height="8" rx="2"/>
+      <rect x="552" y="284" width="10" height="8" rx="2"/><rect x="570" y="284" width="10" height="8" rx="2"/><rect x="588" y="284" width="10" height="8" rx="2"/><rect x="624" y="284" width="10" height="8" rx="2"/>
+      <rect x="552" y="300" width="10" height="8" rx="2"/><rect x="570" y="300" width="10" height="8" rx="2"/><rect x="588" y="300" width="10" height="8" rx="2"/><rect x="606" y="300" width="10" height="8" rx="2"/><rect x="624" y="300" width="10" height="8" rx="2"/>
+      <rect x="552" y="316" width="10" height="8" rx="2"/><rect x="570" y="316" width="10" height="8" rx="2"/>
+    </g>
+    <rect x="606" y="284" width="10" height="8" rx="2" fill="#C2512F"/>
+    <ellipse class="ring" cx="611" cy="288" rx="12" ry="10" fill="none" stroke="#EBA937" stroke-width="3"/>
+  </g>
+</svg>
