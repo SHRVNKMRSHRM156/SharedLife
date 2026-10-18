@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="A wide neem tree in a courtyard with a small wooden swing gently moving from a branch, a bird’s nest in the leaves, and a row of clay pots with seedlings at different stages of growth">
+  <defs>
+    <style>
+      .swing { transform-origin: 400px 160px; animation: rock 5s ease-in-out infinite; }
+      .leaves { transform-origin: 300px 120px; animation: breathe 9s ease-in-out infinite; }
+      .bird { animation: hop 6s ease-in-out infinite; }
+      .sprout { transform-box: fill-box; transform-origin: 50% 100%; animation: grow 7s ease-in-out infinite alternate; }
+      @keyframes rock { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+      @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.015); } }
+      @keyframes hop { 0%, 80%, 100% { transform: translateY(0); } 88% { transform: translateY(-8px); } }
+      @keyframes grow { from { transform: scaleY(.9); } to { transform: scaleY(1.06); } }
+      @media (prefers-reduced-motion: reduce) { .swing, .leaves, .bird, .sprout { animation: none; } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="#FBF6EE"/>
+  <circle cx="640" cy="80" r="34" fill="#EBA937"/>
+  <!-- courtyard floor -->
+  <path d="M0 316 Q400 300 800 316 L800 400 L0 400 Z" fill="#F6D5C6"/>
+  <path d="M0 362 Q400 350 800 364 L800 400 L0 400 Z" fill="#D6E6D9"/>
+  <!-- tree -->
+  <path d="M286 320 Q292 230 280 150 L318 150 Q306 230 316 320 Z" fill="#183A2B"/>
+  <path d="M296 160 Q340 136 380 150" fill="none" stroke="#183A2B" stroke-width="10" stroke-linecap="round"/>
+  <g class="leaves">
+    <ellipse cx="300" cy="110" rx="170" ry="70" fill="#1F4D3A"/>
+    <ellipse cx="200" cy="120" rx="80" ry="46" fill="#1F4D3A"/>
+    <ellipse cx="400" cy="120" rx="80" ry="46" fill="#1F4D3A"/>
+    <g fill="#D6E6D9" opacity=".35"><ellipse cx="250" cy="90" rx="40" ry="16"/><ellipse cx="360" cy="84" rx="34" ry="14"/></g>
+    <!-- nest -->
+    <path d="M150 132 Q170 150 190 132 Z" fill="#C2512F"/>
+    <g class="bird"><circle cx="170" cy="124" r="9" fill="#EBA937"/><path d="M178 122 L186 125 L178 128 Z" fill="#C2512F"/></g>
+  </g>
+  <path d="M310 168 Q360 150 440 160" fill="none" stroke="#183A2B" stroke-width="9" stroke-linecap="round"/>
+  <!-- swing -->
+  <g class="swing">
+    <path d="M376 158 L376 270 M424 158 L424 270" stroke="#C2512F" stroke-width="3"/>
+    <rect x="366" y="268" width="68" height="12" rx="4" fill="#EBA937"/>
+    <g fill="#C2512F"><circle cx="376" cy="210" r="4"/><circle cx="424" cy="210" r="4"/></g>
+  </g>
+  <!-- row of clay pots with seedlings at different stages -->
+  <g fill="#C2512F">
+    <path d="M520 300 L528 334 L560 334 L568 300 Z"/>
+    <path d="M592 300 L600 334 L632 334 L640 300 Z"/>
+    <path d="M664 300 L672 334 L704 334 L712 300 Z"/>
+  </g>
+  <g fill="#EBA937"><rect x="516" y="294" width="56" height="8" rx="3"/><rect x="588" y="294" width="56" height="8" rx="3"/><rect x="660" y="294" width="56" height="8" rx="3"/></g>
+  <g class="sprout" fill="#1F4D3A"><ellipse cx="544" cy="290" rx="5" ry="3"/></g>
+  <g class="sprout"><path d="M616 294 L616 270" stroke="#1F4D3A" stroke-width="3"/><ellipse cx="608" cy="272" rx="8" ry="4" fill="#1F4D3A"/><ellipse cx="624" cy="268" rx="8" ry="4" fill="#1F4D3A"/></g>
+  <g class="sprout"><path d="M688 294 L688 242" stroke="#1F4D3A" stroke-width="3"/><ellipse cx="676" cy="262" rx="10" ry="5" fill="#1F4D3A"/><ellipse cx="700" cy="252" rx="10" ry="5" fill="#1F4D3A"/><ellipse cx="688" cy="240" rx="8" ry="5" fill="#1F4D3A"/><circle cx="688" cy="236" r="5" fill="#EBA937"/></g>
+  <!-- watering can -->
+  <path d="M740 334 L744 300 L776 300 L780 334 Z" fill="#1F4D3A"/>
+  <path d="M744 312 L722 296" stroke="#1F4D3A" stroke-width="5" stroke-linecap="round"/>
+  <!-- two pairs of chappals, side by side on the step -->
+  <rect x="90" y="330" width="120" height="14" rx="4" fill="#1F4D3A"/>
+  <g fill="#C2512F"><ellipse cx="114" cy="324" rx="9" ry="5"/><ellipse cx="132" cy="324" rx="9" ry="5"/></g>
+  <g fill="#EBA937"><ellipse cx="168" cy="324" rx="9" ry="5"/><ellipse cx="186" cy="324" rx="9" ry="5"/></g>
+</svg>
