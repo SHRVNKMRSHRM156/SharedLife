@@ -63,7 +63,7 @@ section { padding-block: 88px; }
 .nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
 .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 10px; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--display); font-size: 20px; }
-.brand img { width: 42px; height: 42px; border-radius: 50%; background: var(--chip); object-fit: cover; }
+.brand img { width: 42px; height: 42px; padding: 3px; box-sizing: border-box; border-radius: 50%; background: var(--chip); object-fit: contain; }
 .menu { display: flex; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 0; font-size: 15px; font-weight: 700; }
 .menu a { display: block; padding: 8px 12px; border-radius: 999px; text-decoration: none; color: var(--ink-soft); transition: background .2s, color .2s; }
 .menu a:hover { background: var(--sage); color: var(--ink); }
