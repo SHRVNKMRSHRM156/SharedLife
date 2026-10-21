@@ -112,7 +112,7 @@ test('anyone sees the outline and the free preview, but not paid lessons', async
   assert.equal(r.status, 200);
   assert.equal(r.body.course.modules.length, 8);
   assert.equal(r.body.course.lesson_count, 32);
-  assert.equal(r.body.course.price_inr, 4999);
+  assert.equal(r.body.course.price_inr, 499);
   assert.equal(r.body.payments, 'manual');
   assert.equal(r.body.access, false);
   assert.equal(r.body.course.modules[0].lessons[0].summary, undefined, 'outline must not leak lesson text');
@@ -144,7 +144,7 @@ test('without Razorpay keys, enrolment waits for payment and an admin marks it p
   assert.equal(r.status, 201, JSON.stringify(r.body));
   assert.equal(r.body.payment, 'manual');
   assert.equal(r.body.enrolment.status, 'pending_payment');
-  assert.equal(r.body.enrolment.amount_inr, 4999);
+  assert.equal(r.body.enrolment.amount_inr, 499);
   r = await asha('POST', '/api/course/enrol', {});
   assert.equal(r.body.enrolment.status, 'pending_payment');
 
@@ -195,9 +195,9 @@ test('with Razorpay keys, a verified payment opens the course', async () => {
   assert.equal(r.status, 201, JSON.stringify(r.body));
   assert.equal(r.body.payment, 'razorpay');
   const { order_id: orderId, amount, key } = r.body.checkout;
-  assert.equal(amount, 499900);
+  assert.equal(amount, 49900);
   assert.equal(key, 'rzp_test_key');
-  assert.equal(orders.get(orderId).amount, 499900);
+  assert.equal(orders.get(orderId).amount, 49900);
 
   r = await ravi('POST', '/api/course/verify', { razorpay_order_id: orderId, razorpay_payment_id: 'pay_1', razorpay_signature: sign(orderId, 'pay_2') });
   assert.equal(r.status, 400);
@@ -276,9 +276,9 @@ test('health names the Razorpay settings that are missing, without their values'
 });
 
 test('price can be set in Vercel', async () => {
-  process.env.COURSE_PRICE_INR = '4999';
+  process.env.COURSE_PRICE_INR = '999';
   const r = await stranger('GET', '/api/course');
-  assert.equal(r.body.course.price_inr, 4999);
+  assert.equal(r.body.course.price_inr, 999);
   delete process.env.COURSE_PRICE_INR;
 });
 
@@ -288,7 +288,7 @@ test('EARLYBIRD99 takes 99% off, and admins manage coupons', async () => {
   await c('POST', '/api/auth/register', { role: 'seeker', name: 'Pooja', email: 'pooja@example.com', ...base_, relationship: 'about_to_marry' });
   let r = await c('GET', '/api/course/coupon?code=earlybird99');
   assert.equal(r.status, 200, JSON.stringify(r.body));
-  assert.deepEqual(r.body.coupon, { code: 'EARLYBIRD99', percent_off: 99, price_inr: 4999, amount_inr: 49.99 });
+  assert.deepEqual(r.body.coupon, { code: 'EARLYBIRD99', percent_off: 99, price_inr: 499, amount_inr: 4.99 });
   r = await c('GET', '/api/course/coupon?code=NOPE');
   assert.equal(r.status, 400);
   assert.equal(r.body.field, 'coupon');
@@ -297,12 +297,12 @@ test('EARLYBIRD99 takes 99% off, and admins manage coupons', async () => {
 
   r = await c('POST', '/api/course/enrol', { coupon: ' earlybird99 ' });
   assert.equal(r.status, 201, JSON.stringify(r.body));
-  assert.equal(r.body.checkout.amount, 4999);
-  assert.equal(orders.get(r.body.checkout.order_id).amount, 4999);
+  assert.equal(r.body.checkout.amount, 499);
+  assert.equal(orders.get(r.body.checkout.order_id).amount, 499);
   assert.equal(r.body.enrolment.coupon, 'EARLYBIRD99');
   // Changing your mind about the coupon reprices the pending enrolment.
   r = await c('POST', '/api/course/enrol', {});
-  assert.equal(r.body.checkout.amount, 499900);
+  assert.equal(r.body.checkout.amount, 49900);
   assert.equal(r.body.enrolment.coupon, null);
 
   r = await c('GET', '/api/admin/coupons');
